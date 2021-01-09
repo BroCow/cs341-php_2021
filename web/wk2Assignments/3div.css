@@ -1,0 +1,35 @@
+/**** 3-Div's HTML Page Styling ****/
+
+/*General page styling*/
+body {
+    background-color: #E3E0DB;
+}
+
+header {
+    padding: 1.5em;
+    background-color: #DDBC85;
+    text-align: center;
+}
+
+main {
+    margin: 1em;
+}
+
+.button {
+    font-size: 20px;
+    padding: 10px;
+    box-shadow: #000000 2px 2px 2px 2px;
+}
+
+/*Set font-size and background color for divs*/
+div {
+    margin: 20px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #C2DD85;
+}
+
+/*Use CSS to make it so that hovering over any of the 3 divs causes the text to temporarily become bold*/
+div:hover {
+    font-weight: bold;
+}

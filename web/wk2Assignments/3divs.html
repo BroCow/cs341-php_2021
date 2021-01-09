@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="author" content="Christopher Cowan">
+        <meta name="description" content="This page serves as the 02 Teach Assignment for CSE341.">
+        
+        <title>3 Divs | CSE 341</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="normalize.css" media="screen">
+        <link rel="stylesheet" href="3div.css" media="screen">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+ 
+    <body>
+        
+        <header>
+            <h1>Chris Cowan's "3-Div's" Page</h1>
+        </header>
+       
+
+        <main>
+            
+                <h2>Behold, Div 1</h2>
+                <div class="container-fluid" id="div1">
+                    <p>This is div1</p>
+                    <p>Would you like to change the background color using Javascript?
+                    <br>
+                    Enter the color you would like it to be in the text-box below:
+                    </p>
+
+                    <!--Make it so user can specify custom colors for the first div. To accomplish this, add a text box and another button labeled "Change color"-->
+                    <div class="form-group">
+                        <label for="colorChange1">Color Choice</label>
+                        <input title="Change Color 1" name="colorChange1" id="colorChange1" class="form-control" type="text">
+                    </div>
+                    <!--
+                    <form title="div1ColorChange" name="colorChange1">
+                        <label for="colorChange1">Color Choice
+                            <input title="Change Color 1" name="colorChange1" id="colorChange1" type="text">
+                        </label>
+                    </form>
+                    -->
+                    <button id="changeColorButton1" class="btn btn-info" onclick="changeColor1()">Change Color</button>
+                </div>
+
+                <h2>Behold, Div 2</h2>
+                <div class="container-fluid" id="div2">
+                    <p>This is div2</p>
+                    <p>Would you like to change the background color using jQuery?
+                    <br>
+                    Enter the color you would like it to be in the text-box below:
+                    </p>
+
+                    <!--Make it so user can specify custom colors for the first div. To accomplish this, add a text box and another button labeled "Change color"-->
+                    <div class="form-group">
+                        <label for="colorChange2">Color Choice</label>
+                        <input title="Change Color 2" name="colorChange2" id="colorChange2" class="form-control" type="text">
+                    </div>
+                    <!--
+                    <form title="div2ColorChange" name="colorChange2">
+                        <label for="colorChange2">Color Choice
+                            <input title="Change Color 2" name="colorChange2" id="colorChange2" type="text">
+                        </label>
+                    </form>
+                    -->
+                    <button id="changeColorButton2" class="btn btn-info">Change Color</button>
+                </div>
+
+                <h2>Behold, Div 3</h2>
+                <div class="container-fluid" id="div3">
+                    <p>This is div3</p>
+                    <p>Would you like to make this DIV fade in and out using jQuery?
+                    <br>
+                    Click on the TOGGLE button below to toggle the div in and out.
+                    </p>
+                </div>
+                <div class="container-fluid">
+                <button id="fadeDiv3" class="btn btn-warning">Toggle</button>
+                </div>
+
+                <h2>Behold, The Button</h2>
+                <div class="container-fluid">
+                <button id="clickMeButton" class="btn btn-danger" onclick="buttonClick()">Click Me</button>
+                </div>
+            
+        </main>
+
+        <script src="mainscript.js"></script>
+    </body>
+
+
+
+
+</html>
