@@ -60,6 +60,9 @@ try {
   while ($row = $statement->fetch(PDO::FETCH_ASSOC))
   {
       echo $row['id'];
+      // Code below added for team activity
+      $display = "<strong>Book:  $row[book] Chapter: $row[chapter] Verse: $row[verse]</strong>";
+      $display .= " - '$row[content]'";
   }
 }
 catch (PDOException $ex) {
@@ -68,11 +71,22 @@ catch (PDOException $ex) {
   die();
 }
 
-return $db;
+// return $db;
 
 ?>
 
-</main>
 <h1>Scripture Resources</h1>
+
+<form method="post" action="scriptures.php">
+  <label for="book"></label>
+  <input type="text" name="book">
+  <input type="submit" name="submit" value="Submit">
+</form>
+
+<?php echo $display; ?>
+
+
+</main>
+
 
 </html>
