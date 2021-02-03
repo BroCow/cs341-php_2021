@@ -61,8 +61,8 @@ try {
   {
       echo $row['id'];
       // Code below added for team activity
-      $display = "<strong>Book:  $row[book] Chapter: $row[chapter] Verse: $row[verse]</strong>";
-      $display .= " - '$row[content]'";
+      $display = "<p><strong>Book:  $row[book] Chapter: $row[chapter] Verse: $row[verse]</strong>";
+      $display .= " - '$row[content]'</p>";
       echo $display;
   }
 }
