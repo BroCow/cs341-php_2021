@@ -63,6 +63,7 @@ try {
       // Code below added for team activity
       $display = "<strong>Book:  $row[book] Chapter: $row[chapter] Verse: $row[verse]</strong>";
       $display .= " - '$row[content]'";
+      echo $display;
   }
 }
 catch (PDOException $ex) {
@@ -83,7 +84,7 @@ catch (PDOException $ex) {
   <input type="submit" name="submit" value="Submit">
 </form>
 
-<?php echo $display; ?>
+<?php //echo $display; ?>
 
 
 </main>
