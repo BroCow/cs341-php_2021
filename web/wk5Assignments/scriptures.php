@@ -36,6 +36,12 @@ $db = get_db();
     }
   ?>
 
+  <?php  
+    if(isset($_POST['search'])){
+      $bookSearch = $_POST['search'];
+      echo $bookSearch;
+    }
+  ?>
 
   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="search"></label>
