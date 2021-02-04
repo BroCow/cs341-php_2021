@@ -37,12 +37,9 @@ session_start();
       $verse = $row['verse'];
       $content = $row['content'];
 
-      }
-      if(isset($_POST['search'])) {
-        $bookSearch = $_POST['search'];
-        /* if statement below searches for 'item1Select' in session array, and deletes it if found */
-        if (($key = array_search($bookSearch, $row['book'])) !== false) {
-            echo "Book found";
+    
+      if($bookSearch == $row['book']) {
+        echo $row['book'];
         }
     }
       
@@ -58,7 +55,7 @@ session_start();
   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="search"></label>
     <input type="text" name="search">
-    <input type="submit" name="submit" value="Submit">
+    <button name="submit" type="submit">Submit</button>
   </form>
   
 </body>
