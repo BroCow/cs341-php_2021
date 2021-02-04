@@ -68,7 +68,7 @@ try {
 
   if (isset($_POST['search'])){
     $searchBook = $_POST['search'];
-    $strSql = 'SELECT id, book, chapter, verse, content FROM ta.scriptures WHERE book = :searchBook';
+    $strSql = 'SELECT id, book, chapter, verse, content FROM scriptures WHERE book = :searchBook';
     $statement = $db->prepare($strSql);
     $statement->bindValue(':searchBook', $searchBook, PDO::PARAM_STR);
     $statement->execute();
