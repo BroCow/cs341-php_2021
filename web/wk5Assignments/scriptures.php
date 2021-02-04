@@ -36,12 +36,8 @@ $db = get_db();
       $verse = $row['verse'];
       $content = $row['content'];
 
-      if($book = $bookSearch){
-        $statement = $db->prepare("SELECT content FROM scriptures WHERE book=$bookSearch");
-        $statement->execute();
-        while ($verses = $statement->fetch(PDO::FETCH_ASSOC)){
-          echo $verses;
-        }
+      if($bookSearch = $book){
+        echo $content;
       }
 
       
