@@ -23,7 +23,6 @@ session_start();
 
     if(isset($_POST['search'])){
       $bookSearch = $_POST['search'];
-      echo $bookSearch;
     }
 
     // Go through each result
@@ -40,7 +39,7 @@ session_start();
     
       if($bookSearch == $row['book']) {
         echo $row['book'] . "<br>";
-        echo $row['content'];
+        echo $row['content'] . "<br>";
         }
     }
       
