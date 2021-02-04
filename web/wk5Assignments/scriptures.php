@@ -38,14 +38,19 @@ session_start();
       $content = $row['content'];
 
       }
+      if(isset($_POST['search'])) {
+        $bookSearch = $_POST['search'];
+        /* if statement below searches for 'item1Select' in session array, and deletes it if found */
+        if (($key = array_search($bookSearch, $row['book'])) !== false) {
+            echo "Book found";
+        }
+    }
       
-      if($bookSearch = $book){
-        echo $book;
 
       
 
       //echo "<p><strong>$book $chapter:$verse</strong> - \"$content\"<p>";
-    }
+    
   ?>
 
   
