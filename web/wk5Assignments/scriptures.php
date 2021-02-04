@@ -3,7 +3,7 @@ require 'connection.php';
 //get_db() function created in connection.php
 $db = get_db();
 
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +23,7 @@ $db = get_db();
 
     if(isset($_POST['search'])){
       $bookSearch = $_POST['search'];
+      echo $bookSearch;
     }
 
     // Go through each result
@@ -37,7 +38,7 @@ $db = get_db();
       $content = $row['content'];
 
       }
-
+      
       if($bookSearch = $book){
         echo $book;
 
