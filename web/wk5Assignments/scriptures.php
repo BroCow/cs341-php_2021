@@ -23,11 +23,12 @@ if (isset($_POST['search'])) {
   $statement->execute();
 
   $displaySearch = "<h1>Scripture Search</h1>";
+  /*
   while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
     $displaySearch .= "<a href='detail.php'><p><strong>Book: $row[book] Chapter: $row[chapter] Verse: $row[verse]</strong>";
     $displaySearch .= "'</p></a>";
     $_SESSION['scriptureId'] = $row['id'];
-  }
+  }*/
 }
 ?>
 
@@ -45,7 +46,7 @@ if (isset($_POST['search'])) {
   <?
     echo $display;
   ?>
-  <form method="POST" action="scriptures.php">
+  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="search"></label>
     <input type="text" name="search">
     <input type="submit" name="submit" value="Submit">
