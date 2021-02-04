@@ -21,6 +21,10 @@ $db = get_db();
     $statement = $db->prepare("SELECT book, chapter, verse, content FROM scriptures");
     $statement->execute();
 
+    if(isset($_POST['search'])){
+      $bookSearch = $_POST['search'];
+    }
+
     // Go through each result
     while ($row = $statement->fetch(PDO::FETCH_ASSOC))
     {
@@ -32,16 +36,17 @@ $db = get_db();
       $verse = $row['verse'];
       $content = $row['content'];
 
-      echo "<p><strong>$book $chapter:$verse</strong> - \"$content\"<p>";
+      if($book = $bookSearch){
+        echo $book . "matches" . $bookSearch;
+      }
+
+      
+
+      //echo "<p><strong>$book $chapter:$verse</strong> - \"$content\"<p>";
     }
   ?>
 
-  <?php  
-    if(isset($_POST['search'])){
-      $bookSearch = $_POST['search'];
-      echo $bookSearch;
-    }
-  ?>
+  
 
   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="search"></label>
