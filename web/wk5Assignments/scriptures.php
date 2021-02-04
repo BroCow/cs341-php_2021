@@ -1,38 +1,10 @@
 <?php
-include 'connection.php';
+require 'connection.php';
 //get_db() function created in connection.php
 $db = get_db();
 
 session_start();
-
-$display = "<h1>Scripture Resources</h1>";
-
-$statement = $db->prepare('SELECT id, book, chapter, verse, content FROM scriptures');
-$statement->execute();
-
-while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-  $display .= "<p><strong>Book: $row[book] Chapter: $row[chapter] Verse: $row[verse]</strong>";
-  $display .= " - '$row[content]'</p>";
-}
-
-if (isset($_POST['search'])) {
-  $searchBook = $_POST['search'];
-  $strSql = 'SELECT id, book, chapter, verse, content FROM ta.scriptures WHERE book = :searchBook';
-  $statement = $db->prepare($strSql);
-  $statement->bindValue(':searchBook', $searchBook, PDO::PARAM_STR);
-  $statement->execute();
-
-  $displaySearch = "<h1>Scripture Search</h1>";
-  /*
-  while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-    $displaySearch .= "<a href='detail.php'><p><strong>Book: $row[book] Chapter: $row[chapter] Verse: $row[verse]</strong>";
-    $displaySearch .= "'</p></a>";
-    $_SESSION['scriptureId'] = $row['id'];
-  }*/
-}
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,20 +15,34 @@ if (isset($_POST['search'])) {
 </head>
 
 <body>
-  <?
-    echo $display;
+  <h1>Scripture Resources</h1>
+
+  <?php
+    $statement = $db->prepare("SELECT book, chapter, verse, content FROM scripture");
+    $statement->execute();
+
+    // Go through each result
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+    {
+      // The variable "row" now holds the complete record for that
+      // row, and we can access the different values based on their
+      // name
+      $book = $row['book'];
+      $chapter = $row['chapter'];
+      $verse = $row['verse'];
+      $content = $row['content'];
+
+      echo "<p><strong>$book $chapter:$verse</strong> - \"$content\"<p>";
+    }
   ?>
+
+
   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="search"></label>
     <input type="text" name="search">
     <input type="submit" name="submit" value="Submit">
   </form>
-  <?
-  if (isset($displaySearch)) {
-    echo $displaySearch;
-  }
   
-  ?>
 </body>
 
 </html>
