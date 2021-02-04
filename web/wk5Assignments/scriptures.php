@@ -39,7 +39,8 @@ session_start();
 
     
       if($bookSearch == $row['book']) {
-        echo $row['book'];
+        echo $row['book'] . "<br>";
+        echo $row['content'];
         }
     }
       
