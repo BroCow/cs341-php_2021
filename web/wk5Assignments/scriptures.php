@@ -3,7 +3,7 @@ require 'connection.php';
 //get_db() function created in connection.php
 $db = get_db();
 
-session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@ session_start();
   <h1>Scripture Resources</h1>
 
   <?php
-    $statement = $db->prepare("SELECT book, chapter, verse, content FROM scripture");
+    $statement = $db->prepare("SELECT book, chapter, verse, content FROM scriptures");
     $statement->execute();
 
     // Go through each result
