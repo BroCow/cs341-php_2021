@@ -36,9 +36,10 @@ $db = get_db();
       $verse = $row['verse'];
       $content = $row['content'];
 
-      if($bookSearch = $book){
-        echo $content;
       }
+
+      if($bookSearch = $book){
+        echo $book;
 
       
 
