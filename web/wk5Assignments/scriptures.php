@@ -65,6 +65,16 @@ try {
       $display .= " - '$row[content]'</p>";
       echo $display;
   }
+
+  if (isset($_POST['search'])){
+    $searchBook = $_POST['search'];
+    $strSql = 'SELECT id, book, chapter, verse, content FROM ta.scriptures WHERE book = :searchBook';
+    $statement = $db->prepare($strSql);
+    $statement->bindValue(':searchBook', $searchBook, PDO::PARAM_STR);
+    $statement->execute();
+  }
+
+
 }
 catch (PDOException $ex) {
   // for debugging only not for production site
@@ -79,8 +89,8 @@ catch (PDOException $ex) {
 <h1>Scripture Resources</h1>
 
 <form method="post" action="scriptures.php">
-  <label for="book"></label>
-  <input type="text" name="book">
+  <label for="search"></label>
+  <input type="text" name="search">
   <input type="submit" name="submit" value="Submit">
 </form>
 
