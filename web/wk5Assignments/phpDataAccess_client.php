@@ -25,33 +25,36 @@ session_start();
     </head>
 
     <body>
-    <?php
-                $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
-                $statement->execute();
+        <?php
+            $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+            $statement->execute();
 
-                // Go through each result
-                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
-                {
-                // The variable "row" now holds the complete record for that
-                // row, and we can access the different values based on their
-                // name
-                $firstname = $row['client_firstname'];
-                $lastname = $row['client_lastname'];
-                $email = $row['client_email'];
-                $phone = $row['client_phone'];
+            
 
-                if(isset($_POST['client_firstname'])){
-                    $search_firstname = $_POST['client_firstname'];
-                    }
+            // Go through each result
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+            {
+            // The variable "row" now holds the complete record for that
+            // row, and we can access the different values based on their
+            // name
+            $firstname = $row['client_firstname'];
+            $lastname = $row['client_lastname'];
+            $email = $row['client_email'];
+            $phone = $row['client_phone'];
+            echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
-                if($search_firstname == $row['client_firstname']) {
-                    echo $row['client_firstname'] . "<br>";
-                    echo $row['client_lastname'] . "<br>";
-                    echo $row['client_email'] . "<br>";
-                    echo $row['client_phone'] . "<br>";
-                    }
-            ?>
-        
+            if($search_firstname == $row['client_firstname']) {
+                echo $row['client_firstname'] . "<br>";
+                echo $row['client_lastname'] . "<br>";
+                echo $row['client_email'] . "<br>";
+                echo $row['client_phone'] . "<br>";
+                }
+            }
+    
+            
+        ?>
+
+
         <main>
             <h1>Client Management</h1>
 
@@ -75,7 +78,6 @@ session_start();
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-
             
 
 
