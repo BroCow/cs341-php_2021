@@ -57,7 +57,7 @@ session_start();
                 $firstname = $row['client_firstname'];
                 $lastname = $row['client_lastname'];
 
-                echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+                //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
                 // Need to create an array and push results to it instead of variable
                 if($search_orderType == $row['order_type']) {
@@ -98,6 +98,8 @@ session_start();
             </form>
             
             <!-- Make this a table for each one -->
+            <br>
+            <br>
             <?php 
                 if(count($orderTypeArray) > 0){
                     echo "<h3>" . $search_orderType . " Orders</h3>";
@@ -111,7 +113,6 @@ session_start();
                     echo    "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
-                    
                 }
 
                 $orderArrayCount = count($orderTypeArray);
@@ -128,9 +129,6 @@ session_start();
                     echo "</tr>"; 
                 }
                   
-
-                
-                
                 echo    "</tbody>";
                 echo "</table>";
             ?>
