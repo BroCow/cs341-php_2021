@@ -48,6 +48,7 @@ session_start();
 
             if($search_firstname == $row['client_firstname']) {
                 echo $row['client_firstname'] . "<br>";
+                $testFirstName = $row['client_firstname'];
                 echo $row['client_lastname'] . "<br>";
                 echo $row['client_email'] . "<br>";
                 echo $row['client_phone'] . "<br>";
@@ -82,6 +83,7 @@ session_start();
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             
+            <?php echo $testFirstName; ?>
 
 
 
