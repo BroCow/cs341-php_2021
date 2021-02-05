@@ -34,6 +34,7 @@ session_start();
     -->
 
 
+    <!-- If/else statements for each possible order type selection with different statement prepared for each?-->
     <body>
         <?php
                 $statement = $db->prepare("SELECT order_type, order_date, public.orderitem.client_id, client_firstname, client_lastname FROM public.order INNER JOIN public.orderitem ON public.order.orderitem_id = public.orderitem.orderitem_id INNER JOIN public.client ON public.orderitem.client_id = public.client.client_id WHERE public.orderitem.client_id = public.client.client_id");
@@ -41,6 +42,7 @@ session_start();
 
                 if(isset($_POST['order_type'])){
                     $search_orderType = $_POST['order_type'];
+                    $orderTypeArray = array();
                 }
                 
 
@@ -57,13 +59,18 @@ session_start();
 
                 echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
+                // Need to create an array and push results to it instead of variable
                 if($search_orderType == $row['order_type']) {
+                    array_push($orderTypeArray, $row['order_type']);
+                    array_push($orderTypeArray, $row['order_date']);
+                    array_push($orderTypeArray, $row['client_firstname']);
+                    array_push($orderTypeArray, $row['client_lastname']);
                     //echo $row['client_firstname'] . "<br>";
-                    $result_orderType = $row['order_type'];
-                    $result_orderDate = $row['order_date'];
-                    $result_firstName = $row['client_firstname'];
+                    //$result_orderType = $row['order_type'];
+                    //$result_orderDate = $row['order_date'];
+                    //$result_firstName = $row['client_firstname'];
                     //echo $row['client_lastname'] . "<br>";
-                    $result_lastName = $row['client_lastname'];
+                    //$result_lastName = $row['client_lastname'];
                     }
                 }
         
@@ -96,10 +103,9 @@ session_start();
             </form>
             
             <?php 
-                echo $result_firstName . "<br>";
-                echo $result_lastName . "<br>";
-                echo $result_orderType . "<br>"; 
-                echo $result_orderDate . "<br>";
+                foreach ($orderTypeArray as $value){
+                    echo "$value <br>";
+                }
                 
             ?>
 
