@@ -62,9 +62,10 @@ session_start();
                 // Need to create an array and push results to it instead of variable
                 if($search_orderType == $row['order_type']) {
                     array_push($orderTypeArray, $row['order_type']);
-                    array_push($orderTypeArray, $row['order_date']);
                     array_push($orderTypeArray, $row['client_firstname']);
                     array_push($orderTypeArray, $row['client_lastname']);
+                    array_push($orderTypeArray, $row['order_date']);
+                    
                     //echo $row['client_firstname'] . "<br>";
                     //$result_orderType = $row['order_type'];
                     //$result_orderDate = $row['order_date'];
@@ -83,12 +84,6 @@ session_start();
 
             <h2>Order Search</h2>
 
-            <!-- Put buttons here to choose between single client or client list -->
-
-            <!-- Put form here to enter client name to appear if "single client" selected -->
-
-            <!-- Put form here to choose between single client or client list -->
-
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
                 <div class="form-group">
                     <label for="order_type">Order Type:</label>
@@ -102,11 +97,13 @@ session_start();
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             
+            <!-- Make this a table for each one -->
             <?php 
                 foreach ($orderTypeArray as $value){
+                    echo "<h3>" . $_SESSION['order_type'] . " Orders</h3>";
                     echo "$value <br>";
+                    echo "<br>";
                 }
-                
             ?>
 
 
