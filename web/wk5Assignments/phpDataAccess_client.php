@@ -139,27 +139,14 @@ session_start();
                     echo "<td>$clientNameArray[$x]</td>"; 
                     echo "</tr>"; 
                 }
-                  
-                echo    "</tbody>";
-                echo "</table>";
+                
+                if(count($clientNameArray) > 0){
+                    echo    "</tbody>";
+                    echo "</table>";
+                }
             ?>
             </div>
             
-            
-            
-            
-            <?php 
-            /*
-                echo $result_FirstName . "<br>"; 
-                echo $result_lastName . "<br>";
-                echo $result_email . "<br>";
-                echo $result_phone . "<br>";
-                */
-            ?>
-
-
-
-
         </main>
     
 
