@@ -44,7 +44,7 @@ session_start();
             $email = $row['client_email'];
             $phone = $row['client_phone'];
             echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
-            
+
             if($bookSearch == $row['book']) {
                 echo $row['book'] . "<br>";
                 echo $row['content'] . "<br>";
@@ -66,15 +66,18 @@ session_start();
 
             <!-- Put form here to choose between single client or client list -->
 
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <?php if(isset($_SESSION['email'])): ?>
-                <input type="text" class="form-control" placeholder="your_email@address.com" id="email" name="email" value="<?php echo $_SESSION['email']?>">
-                <?php else: ?>
-                <input type="text" class="form-control" placeholder="your_email@address.com" id="email" name="email">
-                <?php endif; ?>
-            </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
+                <div class="form-group">
+                    <label for="client_firstname">First Name:</label>
+                    <?php if(isset($_SESSION['client_firstname'])): ?>
+                    <input type="text" class="form-control" placeholder="Jane" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                    <?php else: ?>
+                    <input type="text" class="form-control" placeholder="Jane" id="client_firstname" name="client_firstname">
+                    <?php endif; ?>
+                </div>
 
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
 
 
 
