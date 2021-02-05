@@ -44,7 +44,7 @@ session_start();
             $lastname = $row['client_lastname'];
             $email = $row['client_email'];
             $phone = $row['client_phone'];
-            echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
             if($search_firstname == $row['client_firstname']) {
                 //echo $row['client_firstname'] . "<br>";
@@ -57,10 +57,22 @@ session_start();
                 $result_phone = $row['client_phone'];
                 }
             }
-    
-            
         ?>
 
+        <nav class="navbar navbar-expand-sm bg-light">
+            <!-- Links -->
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_client.php">Client</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_order.php">Order</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_item.php">Item</a>
+            </li>
+            </ul>
+        </nav>
 
         <main>
             <h1>Client Management</h1>
