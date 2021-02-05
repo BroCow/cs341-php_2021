@@ -45,18 +45,24 @@ session_start();
 
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3">
-                    <img src="" alt="">
-                    <button type="submit" class="btn btn-primary">Client</button>
-                    </div>
+                    <form method="post" action="phpDataAccess_client.php">
+                        <div class="col-sm-3">
+                        <img src="" alt="">
+                        <button type="submit" class="btn btn-primary">Client</button>
+                        </div>
+                    </form>
+                    <form>
                     <div class="col-sm-3">
                     <img src="" alt="">
                     <button type="submit" class="btn btn-primary">Order</button>
                     </div>
+                    </form>
+                    <form>
                     <div class="col-sm-3">
                     <img src="" alt="">
                     <button type="submit" class="btn btn-primary">Item</button>
                     </div>
+                    </form>
                 </div>
             </div>
 
