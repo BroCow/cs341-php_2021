@@ -110,6 +110,7 @@ session_start();
             
             <br>
             <br>
+            <div class="table">
             <?php 
                 if(count($clientNameArray) > 0){
                     echo "<h3>Search results for " . $search_firstname . "</h3>";
@@ -142,6 +143,7 @@ session_start();
                 echo    "</tbody>";
                 echo "</table>";
             ?>
+            </div>
             
             
             
