@@ -75,10 +75,12 @@ session_start();
             </form>
 
             <?php
+                $statement->execute();
+                
                 if(isset($_POST['client_firstname'])){
                     $search_firstname = $_POST['client_firstname'];
                     }
-                    
+
                 if($search_firstname == $row['client_firstname']) {
                     echo $row['client_firstname'] . "<br>";
                     echo $row['client_lastname'] . "<br>";
