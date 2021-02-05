@@ -73,11 +73,23 @@ session_start();
                     //echo $row['client_lastname'] . "<br>";
                     //$result_lastName = $row['client_lastname'];
                     }
-                }
-        
-                
+                }  
             ?>
 
+        <nav class="navbar navbar-expand-sm bg-light">
+            <!-- Links -->
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_client.php">Client</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_order.php">Order</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_item.php">Item</a>
+            </li>
+            </ul>
+        </nav>
 
         <main>
             <h1>Order Management</h1>
