@@ -99,8 +99,10 @@ session_start();
             
             <!-- Make this a table for each one -->
             <?php 
+                if(count($orderTypeArray) > 0){
+                    echo "<h3>" . $search_orderType . " Orders</h3>";
+                }
                 foreach ($orderTypeArray as $value){
-                    echo "<h3>" . $_SESSION['order_type'] . " Orders</h3>";
                     echo "$value <br>";
                     echo "<br>";
                 }
