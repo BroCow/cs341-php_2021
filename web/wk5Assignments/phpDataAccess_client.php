@@ -75,8 +75,9 @@ session_start();
             </form>
 
             <?php
+                $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
                 $statement->execute();
-                
+
                 if(isset($_POST['client_firstname'])){
                     $search_firstname = $_POST['client_firstname'];
                     }
