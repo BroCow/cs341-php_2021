@@ -47,11 +47,14 @@ session_start();
             echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
             if($search_firstname == $row['client_firstname']) {
-                echo $row['client_firstname'] . "<br>";
-                $testFirstName = $row['client_firstname'];
-                echo $row['client_lastname'] . "<br>";
-                echo $row['client_email'] . "<br>";
-                echo $row['client_phone'] . "<br>";
+                //echo $row['client_firstname'] . "<br>";
+                $result_FirstName = $row['client_firstname'];
+                //echo $row['client_lastname'] . "<br>";
+                $result_lastName = $row['client_lastname'];
+                //echo $row['client_email'] . "<br>";
+                $result_email = $row['client_email'];
+                //echo $row['client_phone'] . "<br>";
+                $result_phone = $row['client_phone'];
                 }
             }
     
@@ -83,7 +86,12 @@ session_start();
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             
-            <?php echo $testFirstName; ?>
+            <?php 
+                echo $result_FirstName . "<br>"; 
+                echo $result_lastName . "<br>";
+                echo $result_email . "<br>";
+                echo $result_phone . "<br>";
+            ?>
 
 
 
