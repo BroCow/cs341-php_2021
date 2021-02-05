@@ -29,8 +29,8 @@ session_start();
             $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
 
-            if(isset($_POST['search'])){
-            $bookSearch = $_POST['search'];
+            if(isset($_POST['client_firstname'])){
+            $search_firstname = $_POST['client_firstname'];
             }
 
             // Go through each result
@@ -45,9 +45,11 @@ session_start();
             $phone = $row['client_phone'];
             echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
-            if($bookSearch == $row['book']) {
-                echo $row['book'] . "<br>";
-                echo $row['content'] . "<br>";
+            if($search_firstname == $row['client_firstname']) {
+                echo $row['client_firstname'] . "<br>";
+                echo $row['client_lastname'] . "<br>";
+                echo $row['client_email'] . "<br>";
+                echo $row['client_phone'] . "<br>";
                 }
             }
     
