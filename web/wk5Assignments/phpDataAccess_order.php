@@ -113,23 +113,16 @@ session_start();
                     echo "<tbody>";
                     
                 }
-
-                
-
                 foreach ($orderTypeArray as $value){
                     echo "<tr>";
-                    for ($x = 0; $x <= 3; $x++) {
-                        echo "<td>" . $value . "</td>";
-                      }
-                    //echo "<td>" . $value . "</td>";
+                    echo    "<td>" . $value . "</td>";
+                            "<td>" . $value . "</td>";
+                            "<td>" . $value . "</td>";
+                            "<td>" . $value . "</td>";
                     echo "</tr>";
                 }
                 echo    "</tbody>";
                 echo "</table>";
-            ?>
-
-            <?php
-            
             ?>
 
 
