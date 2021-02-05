@@ -115,8 +115,8 @@ session_start();
                 }
                 foreach ($orderTypeArray as $value){
                     echo "<td>" . $value . "</td>";
+                    echo "</tr>";
                 }
-                echo        "</tr>";
                 echo    "</tbody>";
                 echo "</table>";
             ?>
