@@ -31,6 +31,7 @@ session_start();
 
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
+                $clientNameArray = array();
             }
             
 
@@ -47,14 +48,19 @@ session_start();
             //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
             if($search_firstname == $row['client_firstname']) {
+                array_push($clientNameArray, $row['client_firstname']);
+                array_push($clientNameArray, $row['client_lastname']);
+                array_push($clientNameArray, $row['client_email']);
+                array_push($clientNameArray, $row['client_phone']);
+
                 //echo $row['client_firstname'] . "<br>";
-                $result_FirstName = $row['client_firstname'];
+                //$result_FirstName = $row['client_firstname'];
                 //echo $row['client_lastname'] . "<br>";
-                $result_lastName = $row['client_lastname'];
+                //$result_lastName = $row['client_lastname'];
                 //echo $row['client_email'] . "<br>";
-                $result_email = $row['client_email'];
+                //$result_email = $row['client_email'];
                 //echo $row['client_phone'] . "<br>";
-                $result_phone = $row['client_phone'];
+                //$result_phone = $row['client_phone'];
                 }
             }
         ?>
@@ -62,6 +68,9 @@ session_start();
         <nav class="navbar navbar-expand-sm bg-light">
             <!-- Links -->
             <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_home.php">HOME</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="phpDataAccess_client.php">Client</a>
             </li>
@@ -98,11 +107,52 @@ session_start();
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             
+            
+            <br>
+            <br>
             <?php 
+                if(count($clientNameArray) > 0){
+                    echo "<h3>Search results for " . $search_firstname . "</h3>";
+                    echo "<table class='table table-bordered'>";
+                    echo "<thead>";
+                    echo    "<tr>";
+                    echo        "<th>First Name</th>";
+                    echo        "<th>Last Name</th>";
+                    echo        "<th>Email</th>";
+                    echo        "<th>Phone</th>";
+                    echo    "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+                }
+
+                $clientArrayCount = count($clientNameArray);
+
+                for ($x = 0; $x <= $clientArrayCount; $x++) {
+                    echo "<tr>";
+                    echo "<td>$clientNameArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$clientNameArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$clientNameArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$clientNameArray[$x]</td>"; 
+                    echo "</tr>"; 
+                }
+                  
+                echo    "</tbody>";
+                echo "</table>";
+            ?>
+            
+            
+            
+            
+            <?php 
+            /*
                 echo $result_FirstName . "<br>"; 
                 echo $result_lastName . "<br>";
                 echo $result_email . "<br>";
                 echo $result_phone . "<br>";
+                */
             ?>
 
 
