@@ -29,9 +29,7 @@ session_start();
             $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
 
-            if(isset($_POST['client_firstname'])){
-            $search_firstname = $_POST['client_firstname'];
-            }
+            
 
             // Go through each result
             while ($row = $statement->fetch(PDO::FETCH_ASSOC))
@@ -45,12 +43,7 @@ session_start();
             $phone = $row['client_phone'];
             echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
-            if($search_firstname == $row['client_firstname']) {
-                echo $row['client_firstname'] . "<br>";
-                echo $row['client_lastname'] . "<br>";
-                echo $row['client_email'] . "<br>";
-                echo $row['client_phone'] . "<br>";
-                }
+            
             }
     
             
@@ -80,6 +73,19 @@ session_start();
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
+            <?php
+                if(isset($_POST['client_firstname'])){
+                    $search_firstname = $_POST['client_firstname'];
+                    }
+                    
+                if($search_firstname == $row['client_firstname']) {
+                    echo $row['client_firstname'] . "<br>";
+                    echo $row['client_lastname'] . "<br>";
+                    echo $row['client_email'] . "<br>";
+                    echo $row['client_phone'] . "<br>";
+                    }
+            ?>
 
 
 
