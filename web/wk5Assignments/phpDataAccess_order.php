@@ -101,11 +101,24 @@ session_start();
             <?php 
                 if(count($orderTypeArray) > 0){
                     echo "<h3>" . $search_orderType . " Orders</h3>";
+                    echo "<table class='table table-bordered'>";
+                    echo "<thead>";
+                    echo    "<tr>";
+                    echo        "<th>Order Type</th>";
+                    echo        "<th>First Name</th>";
+                    echo        "<th>Last Name</th>";
+                    echo        "<th>Order Date</th>";
+                    echo    "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+                    echo    "<tr>";
                 }
                 foreach ($orderTypeArray as $value){
-                    echo "$value <br>";
-                    echo "<br>";
+                    echo "<td>" . $value . "</td>";
                 }
+                echo        "</tr>";
+                echo    "</tbody>";
+                echo "</table>";
             ?>
 
 
