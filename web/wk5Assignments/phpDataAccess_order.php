@@ -111,16 +111,17 @@ session_start();
                     echo    "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
-                    
+                    echo "<tr>";
                 }
                 foreach ($orderTypeArray as $value){
-                    echo "<tr>";
+                    
                     echo    "<td>" . $value . "</td>";
                             "<td>" . $value . "</td>";
                             "<td>" . $value . "</td>";
                             "<td>" . $value . "</td>";
-                    echo "</tr>";
+                    
                 }
+                echo "</tr>";
                 echo    "</tbody>";
                 echo "</table>";
             ?>
