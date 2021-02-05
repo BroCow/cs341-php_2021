@@ -113,14 +113,20 @@ session_start();
                     echo "<tbody>";
                     echo "<tr>";
                 }
-                foreach ($orderTypeArray as $value){
-                    
-                    echo    "<td>" . $value . "</td>";
-                            "<td>" . $value . "</td>";
-                            "<td>" . $value . "</td>";
-                            "<td>" . $value . "</td>";
-                    
-                }
+
+                $orderArrayCount = count($orderTypeArray);
+
+                for ($x = 1, $y = 1; $x <= $orderArrayCount; $x++) {
+                    foreach ($orderTypeArray as $value){
+                        echo    "<td>" . $value . "</td>";
+                        $y++;
+                        if ($y >= 3) {
+                            echo "<tr>";
+                        }
+                    }
+                  }
+
+                
                 echo "</tr>";
                 echo    "</tbody>";
                 echo "</table>";
