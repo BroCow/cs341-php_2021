@@ -25,32 +25,7 @@ session_start();
     </head>
 
     <body>
-        
-        <main>
-            <h1>Client Management</h1>
-
-            <h2>Client Search</h2>
-
-            <!-- Put buttons here to choose between single client or client list -->
-
-            <!-- Put form here to enter client name to appear if "single client" selected -->
-
-            <!-- Put form here to choose between single client or client list -->
-
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
-                <div class="form-group">
-                    <label for="client_firstname">First Name:</label>
-                    <?php if(isset($_SESSION['client_firstname'])): ?>
-                    <input type="text" class="form-control" placeholder="Jane" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
-                    <?php else: ?>
-                    <input type="text" class="form-control" placeholder="Jane" id="client_firstname" name="client_firstname">
-                    <?php endif; ?>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-
-            <?php
+    <?php
                 $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
                 $statement->execute();
 
@@ -76,6 +51,32 @@ session_start();
                     echo $row['client_phone'] . "<br>";
                     }
             ?>
+        
+        <main>
+            <h1>Client Management</h1>
+
+            <h2>Client Search</h2>
+
+            <!-- Put buttons here to choose between single client or client list -->
+
+            <!-- Put form here to enter client name to appear if "single client" selected -->
+
+            <!-- Put form here to choose between single client or client list -->
+
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
+                <div class="form-group">
+                    <label for="client_firstname">First Name:</label>
+                    <?php if(isset($_SESSION['client_firstname'])): ?>
+                    <input type="text" class="form-control" placeholder="Jane" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                    <?php else: ?>
+                    <input type="text" class="form-control" placeholder="Jane" id="client_firstname" name="client_firstname">
+                    <?php endif; ?>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            
 
 
 
