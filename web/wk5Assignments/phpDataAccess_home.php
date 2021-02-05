@@ -51,17 +51,19 @@ session_start();
                         <button type="submit" class="btn btn-primary">Client</button>
                         </div>
                     </form>
-                    <form>
-                    <div class="col-sm-3">
-                    <img src="" alt="">
-                    <button type="submit" class="btn btn-primary">Order</button>
-                    </div>
+
+                    <form method="post" action="phpDataAccess_order.php">
+                        <div class="col-sm-3">
+                        <img src="" alt="">
+                        <button type="submit" class="btn btn-primary">Order</button>
+                        </div>
                     </form>
-                    <form>
-                    <div class="col-sm-3">
-                    <img src="" alt="">
-                    <button type="submit" class="btn btn-primary">Item</button>
-                    </div>
+
+                    <form method="post" action="phpDataAccess_item.php">
+                        <div class="col-sm-3">
+                        <img src="" alt="">
+                        <button type="submit" class="btn btn-primary">Item</button>
+                        </div>
                     </form>
                 </div>
             </div>
