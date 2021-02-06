@@ -6,13 +6,13 @@ main {
     margin: 5%;
 }
 
-nav {
+.navContainer {
     position: relative;
 }
 
 .gemHunter {
-    float: right;
-    margin-right: 5%;
+    top: 30px;
+    right: 10px;
 }
 
 .table {
@@ -24,5 +24,4 @@ nav {
 .homeButton {
     height: 150px;
     width: 300px;
-    margin-right: 5%;
 }

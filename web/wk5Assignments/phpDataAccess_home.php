@@ -26,6 +26,7 @@ session_start();
 
         <!-- A grey horizontal navbar that becomes vertical on small screens -->
         
+        <div class=".navContainer">
             <nav class="navbar navbar-expand-sm bg-light">
                 <!-- Links -->
                 <ul class="navbar-nav">
@@ -44,11 +45,11 @@ session_start();
                 </ul>
                 <h1 class="gemHunter">Gem Hunter Designs</h1>
             </nav>
-            
+        </div>
 
         <main>
             
-            <div class="container p-3 my-3 bg-dark">
+            <div class="container bg-dark">
                 <div class="row">
                     <form method="post" action="phpDataAccess_client.php">
                         <div class="col-lg-3">
