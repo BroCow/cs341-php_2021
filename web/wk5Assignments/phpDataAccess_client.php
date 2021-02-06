@@ -29,12 +29,17 @@ session_start();
             $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
 
-
+            $clientNameArray = array();
+            
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
-                $clientNameArray = array();
-            } 
-
+            }
+            
+            echo $_POST['client_lastname'];
+            if(isset($_POST['client_lastname'])){
+                $search_lastname = $_POST['client_lastname'];
+            }
+            echo $search_lastname;
 
             // Go through each result
             while ($row = $statement->fetch(PDO::FETCH_ASSOC))
@@ -55,6 +60,13 @@ session_start();
                     array_push($clientNameArray, $row['client_email']);
                     array_push($clientNameArray, $row['client_phone']);
                 } 
+                if($search_lastname == $row['client_lastname']) {
+                    array_push($clientNameArray, $row['client_firstname']);
+                    array_push($clientNameArray, $row['client_lastname']);
+                    array_push($clientNameArray, $row['client_email']);
+                    array_push($clientNameArray, $row['client_phone']);
+                } 
+
             }
         ?>
 
@@ -74,6 +86,7 @@ session_start();
                 <a class="nav-link" href="phpDataAccess_item.php">Item</a>
             </li>
             </ul>
+            <h1 class="gemHunter">Gem Hunter Designs</h1>
         </nav>
 
         <main>
@@ -94,6 +107,15 @@ session_start();
                     <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
                     <?php else: ?>
                     <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                    <?php endif; ?>
+                </div>
+
+                <div class="form-group">
+                    <label for="client_lastname">Last Name:</label>
+                    <?php if(isset($_SESSION['client_lastname'])): ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                    <?php else: ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname">
                     <?php endif; ?>
                 </div>
 
