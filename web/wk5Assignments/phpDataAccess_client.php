@@ -33,6 +33,7 @@ session_start();
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
                 $clientNameArray = array();
+                echo $_POST['client_firstname'];
             } 
 
 
@@ -46,7 +47,7 @@ session_start();
             $lastname = $row['client_lastname'];
             $email = $row['client_email'];
             $phone = $row['client_phone'];
-            echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
             }
             
             if($search_firstname == $row['client_firstname']) {
