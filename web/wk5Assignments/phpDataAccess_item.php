@@ -69,6 +69,9 @@ session_start();
             <!-- Links -->
             <ul class="navbar-nav">
             <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_home.php">HOME</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="phpDataAccess_client.php">Client</a>
             </li>
             <li class="nav-item">

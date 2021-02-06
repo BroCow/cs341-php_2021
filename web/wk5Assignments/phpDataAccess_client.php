@@ -46,7 +46,7 @@ session_start();
             $lastname = $row['client_lastname'];
             $email = $row['client_email'];
             $phone = $row['client_phone'];
-            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+            echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
             }
             
             if($search_firstname == $row['client_firstname']) {
