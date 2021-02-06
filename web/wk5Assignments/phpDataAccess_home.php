@@ -51,26 +51,32 @@ session_start();
             
             <div class="container bg-dark">
                 <div class="row">
+                    <div class="col">
                     <form method="post" action="phpDataAccess_client.php">
-                        <div class="col">
+                        
                         <img src="" alt="">
                         <button type="submit" id="clientButton" class="homeButton">Client</button>
-                        </div>
+                        
                     </form>
+                    </div>
 
+                    <div class="col">
                     <form method="post" action="phpDataAccess_order.php">
-                        <div class="col">
+                        
                         <img src="" alt="">
                         <button type="submit" id="orderButton" class="homeButton">Order</button>
-                        </div>
+                        
                     </form>
+                    </div>
 
+                    <div class="col">
                     <form method="post" action="phpDataAccess_item.php">
-                        <div class="col">
+                        
                         <img src="" alt="">
                         <button type="submit" id="itemButton" class="homeButton">Item</button>
-                        </div>
+                        
                     </form>
+                    </div>
                 </div>
             </div>
 
