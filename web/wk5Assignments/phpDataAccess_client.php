@@ -33,6 +33,7 @@ session_start();
                 $search_firstname = $_POST['client_firstname'];
                 $clientNameArray = array();
             }
+
             
 
             // Go through each result
@@ -46,6 +47,16 @@ session_start();
             $email = $row['client_email'];
             $phone = $row['client_phone'];
             //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+
+            $sql = "SELECT * FROM client WHERE client_firstname LIKE $search_firstname";
+            $sqlresult = $db->quesry($sql);
+            if ($sqlresult->num_rows > 0) {
+                while($row = $sqlresult->FETCH_ASSOC()) {
+                    echo $row['client_firstname'];
+                }
+            } else {
+                echo "0 results";
+            }
 
             if($search_firstname == $row['client_firstname']) {
                 array_push($clientNameArray, $row['client_firstname']);
