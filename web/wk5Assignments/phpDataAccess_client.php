@@ -57,12 +57,12 @@ session_start();
                 array_push($clientNameArray, $row['client_lastname']);
                 array_push($clientNameArray, $row['client_email']);
                 array_push($clientNameArray, $row['client_phone']);
-            } else if($search_lastname == $row['client_lastname']) {
+            } /*else if($search_lastname == $row['client_lastname']) {
                 array_push($clientNameArray, $row['client_firstname']);
                 array_push($clientNameArray, $row['client_lastname']);
                 array_push($clientNameArray, $row['client_email']);
                 array_push($clientNameArray, $row['client_phone']);
-            }
+            }*/
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
