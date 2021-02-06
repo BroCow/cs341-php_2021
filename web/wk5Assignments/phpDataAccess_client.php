@@ -26,8 +26,8 @@ session_start();
 
     <body>
         <?php
-            $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
-            $statement->execute();
+            //$statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+            //$statement->execute();
 
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
@@ -37,15 +37,15 @@ session_start();
             
 
             // Go through each result
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+            //while ($row = $statement->fetch(PDO::FETCH_ASSOC))
             {
             // The variable "row" now holds the complete record for that
             // row, and we can access the different values based on their
             // name
-            $firstname = $row['client_firstname'];
-            $lastname = $row['client_lastname'];
-            $email = $row['client_email'];
-            $phone = $row['client_phone'];
+            //$firstname = $row['client_firstname'];
+            //$lastname = $row['client_lastname'];
+            //$email = $row['client_email'];
+            //$phone = $row['client_phone'];
             //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
             $sql = "SELECT * FROM client WHERE client_firstname LIKE $search_firstname";
