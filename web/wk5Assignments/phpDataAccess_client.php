@@ -33,10 +33,10 @@ session_start();
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
                 $clientNameArray = array();
-            } else if(isset($_POST['client_lastname'])){
+            } /*else if(isset($_POST['client_lastname'])){
                 $search_lastname = $_POST['client_lastname'];
                 $clientNameArray = array();
-            }
+            }*/
 
 
             // Go through each result
@@ -66,12 +66,12 @@ session_start();
                 //$result_email = $row['client_email'];
                 //echo $row['client_phone'] . "<br>";
                 //$result_phone = $row['client_phone'];
-            } else if($search_lastname == $row['client_lastname']) {
+            } /*else if($search_lastname == $row['client_lastname']) {
                 array_push($clientNameArray, $row['client_firstname']);
                 array_push($clientNameArray, $row['client_lastname']);
                 array_push($clientNameArray, $row['client_email']);
                 array_push($clientNameArray, $row['client_phone']);
-            }
+            }*/
             
         ?>
 
