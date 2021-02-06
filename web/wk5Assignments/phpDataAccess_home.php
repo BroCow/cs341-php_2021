@@ -25,28 +25,31 @@ session_start();
         </header>
 
         <!-- A grey horizontal navbar that becomes vertical on small screens -->
-        <nav class="navbar navbar-expand-sm bg-light">
-            <!-- Links -->
-            <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="phpDataAccess_home.php">HOME</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="phpDataAccess_client.php">Client</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="phpDataAccess_order.php">Order</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="phpDataAccess_item.php">Item</a>
-            </li>
-            </ul>
-        </nav>
-        
-        <main>
-            <h1>Gem Hunter Designs Jewelry Management Application</h1>
+        <div class="navContainer">
+            <nav class="navbar navbar-expand-sm bg-light">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="phpDataAccess_home.php">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="phpDataAccess_client.php">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="phpDataAccess_order.php">Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="phpDataAccess_item.php">Item</a>
+                </li>
+                </ul>
+            </nav>
+            <h1 class="gemHunter">Gem Hunter Designs</h1>
+        </div>
 
-            <div class="container">
+        <main>
+            
+
+            <div class="container-fluid">
                 <div class="row">
                     <form method="post" action="phpDataAccess_client.php">
                         <div class="col-lg-3">
