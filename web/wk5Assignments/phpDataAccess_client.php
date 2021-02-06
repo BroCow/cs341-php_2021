@@ -48,15 +48,16 @@ session_start();
             $email = $row['client_email'];
             $phone = $row['client_phone'];
             //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
-            }
             
-            if($search_firstname == $row['client_firstname']) {
-                echo $row['client_firstname'];
-                array_push($clientNameArray, $row['client_firstname']);
-                array_push($clientNameArray, $row['client_lastname']);
-                array_push($clientNameArray, $row['client_email']);
-                array_push($clientNameArray, $row['client_phone']);
-            } 
+            
+                if($search_firstname == $row['client_firstname']) {
+                    echo $row['client_firstname'];
+                    array_push($clientNameArray, $row['client_firstname']);
+                    array_push($clientNameArray, $row['client_lastname']);
+                    array_push($clientNameArray, $row['client_email']);
+                    array_push($clientNameArray, $row['client_phone']);
+                } 
+            }
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
