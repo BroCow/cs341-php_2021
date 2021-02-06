@@ -24,6 +24,6 @@ main {
 .homeButton {
     height: 150px;
     width: 300px;
-    box-shadow: 10px 10px 5px turquoise;
+    box-shadow: 0 4px 8px 0 turquoise, 0 6px 20px 0 turquoise;
     font-size: 3em;
 }
