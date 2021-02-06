@@ -46,7 +46,7 @@ session_start();
             $lastname = $row['client_lastname'];
             $email = $row['client_email'];
             $phone = $row['client_phone'];
-            echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
             }
             
             if($search_firstname == $row['client_firstname']) {
@@ -93,6 +93,19 @@ session_start();
                     <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
                     <?php else: ?>
                     <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                    <?php endif; ?>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Last Name Search" name="lastNameSearch">
+                <div class="form-group">
+                    <label for="client_lastname">Last Name:</label>
+                    <?php if(isset($_SESSION['client_lastname'])): ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                    <?php else: ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname">
                     <?php endif; ?>
                 </div>
 
