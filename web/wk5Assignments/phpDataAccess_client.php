@@ -117,18 +117,7 @@ session_start();
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Last Name Search" name="lastNameSearch">
-                <div class="form-group">
-                    <label for="client_lastname">Last Name:</label>
-                    <?php if(isset($_SESSION['client_lastname'])): ?>
-                    <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
-                    <?php else: ?>
-                    <input type="text" class="form-control" id="client_lastname" name="client_lastname">
-                    <?php endif; ?>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            
             
             
             <br>
