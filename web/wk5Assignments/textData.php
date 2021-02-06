@@ -29,16 +29,17 @@ session_start();
             $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
 
-            echo $_POST['client_lastname'];
+            $clientNameArray = array();
+            
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
-                $clientNameArray = array();
-            } else if(isset($_POST['client_lastname'])){
-                $search_lastname = $_POST['client_lastname'];
-                $clientNameArray = array();
-                echo $search_lastname;
             }
-
+            
+            echo $_POST['client_lastname'];
+            if(isset($_POST['client_lastname'])){
+                $search_lastname = $_POST['client_lastname'];
+            }
+            echo $search_lastname;
 
             // Go through each result
             while ($row = $statement->fetch(PDO::FETCH_ASSOC))
