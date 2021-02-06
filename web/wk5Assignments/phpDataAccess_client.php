@@ -32,7 +32,7 @@ session_start();
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
                 $clientNameArray = array();
-                $sql = "SELECT * FROM client WHERE client_firstname LIKE '%$search_firstname%'";
+                $sql = "SELECT * FROM client WHERE client_firstname = $search_firstname";
                 $sqlresult = $db->quesry($sql);
                 if ($sqlresult->num_rows > 0) {
                     while($row = $sqlresult->fetch(PDO::FETCH_ASSOC)) {
