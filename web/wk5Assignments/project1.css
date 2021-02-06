@@ -7,3 +7,7 @@ body {
     border: 2px solid turquoise;
     color: white;
 }
+
+#clientButton, #orderButton, #itemButton {
+    width: 20%;
+}

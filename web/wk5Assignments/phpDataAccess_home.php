@@ -29,6 +29,9 @@ session_start();
             <!-- Links -->
             <ul class="navbar-nav">
             <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_home.php">HOME</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="phpDataAccess_client.php">Client</a>
             </li>
             <li class="nav-item">
@@ -48,21 +51,21 @@ session_start();
                     <form method="post" action="phpDataAccess_client.php">
                         <div class="col-sm-3">
                         <img src="" alt="">
-                        <button type="submit" class="btn btn-primary">Client</button>
+                        <button type="submit" id="clientButton" class="btn btn-primary">Client</button>
                         </div>
                     </form>
 
                     <form method="post" action="phpDataAccess_order.php">
                         <div class="col-sm-3">
                         <img src="" alt="">
-                        <button type="submit" class="btn btn-primary">Order</button>
+                        <button type="submit" id="orderButton" class="btn btn-primary">Order</button>
                         </div>
                     </form>
 
                     <form method="post" action="phpDataAccess_item.php">
                         <div class="col-sm-3">
                         <img src="" alt="">
-                        <button type="submit" class="btn btn-primary">Item</button>
+                        <button type="submit" id="itemButton" class="btn btn-primary">Item</button>
                         </div>
                     </form>
                 </div>
