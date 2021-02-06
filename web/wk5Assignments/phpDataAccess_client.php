@@ -47,22 +47,13 @@ session_start();
             $email = $row['client_email'];
             $phone = $row['client_phone'];
             //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
-
+            }
             
             if($search_firstname == $row['client_firstname']) {
                 array_push($clientNameArray, $row['client_firstname']);
                 array_push($clientNameArray, $row['client_lastname']);
                 array_push($clientNameArray, $row['client_email']);
                 array_push($clientNameArray, $row['client_phone']);
-
-                //echo $row['client_firstname'] . "<br>";
-                //$result_FirstName = $row['client_firstname'];
-                //echo $row['client_lastname'] . "<br>";
-                //$result_lastName = $row['client_lastname'];
-                //echo $row['client_email'] . "<br>";
-                //$result_email = $row['client_email'];
-                //echo $row['client_phone'] . "<br>";
-                //$result_phone = $row['client_phone'];
             } 
         ?>
 
