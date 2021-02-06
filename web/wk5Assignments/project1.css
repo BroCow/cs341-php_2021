@@ -3,12 +3,16 @@ body {
 }
 
 main {
-    /*margin: 5%;*/
+    margin: 5%;
 }
 
 .gemHunter {
     right: 30px;
     position: absolute;
+}
+
+.col {
+padding-left: 20%;
 }
 
 .table {
