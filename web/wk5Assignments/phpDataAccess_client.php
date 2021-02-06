@@ -35,12 +35,10 @@ session_start();
                 $search_firstname = $_POST['client_firstname'];
             }
             
-            echo $_POST['client_lastname'];
             if(isset($_POST['client_lastname'])){
                 $search_lastname = $_POST['client_lastname'];
             }
-            echo $search_lastname;
-
+            
             // Go through each result
             while ($row = $statement->fetch(PDO::FETCH_ASSOC))
             {
@@ -52,7 +50,6 @@ session_start();
             $email = $row['client_email'];
             $phone = $row['client_phone'];
             //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
-            
             
                 if($search_firstname == $row['client_firstname']) {
                     array_push($clientNameArray, $row['client_firstname']);
