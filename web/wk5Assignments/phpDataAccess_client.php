@@ -35,7 +35,7 @@ session_start();
                 $clientNameArray = array();
             } else if(isset($_POST['client_lastname'])){
                 $search_lastname = $_POST['client_lastname'];
-                $clientNameArray = array();
+                //$clientNameArray = array();
             } 
 
 
