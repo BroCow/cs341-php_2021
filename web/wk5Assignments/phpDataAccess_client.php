@@ -29,16 +29,15 @@ session_start();
             $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
 
+
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
                 $clientNameArray = array();
+            } else if(isset($_POST['client_lastname'])){
+                $search_lastname = $_POST['client_lastname'];
+                $clientNameArray = array();
             }
 
-
-
-            
-
-            
 
             // Go through each result
             while ($row = $statement->fetch(PDO::FETCH_ASSOC))
@@ -50,10 +49,9 @@ session_start();
             $lastname = $row['client_lastname'];
             $email = $row['client_email'];
             $phone = $row['client_phone'];
-            echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
             
-
             if($search_firstname == $row['client_firstname']) {
                 array_push($clientNameArray, $row['client_firstname']);
                 array_push($clientNameArray, $row['client_lastname']);
@@ -68,8 +66,13 @@ session_start();
                 //$result_email = $row['client_email'];
                 //echo $row['client_phone'] . "<br>";
                 //$result_phone = $row['client_phone'];
-                }
+            } else if($search_lastname == $row['client_lastname']) {
+                array_push($clientNameArray, $row['client_firstname']);
+                array_push($clientNameArray, $row['client_lastname']);
+                array_push($clientNameArray, $row['client_email']);
+                array_push($clientNameArray, $row['client_phone']);
             }
+            
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -101,13 +104,26 @@ session_start();
 
             <!-- Put form here to choose between single client or client list -->
 
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="First Name Search" name="firstNameSearch">
                 <div class="form-group">
                     <label for="client_firstname">First Name:</label>
                     <?php if(isset($_SESSION['client_firstname'])): ?>
-                    <input type="text" class="form-control" placeholder="Jane" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                    <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
                     <?php else: ?>
-                    <input type="text" class="form-control" placeholder="Jane" id="client_firstname" name="client_firstname">
+                    <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                    <?php endif; ?>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Last Name Search" name="lastNameSearch">
+                <div class="form-group">
+                    <label for="client_lastname">Last Name:</label>
+                    <?php if(isset($_SESSION['client_lastname'])): ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                    <?php else: ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname">
                     <?php endif; ?>
                 </div>
 
