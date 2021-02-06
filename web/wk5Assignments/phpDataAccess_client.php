@@ -101,7 +101,7 @@ session_start();
             </form>
 
             <br>
-            <?php echo count($clientNameArray); ?>
+            
             <br>
 
             <div class="table">
