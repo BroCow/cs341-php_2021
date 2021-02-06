@@ -86,7 +86,7 @@ session_start();
 
             <!-- Put form here to choose between single client or client list -->
 
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="First Name Search" name="firstNameSearch">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
                 <div class="form-group">
                     <label for="client_firstname">First Name:</label>
                     <?php if(isset($_SESSION['client_firstname'])): ?>
