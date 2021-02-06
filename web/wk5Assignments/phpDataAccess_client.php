@@ -36,15 +36,7 @@ session_start();
 
 
 
-            $sql = "SELECT client_lastname FROM client WHERE client_firstname = 'Trump'";
-                $sqlresult = $db->quesry($sql);
-                if ($sqlresult->num_rows > 0) {
-                    while($row = $sqlresult->fetch(PDO::FETCH_ASSOC)) {
-                        echo $row['client_lastname'];
-                    }
-                } else {
-                    echo "0 results";
-                }
+            
 
             
 
