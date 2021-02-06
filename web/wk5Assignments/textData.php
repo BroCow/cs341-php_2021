@@ -26,25 +26,131 @@ session_start();
 
     <body>
         <?php
-            $stmt = $db->prepare("SELECT client_firstname FROM client");
-            $stmt->execute();
+            $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+            $statement->execute();
 
-            
-            
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+
+            if(isset($_POST['client_firstname'])){
+                $search_firstname = $_POST['client_firstname'];
+                $clientNameArray = array();
+            } 
+
+
+            // Go through each result
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC))
             {
             // The variable "row" now holds the complete record for that
             // row, and we can access the different values based on their
             // name
             $firstname = $row['client_firstname'];
+            $lastname = $row['client_lastname'];
+            $email = $row['client_email'];
+            $phone = $row['client_phone'];
+            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+            
+            
+                if($search_firstname == $row['client_firstname']) {
+                    array_push($clientNameArray, $row['client_firstname']);
+                    array_push($clientNameArray, $row['client_lastname']);
+                    array_push($clientNameArray, $row['client_email']);
+                    array_push($clientNameArray, $row['client_phone']);
+                } 
             }
-            echo $firstname;
         ?>
 
-        
+        <nav class="navbar navbar-expand-sm bg-light">
+            <!-- Links -->
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_home.php">HOME</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_client.php">Client</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_order.php">Order</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="phpDataAccess_item.php">Item</a>
+            </li>
+            </ul>
+            <h1 class="gemHunter">Gem Hunter Designs</h1>
+        </nav>
 
         <main>
+            <h1>Client Management</h1>
+
+            <h2>Client Search</h2>
+
+            <!-- Put buttons here to choose between single client or client list -->
+
+            <!-- Put form here to enter client name to appear if "single client" selected -->
+
+            <!-- Put form here to choose between single client or client list -->
+
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
+                <div class="form-group">
+                    <label for="client_firstname">First Name:</label>
+                    <?php if(isset($_SESSION['client_firstname'])): ?>
+                    <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                    <?php else: ?>
+                    <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                    <?php endif; ?>
+                </div>
+
+                <div class="form-group">
+                    <label for="client_lastname">Last Name:</label>
+                    <?php if(isset($_SESSION['client_lastname'])): ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                    <?php else: ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                    <?php endif; ?>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <br>
             
+            <br>
+
+            <div class="table">
+                
+            <?php 
+                if(count($clientNameArray) > 0){
+                    echo "<h3>Search results for " . $search_firstname . "</h3>";
+                    echo "<table class='table table-bordered'>";
+                    echo "<thead>";
+                    echo    "<tr>";
+                    echo        "<th>First Name</th>";
+                    echo        "<th>Last Name</th>";
+                    echo        "<th>Email</th>";
+                    echo        "<th>Phone</th>";
+                    echo    "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+                }
+
+                $clientArrayCount = count($clientNameArray);
+
+                for ($x = 0; $x <= $clientArrayCount; $x++) {
+                    echo "<tr>";
+                    echo "<td>$clientNameArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$clientNameArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$clientNameArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$clientNameArray[$x]</td>"; 
+                    echo "</tr>"; 
+                }
+                
+                if(count($clientNameArray) > 0){
+                    echo    "</tbody>";
+                    echo "</table>";
+                }
+            ?>
+            </div>
             
         </main>
     
