@@ -8,3 +8,6 @@ body {
     color: white;
 }
 
+.homeButton {
+    max-width: 20%;
+}

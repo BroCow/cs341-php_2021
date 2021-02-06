@@ -51,21 +51,21 @@ session_start();
                     <form method="post" action="phpDataAccess_client.php">
                         <div class="col-lg-3">
                         <img src="" alt="">
-                        <button type="submit" id="clientButton" class="btn btn-primary">Client</button>
+                        <button type="submit" id="clientButton" class="homeButton">Client</button>
                         </div>
                     </form>
 
                     <form method="post" action="phpDataAccess_order.php">
                         <div class="col-lg-3">
                         <img src="" alt="">
-                        <button type="submit" id="orderButton" class="btn btn-primary">Order</button>
+                        <button type="submit" id="orderButton" class="homeButton">Order</button>
                         </div>
                     </form>
 
                     <form method="post" action="phpDataAccess_item.php">
                         <div class="col-lg-3">
                         <img src="" alt="">
-                        <button type="submit" id="itemButton" class="btn btn-primary">Item</button>
+                        <button type="submit" id="itemButton" class="homeButton">Item</button>
                         </div>
                     </form>
                 </div>
