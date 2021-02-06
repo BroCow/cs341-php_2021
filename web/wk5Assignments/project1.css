@@ -24,8 +24,12 @@ main {
 .homeButton {
     height: 150px;
     width: 300px;
-    box-shadow: 0 4px 8px 0 turquoise, 0 6px 20px 0 turquoise;
+    
     font-size: 3em;
     color: aliceblue;
     background-color: darkslategray;
+}
+
+.homeButton:hover {
+    box-shadow: 0 4px 8px 0 turquoise, 0 6px 20px 0 turquoise;
 }
