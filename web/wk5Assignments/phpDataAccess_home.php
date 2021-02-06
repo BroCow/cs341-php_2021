@@ -49,13 +49,13 @@ session_start();
 
         <main>
             
-            <div class="container bg-dark">
+            <div id="test" class="container">
                 <div class="row">
                     <div class="col">
                     <form method="post" action="phpDataAccess_client.php">
                         
                         <img src="" alt="">
-                        <button type="submit" id="clientButton" class="homeButton">Client</button>
+                        <button type="submit" id="clientButton" class="w-30 h-25">Client</button>
                         
                     </form>
                     </div>
