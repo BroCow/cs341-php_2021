@@ -33,10 +33,7 @@ session_start();
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
                 $clientNameArray = array();
-            } /*else if(isset($_POST['client_lastname'])){
-                $search_lastname = $_POST['client_lastname'];
-                //$clientNameArray = array();
-            } */
+            } 
 
 
             // Go through each result
@@ -57,12 +54,7 @@ session_start();
                 array_push($clientNameArray, $row['client_lastname']);
                 array_push($clientNameArray, $row['client_email']);
                 array_push($clientNameArray, $row['client_phone']);
-            } /*else if($search_lastname == $row['client_lastname']) {
-                array_push($clientNameArray, $row['client_firstname']);
-                array_push($clientNameArray, $row['client_lastname']);
-                array_push($clientNameArray, $row['client_email']);
-                array_push($clientNameArray, $row['client_phone']);
-            }*/
+            } 
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -107,10 +99,6 @@ session_start();
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
-
-            
-            
-            
             <br>
             <br>
             <div class="table">
