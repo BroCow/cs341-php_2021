@@ -55,7 +55,7 @@ session_start();
                     <form method="post" action="phpDataAccess_client.php">
                         
                         <img src="" alt="">
-                        <button type="submit" id="clientButton" class="w-30 h-25">Client</button>
+                        <button type="submit" id="clientButton" class="homeButton">Client</button>
                         
                     </form>
                     </div>
