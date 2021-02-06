@@ -51,6 +51,7 @@ session_start();
             }
             
             if($search_firstname == $row['client_firstname']) {
+                echo $row['client_firstname'];
                 array_push($clientNameArray, $row['client_firstname']);
                 array_push($clientNameArray, $row['client_lastname']);
                 array_push($clientNameArray, $row['client_email']);
