@@ -110,6 +110,7 @@ session_start();
                     <?php endif; ?>
                 </div>
 
+                <p>Order Date:</p>
                 <label for="expMonth">Month</label>
                 <select id="expMonth" name="expMonth">
                     <option value="01">January</option>
@@ -165,7 +166,7 @@ session_start();
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
                 </select>
-
+                <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             
