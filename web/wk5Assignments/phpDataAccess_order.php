@@ -177,7 +177,7 @@ session_start();
                     <option value="2021">2021</option>
                 </select>
                 <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Search</button>
             </form>
             
             <!-- Make this a table for each one -->

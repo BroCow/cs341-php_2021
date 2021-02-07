@@ -52,7 +52,7 @@ session_start();
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                    <form method="post" action="phpDataAccess_client.php">
+                    <form class="homeForm" method="post" action="phpDataAccess_client.php">
                         
                         <img src="" alt="">
                         <button type="submit" id="clientButton" class="homeButton">Client</button>
@@ -61,7 +61,7 @@ session_start();
                     </div>
 
                     <div class="col">
-                    <form method="post" action="phpDataAccess_order.php">
+                    <form class="homeForm" method="post" action="phpDataAccess_order.php">
                         
                         <img src="" alt="">
                         <button type="submit" id="orderButton" class="homeButton">Order</button>
@@ -70,7 +70,7 @@ session_start();
                     </div>
 
                     <div class="col">
-                    <form method="post" action="phpDataAccess_item.php">
+                    <form class="homeForm" method="post" action="phpDataAccess_item.php">
                         
                         <img src="" alt="">
                         <button type="submit" id="itemButton" class="homeButton">Item</button>
