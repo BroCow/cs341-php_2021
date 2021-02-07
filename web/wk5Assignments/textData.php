@@ -101,16 +101,33 @@ session_start();
             <h2>Order Search</h2>
 
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
+                <!--
                 <div class="form-group">
-                    <label for="order_type">Order Type:</label>
-                    <?php if(isset($_SESSION['order_type'])): ?>
-                    <input type="text" class="form-control" id="order_type" name="order_type" value="<?php echo $_SESSION['order_type']?>">
-                    <?php else: ?>
+                    <label for="order_type">Search by payment type:</label>
+                    <?php //if(isset($_SESSION['order_type'])): ?>
+                    <input type="text" class="form-control" id="order_type" name="order_type" value="<?php //echo $_SESSION['order_type']?>">
+                    <?php //else: ?>
                     <input type="text" class="form-control" id="order_type" name="order_type">
-                    <?php endif; ?>
+                    <?php //endif; ?>
                 </div>
+            -->
+                <label for="order_type">Search by payment type:</label>
+                <select id="order_type" name="order_type">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
 
-                <p>Order Date:</p>
+                <p>Search by order date:</p>
                 <label for="expMonth">Month</label>
                 <select id="expMonth" name="expMonth">
                     <option value="01">January</option>
