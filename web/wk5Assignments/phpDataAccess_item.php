@@ -81,6 +81,7 @@ session_start();
                 <a class="nav-link" href="phpDataAccess_item.php">Item</a>
             </li>
             </ul>
+            <h1 class="gemHunter">Gem Hunter Designs</h1>
         </nav>
 
 
@@ -96,16 +97,17 @@ session_start();
             <!-- Put form here to choose between single client or client list -->
 
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Search" name="itemSearch">
-                <div class="form-group">
-                    <label for="item_type">Item Type:</label>
-                    <?php if(isset($_SESSION['item_type'])): ?>
-                    <input type="text" class="form-control" id="item_type" name="item_type" value="<?php echo $_SESSION['item_type']?>">
-                    <?php else: ?>
-                    <input type="text" class="form-control" id="item_type" name="item_type">
-                    <?php endif; ?>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <label for="item_type">Search by item type:</label>
+                <br>
+                <select id="item_type" name="item_type">
+                    <option value="">Select</option>
+                    <option value="Necklace">Necklace</option>
+                    <option value="Earrings">Earrings</option>
+                    <option value="Bracelet">Bracelet</option>
+                </select>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Search</button>
             </form>
             
             <!-- Make this a table for each one -->
