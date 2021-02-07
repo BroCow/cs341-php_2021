@@ -51,7 +51,7 @@ session_start();
                 if(null !==($_POST['year'] && $_POST['month'] && $_POST['day'])){
                     $search_orderDate = $_POST['year'] . "-" . $_POST['month'] . "-" . $_POST['day'];
                 }
-                echo $search_orderDate;
+                //echo $search_orderDate;
 
                 // Go through each result
                 while ($row = $statement->fetch(PDO::FETCH_ASSOC))
@@ -74,10 +74,10 @@ session_start();
                     array_push($orderArray, $row['order_date']);
                     }
                 if($search_orderDate == $row['order_date']) {
-                    array_push($orderArray, $row['order_date']);
                     array_push($orderArray, $row['order_type']);
                     array_push($orderArray, $row['client_firstname']);
                     array_push($orderArray, $row['client_lastname']);
+                    array_push($orderArray, $row['order_date']);
                     } else {
                         echo "No results found";
                     }
