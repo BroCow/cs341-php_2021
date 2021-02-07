@@ -40,11 +40,18 @@ session_start();
                 $statement = $db->prepare("SELECT order_type, order_date, public.orderitem.client_id, client_firstname, client_lastname FROM public.order INNER JOIN public.orderitem ON public.order.orderitem_id = public.orderitem.orderitem_id INNER JOIN public.client ON public.orderitem.client_id = public.client.client_id WHERE public.orderitem.client_id = public.client.client_id");
                 $statement->execute();
 
+
+                $orderArray = array();
+
                 if(isset($_POST['order_type'])){
                     $search_orderType = $_POST['order_type'];
-                    $orderTypeArray = array();
                 }
+
                 
+                if(null !==($_POST['year'] && $_POST['month'] && $_POST['day'])){
+                    $search_orderDate = $_POST['year'] . "-" . $_POST['month'] . "-" . $_POST['day'];
+                }
+                echo $search_orderDate;
 
                 // Go through each result
                 while ($row = $statement->fetch(PDO::FETCH_ASSOC))
@@ -61,10 +68,10 @@ session_start();
 
                 // Need to create an array and push results to it instead of variable
                 if($search_orderType == $row['order_type']) {
-                    array_push($orderTypeArray, $row['order_type']);
-                    array_push($orderTypeArray, $row['client_firstname']);
-                    array_push($orderTypeArray, $row['client_lastname']);
-                    array_push($orderTypeArray, $row['order_date']);
+                    array_push($orderArray, $row['order_type']);
+                    array_push($orderArray, $row['client_firstname']);
+                    array_push($orderArray, $row['client_lastname']);
+                    array_push($orderArray, $row['order_date']);
                     
                     //echo $row['client_firstname'] . "<br>";
                     //$result_orderType = $row['order_type'];
@@ -101,19 +108,9 @@ session_start();
             <h2>Order Search</h2>
 
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
-                <!--
-                <div class="form-group">
-                    <label for="order_type">Search by payment type:</label>
-                    <?php //if(isset($_SESSION['order_type'])): ?>
-                    <input type="text" class="form-control" id="order_type" name="order_type" value="<?php //echo $_SESSION['order_type']?>">
-                    <?php //else: ?>
-                    <input type="text" class="form-control" id="order_type" name="order_type">
-                    <?php //endif; ?>
-                </div>
-            -->
-                <p>
+
                 <label for="order_type">Search by payment type:</label>
-                </p>
+                <br>
                 <select id="order_type" name="order_type">
                     <option value="">Select</option>
                     <option value="Online">Online</option>
@@ -122,8 +119,8 @@ session_start();
                 </select>
 
                 <p>Search by order date:</p>
-                <label for="expMonth">Month</label>
-                <select id="expMonth" name="expMonth">
+                <label for="month">Month</label>
+                <select id="month" name="month">
                     <option value=""></option>
                     <option value="01">January</option>
                     <option value="02">February</option>
@@ -138,8 +135,8 @@ session_start();
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-                <label for="expMonth">Day</label>
-                <select id="expMonth" name="expMonth">
+                <label for="day">Day</label>
+                <select id="day" name="day">
                     <option value=""></option>
                     <option value="01">01</option>
                     <option value="02">02</option>
@@ -173,8 +170,8 @@ session_start();
                     <option value="30">30</option>
                     <option value="31">31</option>
                 </select>
-                <label for="expYear">Year</label>
-                <select id="expYear" name="expYear">
+                <label for="year">Year</label>
+                <select id="year" name="year">
                     <option value=""></option>
                     <option value="2019">2019</option>
                     <option value="2020">2020</option>
@@ -188,7 +185,7 @@ session_start();
             <br>
             <br>
             <?php 
-                if(count($orderTypeArray) > 0){
+                if(count($orderArray) > 0){
                     echo "<h3>" . $search_orderType . " Orders</h3>";
                     echo "<table class='table table-bordered'>";
                     echo "<thead>";
@@ -202,17 +199,17 @@ session_start();
                     echo "<tbody>";
                 }
 
-                $orderArrayCount = count($orderTypeArray);
+                $orderArrayCount = count($orderArray);
 
                 for ($x = 0; $x <= $orderArrayCount; $x++) {
                     echo "<tr>";
-                    echo "<td>$orderTypeArray[$x]</td>"; 
+                    echo "<td>$orderArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$orderTypeArray[$x]</td>"; 
+                    echo "<td>$orderArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$orderTypeArray[$x]</td>"; 
+                    echo "<td>$orderArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$orderTypeArray[$x]</td>"; 
+                    echo "<td>$orderArray[$x]</td>"; 
                     echo "</tr>"; 
                 }
                   
