@@ -111,20 +111,13 @@ session_start();
                     <?php //endif; ?>
                 </div>
             -->
+                <p>
                 <label for="order_type">Search by payment type:</label>
+                </p>
                 <select id="order_type" name="order_type">
-                    <option value="01">January</option>
-                    <option value="02">February</option>
-                    <option value="03">March</option>
-                    <option value="04">April</option>
-                    <option value="05">May</option>
-                    <option value="06">June</option>
-                    <option value="07">July</option>
-                    <option value="08">August</option>
-                    <option value="09">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
+                    <option value="Online">Online</option>
+                    <option value="Credit">Credit</option>
+                    <option value="Cash">Cash</option>
                 </select>
 
                 <p>Search by order date:</p>
