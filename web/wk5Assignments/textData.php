@@ -79,7 +79,7 @@ session_start();
                     array_push($orderArray, $row['client_lastname']);
                     array_push($orderArray, $row['order_date']);
                     } else {
-                        echo "No results found";
+                        $noResult = "No result found";
                     }
                 }  
             ?>
@@ -184,6 +184,11 @@ session_start();
             
             <!-- Make this a table for each one -->
             <br>
+            <?php 
+                if($noResult){
+                    echo $noResult;
+                }
+            ?>
             <br>
             <?php 
                 if(count($orderArray) > 0){
