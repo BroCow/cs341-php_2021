@@ -13,8 +13,8 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="author" content="Christopher Cowan">
-        <meta name="description" content="This page serves as the PHP Data Access order page for CSE341 Project 1 Assignment.">
-        <title>CSE 341 PHP Data Access | Order</title>
+        <meta name="description" content="This page serves as the PHP Data Access item page for CSE341 Project 1 Assignment.">
+        <title>CSE 341 PHP Data Access | Item</title>
         <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="normalize.css" media="screen">
@@ -24,63 +24,46 @@ session_start();
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
 
-    <!--
-    SELECT order_type, public.orderitem.client_id, client_firstname, client_lastname 
-    FROM public.order 
-    INNER JOIN public.orderitem 
-    ON public.order.orderitem_id = public.orderitem.orderitem_id
-    INNER JOIN public.client ON public.orderitem.client_id = public.client.client_id
-    WHERE order_type = 'Online';
-    -->
-
-
-    <!-- If/else statements for each possible order type selection with different statement prepared for each?-->
     <body>
         <?php
-                $statement = $db->prepare("SELECT order_type, order_date, public.orderitem.client_id, client_firstname, client_lastname FROM public.order INNER JOIN public.orderitem ON public.order.orderitem_id = public.orderitem.orderitem_id INNER JOIN public.client ON public.orderitem.client_id = public.client.client_id WHERE public.orderitem.client_id = public.client.client_id");
-                $statement->execute();
+            $statement = $db->prepare("SELECT item_type, item_name, item_desc, item_price FROM public.item item_id");
+            $statement->execute();
 
+            if(isset($_POST['item_type'])){
+                $search_itemType = $_POST['item_type'];
+                $itemTypeArray = array();
+            }
+            
 
-                $orderArray = array();
+            // Go through each result
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+            {
+            // The variable "row" now holds the complete record for that
+            // row, and we can access the different values based on their
+            // name
+            $item_type = $row['item_type'];
+            $item_name = $row['item_name'];
+            $item_desc = $row['item_desc'];
+            $item_price = $row['item_price'];
 
-                if(isset($_POST['order_type'])){
-                    $search_orderType = $_POST['order_type'];
-                }
+            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
+            // Need to create an array and push results to it instead of variable
+            if($search_itemType == $row['item_type']) {
+                array_push($itemTypeArray, $row['item_type']);
+                array_push($itemTypeArray, $row['item_name']);
+                array_push($itemTypeArray, $row['item_desc']);
+                array_push($itemTypeArray, $row['item_price']);
                 
-                if(null !==($_POST['year'] && $_POST['month'] && $_POST['day'])){
-                    $search_orderDate = $_POST['year'] . "-" . $_POST['month'] . "-" . $_POST['day'];
+                //echo $row['client_firstname'] . "<br>";
+                //$result_orderType = $row['order_type'];
+                //$result_orderDate = $row['order_date'];
+                //$result_firstName = $row['client_firstname'];
+                //echo $row['client_lastname'] . "<br>";
+                //$result_lastName = $row['client_lastname'];
                 }
-                //echo $search_orderDate;
-
-                // Go through each result
-                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
-                {
-                // The variable "row" now holds the complete record for that
-                // row, and we can access the different values based on their
-                // name
-                $order_type = $row['order_type'];
-                $order_date = $row['order_date'];
-                $firstname = $row['client_firstname'];
-                $lastname = $row['client_lastname'];
-
-                //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
-
-                // Need to create an array and push results to it instead of variable
-                if($search_orderType == $row['order_type']) {
-                    array_push($orderArray, $row['order_type']);
-                    array_push($orderArray, $row['client_firstname']);
-                    array_push($orderArray, $row['client_lastname']);
-                    array_push($orderArray, $row['order_date']);
-                    }
-                if($search_orderDate == $row['order_date']) {
-                    array_push($orderArray, $row['order_type']);
-                    array_push($orderArray, $row['client_firstname']);
-                    array_push($orderArray, $row['client_lastname']);
-                    array_push($orderArray, $row['order_date']);
-                    } 
-                }  
-            ?>
+            }  
+        ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
             <!-- Links -->
@@ -101,119 +84,60 @@ session_start();
             <h1 class="gemHunter">Gem Hunter Designs</h1>
         </nav>
 
+
         <main>
-            <h1>Order Management</h1>
+            <h1>Item Management</h1>
 
-            <h2>Order Search</h2>
+            <h2>Item Search</h2>
 
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
+            <!-- Put buttons here to choose between single client or client list -->
 
-                <label for="order_type">Search by payment type:</label>
+            <!-- Put form here to enter client name to appear if "single client" selected -->
+
+            <!-- Put form here to choose between single client or client list -->
+
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Search" name="itemSearch">
+                <label for="item_type">Search by item type:</label>
                 <br>
-                <select id="order_type" name="order_type">
+                <select id="item_type" name="item_type">
                     <option value="">Select</option>
-                    <option value="Online">Online</option>
-                    <option value="Credit">Credit</option>
-                    <option value="Cash">Cash</option>
+                    <option value="Necklace">Necklace</option>
+                    <option value="Earrings">Earrings</option>
+                    <option value="Bracelet">Bracelet</option>
                 </select>
 
-                <p>Search by order date:</p>
-                <label for="month">Month</label>
-                <select id="month" name="month">
-                    <option value=""></option>
-                    <option value="01">January</option>
-                    <option value="02">February</option>
-                    <option value="03">March</option>
-                    <option value="04">April</option>
-                    <option value="05">May</option>
-                    <option value="06">June</option>
-                    <option value="07">July</option>
-                    <option value="08">August</option>
-                    <option value="09">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
-                <label for="day">Day</label>
-                <select id="day" name="day">
-                    <option value=""></option>
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                </select>
-                <label for="year">Year</label>
-                <select id="year" name="year">
-                    <option value=""></option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                </select>
-                <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Search</button>
             </form>
             
             <!-- Make this a table for each one -->
             <br>
-            <?php 
-                if($noResult){
-                    echo $noResult;
-                }
-            ?>
             <br>
             <?php 
-                if(count($orderArray) > 0){
-                    echo "<h3>" . $search_orderType . " Orders</h3>";
+                if(count($itemTypeArray) > 0){
+                    echo "<h3>" . $search_itemType . " Items</h3>";
                     echo "<table class='table table-bordered'>";
                     echo "<thead>";
                     echo    "<tr>";
-                    echo        "<th>Order Type</th>";
-                    echo        "<th>First Name</th>";
-                    echo        "<th>Last Name</th>";
-                    echo        "<th>Order Date</th>";
+                    echo        "<th>Item Type</th>";
+                    echo        "<th>Item Name</th>";
+                    echo        "<th>Item Description</th>";
+                    echo        "<th>Item Price</th>";
                     echo    "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
                 }
 
-                $orderArrayCount = count($orderArray);
+                $itemArrayCount = count($itemTypeArray);
 
-                for ($x = 0; $x <= $orderArrayCount; $x++) {
+                for ($x = 0; $x <= $itemArrayCount; $x++) {
                     echo "<tr>";
-                    echo "<td>$orderArray[$x]</td>"; 
+                    echo "<td>$itemTypeArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$orderArray[$x]</td>"; 
+                    echo "<td>$itemTypeArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$orderArray[$x]</td>"; 
+                    echo "<td>$itemTypeArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$orderArray[$x]</td>"; 
+                    echo "<td>$itemTypeArray[$x]</td>"; 
                     echo "</tr>"; 
                 }
                   
