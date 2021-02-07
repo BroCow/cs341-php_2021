@@ -115,6 +115,7 @@ session_start();
                 <label for="order_type">Search by payment type:</label>
                 </p>
                 <select id="order_type" name="order_type">
+                    <option value="">Select</option>
                     <option value="Online">Online</option>
                     <option value="Credit">Credit</option>
                     <option value="Cash">Cash</option>
