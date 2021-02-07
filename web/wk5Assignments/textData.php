@@ -72,13 +72,14 @@ session_start();
                     array_push($orderArray, $row['client_firstname']);
                     array_push($orderArray, $row['client_lastname']);
                     array_push($orderArray, $row['order_date']);
-                    
-                    //echo $row['client_firstname'] . "<br>";
-                    //$result_orderType = $row['order_type'];
-                    //$result_orderDate = $row['order_date'];
-                    //$result_firstName = $row['client_firstname'];
-                    //echo $row['client_lastname'] . "<br>";
-                    //$result_lastName = $row['client_lastname'];
+                    }
+                if($search_orderDate == $row['order_date']) {
+                    array_push($orderArray, $row['order_date']);
+                    array_push($orderArray, $row['order_type']);
+                    array_push($orderArray, $row['client_firstname']);
+                    array_push($orderArray, $row['client_lastname']);
+                    } else {
+                        echo "No results found";
                     }
                 }  
             ?>
