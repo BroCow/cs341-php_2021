@@ -123,6 +123,7 @@ session_start();
                 <p>Search by order date:</p>
                 <label for="expMonth">Month</label>
                 <select id="expMonth" name="expMonth">
+                    <option value=""></option>
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -138,6 +139,7 @@ session_start();
                 </select>
                 <label for="expMonth">Day</label>
                 <select id="expMonth" name="expMonth">
+                    <option value=""></option>
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -172,6 +174,7 @@ session_start();
                 </select>
                 <label for="expYear">Year</label>
                 <select id="expYear" name="expYear">
+                    <option value=""></option>
                     <option value="2019">2019</option>
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
