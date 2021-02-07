@@ -105,7 +105,7 @@ session_start();
                     <option value="Earrings">Earrings</option>
                     <option value="Bracelet">Bracelet</option>
                 </select>
-
+                <br>
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
             
@@ -137,7 +137,7 @@ session_start();
                     $x++;
                     echo "<td>$itemTypeArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "<td>$ " . $itemTypeArray[$x] . ".00</td>"; 
                     echo "</tr>"; 
                 }
                   
