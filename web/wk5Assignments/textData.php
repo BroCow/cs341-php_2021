@@ -78,7 +78,7 @@ session_start();
                     array_push($orderArray, $row['client_firstname']);
                     array_push($orderArray, $row['client_lastname']);
                     array_push($orderArray, $row['order_date']);
-                    } else {
+                    } elseif($search_orderDate != $row['order_date']) {
                         $noResult = "No result found";
                     }
                 }  
