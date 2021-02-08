@@ -1,25 +1,10 @@
 <?php
 
-if (!isset($_GET['course_id'])) {
-    die("Error, course id not specified.");
-}
+$course_id = htmlspecialchars($_POST['course_id']);
+$note_content = htmlspecialchars($_POST['note_content']);
 
-
-
-$course_id = htmlspecialchars($_GET['course_id']); //comes from href link
-
-require('dbConnect.php');
-$db = get_db();
-
-$stmt = $db->prepare('SELECT c.code, c.name, n.content FROM note n 
-JOIN course c ON n.course_id = c.id 
-WHERE c.id = :id;');
-$stmt->bindValue(':id', $course_id, PDO::PARAM_INT);
-$stmt->execute();
-$note_rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$course_code = $note_rows[0]['code'];
-
+echo "$course_id\n";
+echo $note_content;
 
 
 ?>
@@ -44,6 +29,7 @@ $course_code = $note_rows[0]['code'];
         <form method="post" action="insert_note.php">
             <textarea name="note_content"></textarea>
             <input type="submit" value="Create Note">
+            <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
         </form>
         
     </body>
