@@ -3,6 +3,7 @@
 $course_id = htmlspecialchars($_POST['course_id']);
 $note_content = htmlspecialchars($_POST['note_content']);
 
+/*
 require('dbConnect.php');
 $db = get_db();
 
@@ -10,7 +11,7 @@ $stmt = $db->prepare('INSERT INTO note (course_id, content) VALUES (:course_id, 
 $stmt->bindValue(':course_id', $course_id, PDO::PARAM_INT);
 $stmt->bindValue(':note_content', $note_content, PDO::PARAM_STR);
 $stmt->execute();
-
+*/
 
 echo "$course_id\n";
 echo $note_content;
