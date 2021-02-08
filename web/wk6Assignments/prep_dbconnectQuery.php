@@ -30,10 +30,10 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $id = $course['id'];
             $code = $course['code'];
             $name = $course['name'];
-            echo "<li><p>$code - $name</p></li>";
+            echo "<li><p><a href='prep_coursenotes.php?course_id=$id' $code - $name</a></p></li>";
         }
         ?>
         </ul>
-        
+
     </body>
 </html>
