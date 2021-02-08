@@ -25,10 +25,6 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Courses</h1>
 
         <ul>
-            <li><p></p></li>
-            <li><p></p></li>
-        </ul>
-
         <?php
         foreach ($courses as $course) {
             $id = $course['id'];
@@ -37,5 +33,7 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             echo "<li><p>$code - $name</p></li>";
         }
         ?>
+        </ul>
+        
     </body>
 </html>
