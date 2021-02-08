@@ -2,7 +2,7 @@
     require('dbConnect.php');
     $db = get_db();
 
-    $stmt = $db->prepare('SELECT name FROM topic');
+    $stmt = $db->prepare('SELECT name FROM topic;');
     $stmt->execute();
 
     $name_rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -15,12 +15,7 @@
     <body>
         <h1>Insert Scripture and Topic</h1>
 
-        <?php
-        foreach ($note_rows as $note_row){
-            $content = $note_row['content'];
-            echo "<p>$content</p>";
-        }
-        ?>
+        
         
         <form method="post" action="scripture_topic.php">
             <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
