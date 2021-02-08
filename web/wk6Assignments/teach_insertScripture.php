@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="content">Scripture:</label>
-                <textarea class="form-control" name="scripture">
+                <textarea class="form-control" name="scripture"></textarea>
             </div>
             
             <p>Select a topic below that corresponds with the scripure</p>
