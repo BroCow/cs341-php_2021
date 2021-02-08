@@ -28,5 +28,14 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li><p></p></li>
             <li><p></p></li>
         </ul>
+
+        <?php
+        foreach ($courses as $course) {
+            $id = $course['id'];
+            $code = $course['code'];
+            $name = $course['name'];
+            echo "<li><p>$code - $name</p></li>";
+        }
+        ?>
     </body>
 </html>
