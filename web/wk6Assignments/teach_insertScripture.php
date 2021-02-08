@@ -27,8 +27,7 @@
             <p>Select a topic below that corresponds with the scripure</p>
             <?php foreach($name_rows as $name_row){
                 $topic = $name_row['name'];
-                echo "<input type='checkbox' name='topic' value='<?php echo $topic ?>'>";
-                echo "<label for='topic'>'<?php echo $topic ?>'</label>";
+                echo $topic;
             }
             ?>
 
