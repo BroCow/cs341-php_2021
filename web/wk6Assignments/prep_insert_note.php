@@ -12,11 +12,14 @@ $stmt->bindValue(':note_content', $note_content, PDO::PARAM_STR);
 $stmt->execute();
 
 
+echo "$course_id\n";
+echo $note_content;
+/*
 $new_page = "prep_coursenotes.php?course_id=$course_id";
 
 header("Location: $new_page");
 die();
-
+*/
 
 ?>
 
