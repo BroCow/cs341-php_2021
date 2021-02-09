@@ -2,10 +2,11 @@
     require('dbConnect.php');
     $db = get_db();
 
-    $stmt = $db->prepare('SELECT name FROM topic;');
+    $stmt = $db->prepare('SELECT s.id, t.id, book, chapter, verse, content, name FROM scriptures s
+    INNER JOIN topic t ON s.id = t.id;');
     $stmt->execute();
 
-    $name_rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,12 +34,19 @@
             </div>
             <div class="form-group">
                 <label for="content">Scripture:</label>
-                <textarea class="form-control" name="scripture"></textarea>
+                <textarea class="form-control" name="content"></textarea>
             </div>
             
             <p>Select a topic below that corresponds with the scripure</p>
-            <?php foreach($name_rows as $name_row){
-                $topic = $name_row['name'];
+            <?php foreach($rows as $row){
+                $scripture_id = $row['id'];
+                $topic_id = $row['id'];
+                $book = $row['book'];
+                $chapter = $row['chapter'];
+                $verse = $row['verse'];
+                $content = $row['content'];
+                $name = $row['name'];
+
                 echo "<div class='form-check'>";
                 echo "<label class='form-check-label'>";
                 echo "<input type='checkbox' class='form-check-input' name='cont1' value='<?php echo $topic ?>'>$topic";
@@ -46,7 +54,7 @@
                 echo "</div>";
             }
             ?>
-
+            <input type="hidden" name="scripture_id" value="<?php ; ?>">
             <input type="submit" value="Add Scripture">
         </form>
         
