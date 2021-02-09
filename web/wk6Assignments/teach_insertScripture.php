@@ -45,7 +45,7 @@
                 $chapter = $row['chapter'];
                 $verse = $row['verse'];
                 $content = $row['content'];
-                $name = $row['name'];
+                $topic = $row['name'];
 
                 echo "<div class='form-check'>";
                 echo "<label class='form-check-label' for='topic'>";
