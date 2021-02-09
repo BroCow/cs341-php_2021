@@ -28,8 +28,6 @@ session_start();
         <?php
             $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
-        
-            
 
             $clientNameArray = array();
             
@@ -91,31 +89,7 @@ session_start();
         <main>
             <h1>Client Management</h1>
 
-            <div id="test" class="container">
-                    <div class="row">
-                        <div class="col">
-                            <form for="clientSearch" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                                <input type="hidden" id="clientSearch" name="clientSearch" value="clientSearch">
-                                <button type="submit" id="clientSearch" class="homeButton">Search</button>
-                            </form>
-                        </div>
-
-                        <div class="col">
-                            <form for="clientAdd" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                                <input type="hidden" id="clientAdd" name="clientAdd" value="clientAdd">
-                                <button type="submit" id="clientAdd" class="homeButton">Add</button>
-                            </form>
-                        </div>
-
-                        <div class="col">
-                            <form for="clientDelete" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                                <input type="hidden" id="clientDelete" name="clientDelete" value="clientDelete">
-                                <button type="submit" id="clientDelete" class="homeButton">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            
+            <h2>Client Search</h2>
 
             <!-- Put buttons here to choose between single client or client list -->
 
