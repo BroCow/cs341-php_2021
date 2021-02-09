@@ -22,6 +22,7 @@
             echo $_POST['chapter'];
             echo $_POST['verse'];
             echo $_POST['content'];
+            echo $_POST['topic'];
         ?>
 
         
