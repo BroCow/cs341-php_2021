@@ -89,6 +89,31 @@ session_start();
         <main>
             <h1>Client Management</h1>
 
+            <div id="test" class="container">
+                <div class="row">
+                    <div class="col">
+                        <form for="clientSearch" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                            <input type="hidden" id="clientSearch" name="clientSearch" value="clientSearch">
+                            <button type="submit" id="clientSearch" class="homeButton">Search</button>
+                        </form>
+                    </div>
+
+                    <div class="col">
+                        <form for="clientAdd" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                            <input type="hidden" id="clientAdd" name="clientAdd" value="clientAdd">
+                            <button type="submit" id="clientAdd" class="homeButton">Add</button>
+                        </form>
+                    </div>
+
+                    <div class="col">
+                        <form for="clientDelete" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                            <input type="hidden" id="clientDelete" name="clientDelete" value="clientDelete">
+                            <button type="submit" id="clientDelete" class="homeButton">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <h2 id="h2_clientSearch">Client Search</h2>
 
             <!-- Put buttons here to choose between single client or client list -->
@@ -97,7 +122,7 @@ session_start();
 
             <!-- Put form here to choose between single client or client list -->
 
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
+            <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
                 <div class="form-group">
                     <label for="client_firstname">First Name:</label>
                     <?php if(isset($_SESSION['client_firstname'])): ?>
