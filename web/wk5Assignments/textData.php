@@ -13,8 +13,8 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="author" content="Christopher Cowan">
-        <meta name="description" content="This page serves as the PHP Data Access item page for CSE341 Project 1 Assignment.">
-        <title>CSE 341 PHP Data Access | Item</title>
+        <meta name="description" content="This page serves as the PHP Data Access client page for CSE341 Project 1 Assignment.">
+        <title>CSE 341 PHP Data Access | Client</title>
         <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="normalize.css" media="screen">
@@ -26,43 +26,48 @@ session_start();
 
     <body>
         <?php
-            $statement = $db->prepare("SELECT item_type, item_name, item_desc, item_price FROM public.item item_id");
+        if(isset($_POST['client_firstname'])){
+
+        }
+            $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
 
-            if(isset($_POST['item_type'])){
-                $search_itemType = $_POST['item_type'];
-                $itemTypeArray = array();
+            $clientNameArray = array();
+            
+            if(isset($_POST['client_firstname'])){
+                $search_firstname = $_POST['client_firstname'];
             }
             
-
+            if(isset($_POST['client_lastname'])){
+                $search_lastname = $_POST['client_lastname'];
+            }
+            
             // Go through each result
             while ($row = $statement->fetch(PDO::FETCH_ASSOC))
             {
             // The variable "row" now holds the complete record for that
             // row, and we can access the different values based on their
             // name
-            $item_type = $row['item_type'];
-            $item_name = $row['item_name'];
-            $item_desc = $row['item_desc'];
-            $item_price = $row['item_price'];
-
+            $firstname = $row['client_firstname'];
+            $lastname = $row['client_lastname'];
+            $email = $row['client_email'];
+            $phone = $row['client_phone'];
             //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+            
+                if($search_firstname == $row['client_firstname']) {
+                    array_push($clientNameArray, $row['client_firstname']);
+                    array_push($clientNameArray, $row['client_lastname']);
+                    array_push($clientNameArray, $row['client_email']);
+                    array_push($clientNameArray, $row['client_phone']);
+                } 
+                if($search_lastname == $row['client_lastname']) {
+                    array_push($clientNameArray, $row['client_firstname']);
+                    array_push($clientNameArray, $row['client_lastname']);
+                    array_push($clientNameArray, $row['client_email']);
+                    array_push($clientNameArray, $row['client_phone']);
+                } 
 
-            // Need to create an array and push results to it instead of variable
-            if($search_itemType == $row['item_type']) {
-                array_push($itemTypeArray, $row['item_type']);
-                array_push($itemTypeArray, $row['item_name']);
-                array_push($itemTypeArray, $row['item_desc']);
-                array_push($itemTypeArray, $row['item_price']);
-                
-                //echo $row['client_firstname'] . "<br>";
-                //$result_orderType = $row['order_type'];
-                //$result_orderDate = $row['order_date'];
-                //$result_firstName = $row['client_firstname'];
-                //echo $row['client_lastname'] . "<br>";
-                //$result_lastName = $row['client_lastname'];
-                }
-            }  
+            }
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -84,11 +89,29 @@ session_start();
             <h1 class="gemHunter">Gem Hunter Designs</h1>
         </nav>
 
-
         <main>
-            <h1>Item Management</h1>
+            <div id="test" class="container">
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" id="clientSearchButton" class="homeButton">Client</button>
+                        </div>
 
-            <h2>Item Search</h2>
+                        <div class="col">
+                            <button type="submit" id="clientAddButton" class="homeButton">Order</button>
+                        </div>
+
+                        <div class="col">
+                            <button type="submit" id="clientDeleteButton" class="homeButton">Item</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            <h1>Client Management</h1>
+
+            <h2>Client Search</h2>
 
             <!-- Put buttons here to choose between single client or client list -->
 
@@ -96,60 +119,70 @@ session_start();
 
             <!-- Put form here to choose between single client or client list -->
 
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Search" name="itemSearch">
-                <label for="item_type">Search by item type:</label>
-                <br>
-                <select id="item_type" name="item_type">
-                    <option value="">Select</option>
-                    <option value="Necklace">Necklace</option>
-                    <option value="Earrings">Earrings</option>
-                    <option value="Bracelet">Bracelet</option>
-                </select>
-                <br>
-                <br>
-                <button type="submit" class="btn btn-primary">Search</button>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
+                <div class="form-group">
+                    <label for="client_firstname">First Name:</label>
+                    <?php if(isset($_SESSION['client_firstname'])): ?>
+                    <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                    <?php else: ?>
+                    <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                    <?php endif; ?>
+                </div>
+
+                <div class="form-group">
+                    <label for="client_lastname">Last Name:</label>
+                    <?php if(isset($_SESSION['client_lastname'])): ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                    <?php else: ?>
+                    <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                    <?php endif; ?>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
+            <br>
             
-            <!-- Make this a table for each one -->
             <br>
-            <br>
+
+            <div class="table">
+                
             <?php 
-                if(count($itemTypeArray) > 0){
-                    echo "<h3>" . $search_itemType . " Items</h3>";
+                if(count($clientNameArray) > 0){
+                    echo "<h3>Search results for " . $search_firstname . "</h3>";
                     echo "<table class='table table-bordered'>";
                     echo "<thead>";
                     echo    "<tr>";
-                    echo        "<th>Item Type</th>";
-                    echo        "<th>Item Name</th>";
-                    echo        "<th>Item Description</th>";
-                    echo        "<th>Item Price</th>";
+                    echo        "<th>First Name</th>";
+                    echo        "<th>Last Name</th>";
+                    echo        "<th>Email</th>";
+                    echo        "<th>Phone</th>";
                     echo    "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
                 }
 
-                $itemArrayCount = count($itemTypeArray);
+                $clientArrayCount = count($clientNameArray);
 
-                for ($x = 0; $x <= $itemArrayCount; $x++) {
+                for ($x = 0; $x <= $clientArrayCount; $x++) {
                     echo "<tr>";
-                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "<td>$clientNameArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "<td>$clientNameArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "<td>$clientNameArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "<td>$clientNameArray[$x]</td>"; 
                     echo "</tr>"; 
                 }
-                  
-                echo    "</tbody>";
-                echo "</table>";
+                
+                if(count($clientNameArray) > 0){
+                    echo    "</tbody>";
+                    echo "</table>";
+                }
             ?>
-
-
-
-
-
+            </div>
+            
         </main>
     
 
