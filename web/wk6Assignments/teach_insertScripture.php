@@ -17,7 +17,6 @@
         $content = $row['content'];
         $topic = $row['topic_name'];
     }
-    echo $topic;
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,17 +48,16 @@
             </div>
             
             <p>Select a topic below that corresponds with the scripure</p>
-            
+
 
             <?php foreach($rows as $row){
                 echo "<div class='form-check'>";
                 echo "<label class='form-check-label' for='topic'>";
-                echo "<input type='checkbox' class='form-check-input' name='topic' value=$topic>$topic";
+                echo "<input type='checkbox' class='form-check-input' name='topic' value='<?php echo $topic ?>'>$topic";
                 echo "</label>";
                 echo "</div>";
             }
             ?>
-            
             <input type="hidden" name="scripture_id" value="<?php ; ?>">
             <input type="submit" value="Add Scripture">
         </form>
