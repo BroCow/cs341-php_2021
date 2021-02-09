@@ -49,15 +49,17 @@
             </div>
             
             <p>Select a topic below that corresponds with the scripure</p>
-            <div class='form-check'>
+            
 
             <?php foreach($rows as $row){
+                echo "<div class='form-check'>";
                 echo "<label class='form-check-label' for='topic'>";
-                echo "<input type='checkbox' class='form-check-input' name='topic' value='<?php echo $topic ?>'>$topic";
+                echo "<input type='checkbox' class='form-check-input' name='topic' value=$topic>$topic";
                 echo "</label>";
+                echo "</div>";
             }
             ?>
-            </div>
+            
             <input type="hidden" name="scripture_id" value="<?php ; ?>">
             <input type="submit" value="Add Scripture">
         </form>
