@@ -1,5 +1,4 @@
 
-document.getElementById('hideSearch').style.display = "none";
 
 function clientSearch () {
     var x = document.getElementById('hideSearch');
