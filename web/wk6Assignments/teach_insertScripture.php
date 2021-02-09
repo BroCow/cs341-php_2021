@@ -2,7 +2,7 @@
     require('dbConnect.php');
     $db = get_db();
 
-    $stmt = $db->prepare('SELECT s.id, t.id, book, chapter, verse, content, name FROM scriptures s
+    $stmt = $db->prepare('SELECT s.id, t.id, book, chapter, verse, content, topic_name FROM scriptures s
     INNER JOIN topic t ON s.id = t.id;');
     $stmt->execute();
 
@@ -45,7 +45,7 @@
                 $chapter = $row['chapter'];
                 $verse = $row['verse'];
                 $content = $row['content'];
-                $topic = $row['name'];
+                $topic = $row['topic_name'];
 
                 echo "<div class='form-check'>";
                 echo "<label class='form-check-label' for='topic'>";
