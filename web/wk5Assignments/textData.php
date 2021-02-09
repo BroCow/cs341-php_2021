@@ -26,10 +26,9 @@ session_start();
 
     <body>
         <?php
-        if(isset($_POST['clientSearch'])){
             $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
-        }
+        
             
 
             $clientNameArray = array();
@@ -116,14 +115,6 @@ session_start();
                         </div>
                     </div>
                 </div>
-
-
-            <?php
-                if(isset($_POST['clientSearch'])){
-                    echo "<h2>Client Search</h2>";
-                }
-                
-            ?>
             
 
             <!-- Put buttons here to choose between single client or client list -->
