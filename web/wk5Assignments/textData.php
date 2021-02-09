@@ -95,15 +95,24 @@ session_start();
             <div id="test" class="container">
                     <div class="row">
                         <div class="col">
-                            <button type="submit" id="clientSearchButton" class="homeButton">Search Client</button>
+                            <form for="clientSearch" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                <input type="hidden" id="clientSearch" name="clientSearch" value="clientSearch">
+                                <button type="submit" id="clientSearch" class="homeButton">Search</button>
+                            </form>
                         </div>
 
                         <div class="col">
-                            <button type="submit" id="clientAddButton" class="homeButton">Add Client</button>
+                            <form for="clientAdd" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                <input type="hidden" id="clientAdd" name="clientAdd" value="clientAdd">
+                                <button type="submit" id="clientAdd" class="homeButton">Add</button>
+                            </form>
                         </div>
 
                         <div class="col">
-                            <button type="submit" id="clientDeleteButton" class="homeButton">Delete Client</button>
+                            <form for="clientDelete" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                <input type="hidden" id="clientDelete" name="clientDelete" value="clientDelete">
+                                <button type="submit" id="clientDelete" class="homeButton">Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>
