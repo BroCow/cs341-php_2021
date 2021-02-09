@@ -33,6 +33,7 @@ session_start();
 
             if (isset($_POST['clientSearch'])){
                 $clientSearch = true;
+                echo "true";
             }
             
             if(isset($_POST['client_firstname'])){
