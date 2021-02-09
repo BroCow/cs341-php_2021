@@ -8,15 +8,6 @@
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach($rows as $row){
-        $scripture_id = $row['id'];
-        $topic_id = $row['id'];
-        $book = $row['book'];
-        $chapter = $row['chapter'];
-        $verse = $row['verse'];
-        $content = $row['content'];
-        $topic = $row['topic_name'];
-    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,6 +42,14 @@
 
 
             <?php foreach($rows as $row){
+                $scripture_id = $row['id'];
+                $topic_id = $row['id'];
+                $book = $row['book'];
+                $chapter = $row['chapter'];
+                $verse = $row['verse'];
+                $content = $row['content'];
+                $topic = $row['topic_name'];
+
                 echo "<div class='form-check'>";
                 echo "<label class='form-check-label' for='topic'>";
                 echo "<input type='checkbox' class='form-check-input' name='topic' value='<?php echo $topic ?>'>$topic";
