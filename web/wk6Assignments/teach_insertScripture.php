@@ -48,8 +48,8 @@
                 $name = $row['name'];
 
                 echo "<div class='form-check'>";
-                echo "<label class='form-check-label'>";
-                echo "<input type='checkbox' class='form-check-input' name='cont1' value='<?php echo $topic ?>'>$topic";
+                echo "<label class='form-check-label' for='topic'>";
+                echo "<input type='checkbox' class='form-check-input' name='topic' value='<?php echo $topic ?>'>$topic";
                 echo "</label>";
                 echo "</div>";
             }
