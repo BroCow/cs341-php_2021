@@ -30,6 +30,10 @@ session_start();
             $statement->execute();
 
             $clientNameArray = array();
+
+            if (isset($_POST['clientSearch'])){
+                $clientSearch = true;
+            }
             
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
