@@ -94,7 +94,7 @@ session_start();
                     <div class="col">
                         <form for="clientSearch" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                             <input type="hidden" id="clientSearch" name="clientSearch" value="clientSearch">
-                            <button type="submit" id="clientSearch" class="homeButton">Search</button>
+                            <button type="submit" onclick="clientSearch()" id="clientSearch" class="homeButton">Search</button>
                         </form>
                     </div>
 
