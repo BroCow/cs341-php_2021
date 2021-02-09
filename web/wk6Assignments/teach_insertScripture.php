@@ -52,7 +52,7 @@
 
                 echo "<div class='form-check'>";
                 echo "<label class='form-check-label' for='topic'>";
-                echo "<input type='checkbox' class='form-check-input' name='topic' value='<?php echo $topic ?>'>$topic";
+                echo "<input type='checkbox' class='form-check-input' name='topic' value=$topic>$topic";
                 echo "</label>";
                 echo "</div>";
             }
