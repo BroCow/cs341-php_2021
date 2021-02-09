@@ -89,7 +89,7 @@ session_start();
         <main>
             <h1>Client Management</h1>
 
-            <h2>Client Search</h2>
+            <h2 id="h2_clientSearch">Client Search</h2>
 
             <!-- Put buttons here to choose between single client or client list -->
 
@@ -163,7 +163,7 @@ session_start();
             
         </main>
     
-
+        <script src="project1.js"></script>
     </body>
 
 </html>
