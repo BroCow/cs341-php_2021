@@ -7,6 +7,17 @@
     $stmt->execute();
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach($rows as $row){
+        $scripture_id = $row['id'];
+        $topic_id = $row['id'];
+        $book = $row['book'];
+        $chapter = $row['chapter'];
+        $verse = $row['verse'];
+        $content = $row['content'];
+        $topic = $row['topic_name'];
+    }
+    echo $topic;
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,22 +49,15 @@
             </div>
             
             <p>Select a topic below that corresponds with the scripure</p>
-            <?php foreach($rows as $row){
-                $scripture_id = $row['id'];
-                $topic_id = $row['id'];
-                $book = $row['book'];
-                $chapter = $row['chapter'];
-                $verse = $row['verse'];
-                $content = $row['content'];
-                $topic = $row['topic_name'];
+            <div class='form-check'>
 
-                echo "<div class='form-check'>";
+            <?php foreach($rows as $row){
                 echo "<label class='form-check-label' for='topic'>";
                 echo "<input type='checkbox' class='form-check-input' name='topic' value='<?php echo $topic ?>'>$topic";
                 echo "</label>";
-                echo "</div>";
             }
             ?>
+            </div>
             <input type="hidden" name="scripture_id" value="<?php ; ?>">
             <input type="submit" value="Add Scripture">
         </form>
