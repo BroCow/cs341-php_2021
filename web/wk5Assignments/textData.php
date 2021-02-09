@@ -90,26 +90,25 @@ session_start();
         </nav>
 
         <main>
+            <h1>Client Management</h1>
+
             <div id="test" class="container">
                     <div class="row">
                         <div class="col">
-                            <button type="submit" id="clientSearchButton" class="homeButton">Client</button>
+                            <button type="submit" id="clientSearchButton" class="homeButton">Search Client</button>
                         </div>
 
                         <div class="col">
-                            <button type="submit" id="clientAddButton" class="homeButton">Order</button>
+                            <button type="submit" id="clientAddButton" class="homeButton">Add Client</button>
                         </div>
 
                         <div class="col">
-                            <button type="submit" id="clientDeleteButton" class="homeButton">Item</button>
+                            <button type="submit" id="clientDeleteButton" class="homeButton">Delete Client</button>
                         </div>
                     </div>
                 </div>
 
 
-
-
-            <h1>Client Management</h1>
 
             <h2>Client Search</h2>
 
