@@ -1,7 +1,7 @@
 
 
-function myFunction() {
-    var x = document.getElementById("myDIV");
+function toggleClientSearch() {
+    var x = document.getElementById("clientSearch");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {

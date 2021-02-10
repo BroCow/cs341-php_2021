@@ -92,49 +92,43 @@ session_start();
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                            <button onclick="myFunction()" id="clientSearch" class="homeButton">Search</button>
+                            <button onclick="toggleClientSearch()" id="clientSearch" class="homeButton">Search</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="myFunction()" id="clientAdd" class="homeButton">Add</button>
+                            <button onclick="toggleClientSearch()" id="clientAdd" class="homeButton">Add</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="myFunction()" id="clientDelete" class="homeButton">Delete</button>
+                            <button onclick="toggleClientSearch()" id="clientDelete" class="homeButton">Delete</button>
                     </div>
                 </div>
             </div>
             
-            <div id="myDIV" style="display:none;">
-            <h2>Client Search</h2>
-            
-            <!-- Put buttons here to choose between single client or client list -->
+            <div id="clientSearch" style="display:none;">
+                <h2>Client Search</h2>
+                
+                <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
+                    <div class="form-group">
+                        <label for="client_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['client_firstname'])): ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                        <?php endif; ?>
+                    </div>
 
-            <!-- Put form here to enter client name to appear if "single client" selected -->
+                    <div class="form-group">
+                        <label for="client_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['client_lastname'])): ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                        <?php endif; ?>
+                    </div>
 
-            <!-- Put form here to choose between single client or client list -->
-
-            <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
-                <div class="form-group">
-                    <label for="client_firstname">First Name:</label>
-                    <?php if(isset($_SESSION['client_firstname'])): ?>
-                    <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
-                    <?php else: ?>
-                    <input type="text" class="form-control" id="client_firstname" name="client_firstname">
-                    <?php endif; ?>
-                </div>
-
-                <div class="form-group">
-                    <label for="client_lastname">Last Name:</label>
-                    <?php if(isset($_SESSION['client_lastname'])): ?>
-                    <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
-                    <?php else: ?>
-                    <input type="text" class="form-control" id="client_lastname" name="client_lastname">
-                    <?php endif; ?>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
             <br>
             
