@@ -92,30 +92,21 @@ session_start();
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                        
-                            
                             <button onclick="myFunction()" id="clientSearch" class="homeButton">Search</button>
-                        
                     </div>
 
                     <div class="col">
-                        
-                            
                             <button onclick="myFunction()" id="clientAdd" class="homeButton">Add</button>
-                        
                     </div>
 
                     <div class="col">
-                        
-                            
                             <button onclick="myFunction()" id="clientDelete" class="homeButton">Delete</button>
-                        
                     </div>
                 </div>
             </div>
             
-            
-            <h2 id="myDIV">Client Search</h2>
+            <div id="myDIV">
+            <h2>Client Search</h2>
             
             <!-- Put buttons here to choose between single client or client list -->
 
@@ -144,7 +135,7 @@ session_start();
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-           
+            </div>
             <br>
             
             <br>
