@@ -119,13 +119,9 @@ session_start();
                 </div>
             </div>
             
-            <?php
-                if($clientSearch = true){
-                    myFunction();
-                }
-            ?>
+            
             <h2 id="myDIV">Client Search</h2>
-
+            <button onclick="myFunction()">Search</button>
             <!-- Put buttons here to choose between single client or client list -->
 
             <!-- Put form here to enter client name to appear if "single client" selected -->
