@@ -120,11 +120,11 @@ session_start();
             </div>
             <!--
             <button onclick="myFunction()">Click Me</button>
-            -->
+            
             <div id="myDIV">
             This is my DIV element.
             </div>
-
+            -->
             
             <h2 id="myDIV">Client Search</h2>
 
