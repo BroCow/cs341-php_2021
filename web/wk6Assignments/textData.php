@@ -30,11 +30,6 @@ session_start();
             $statement->execute();
 
             $clientNameArray = array();
-
-            if (isset($_POST['clientSearch'])){
-                $clientSearch = true;
-                echo "true";
-            }
             
             if(isset($_POST['client_firstname'])){
                 $search_firstname = $_POST['client_firstname'];
@@ -97,31 +92,31 @@ session_start();
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                        <form for="clientSearch" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                            <input type="hidden" id="clientSearch" name="clientSearch" value="clientSearch">
-                            <button type="submit" id="clientSearch" class="homeButton">Search</button>
-                        </form>
+                        
+                            
+                            <button onclick="myFunction()" id="clientSearch" class="homeButton">Search</button>
+                        
                     </div>
 
                     <div class="col">
-                        <form for="clientAdd" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                            <input type="hidden" id="clientAdd" name="clientAdd" value="clientAdd">
-                            <button type="submit" id="clientAdd" class="homeButton">Add</button>
-                        </form>
+                        
+                            
+                            <button onclick="myFunction()" id="clientAdd" class="homeButton">Add</button>
+                        
                     </div>
 
                     <div class="col">
-                        <form for="clientDelete" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                            <input type="hidden" id="clientDelete" name="clientDelete" value="clientDelete">
-                            <button type="submit" id="clientDelete" class="homeButton">Delete</button>
-                        </form>
+                        
+                            
+                            <button onclick="myFunction()" id="clientDelete" class="homeButton">Delete</button>
+                        
                     </div>
                 </div>
             </div>
             
             
             <h2 id="myDIV">Client Search</h2>
-            <button onclick="myFunction()">Search</button>
+            
             <!-- Put buttons here to choose between single client or client list -->
 
             <!-- Put form here to enter client name to appear if "single client" selected -->
