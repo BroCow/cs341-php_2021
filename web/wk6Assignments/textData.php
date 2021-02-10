@@ -105,7 +105,7 @@ session_start();
                 </div>
             </div>
             
-            <div id="myDIV">
+            <div id="myDIV" style="display:none;">
             <h2>Client Search</h2>
             
             <!-- Put buttons here to choose between single client or client list -->
