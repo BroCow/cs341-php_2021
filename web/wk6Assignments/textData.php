@@ -99,7 +99,7 @@ session_start();
                     <div class="col">
                         <form for="clientSearch" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                             <input type="hidden" id="clientSearch" name="clientSearch" value="clientSearch">
-                            <button type="submit" onclick="myFunction()" id="clientSearch" class="homeButton">Search</button>
+                            <button type="submit" id="clientSearch" class="homeButton">Search</button>
                         </form>
                     </div>
 
@@ -118,14 +118,12 @@ session_start();
                     </div>
                 </div>
             </div>
-            <!--
-            <button onclick="myFunction()">Click Me</button>
             
-            <div id="myDIV">
-            This is my DIV element.
-            </div>
-            -->
-            
+            <?php
+                if($clientSearch = true){
+                    myFunction();
+                }
+            ?>
             <h2 id="myDIV">Client Search</h2>
 
             <!-- Put buttons here to choose between single client or client list -->
