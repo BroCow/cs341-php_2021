@@ -1,5 +1,5 @@
 
-document.getElementById('hideSearch').style.display = "block";
+
 function clientSearch () {
-    document.getElementById('hideSearch').style.display = "block";
+    document.getElementById('h2_clientSearch').style.display = "block";
 }

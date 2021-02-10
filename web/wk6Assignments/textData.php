@@ -119,7 +119,7 @@ session_start();
                 </div>
             </div>
 
-            <div id="hideSearch">
+            
             <h2 id="h2_clientSearch">Client Search</h2>
 
             <!-- Put buttons here to choose between single client or client list -->
@@ -149,7 +149,7 @@ session_start();
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            </div>
+           
             <br>
             
             <br>
