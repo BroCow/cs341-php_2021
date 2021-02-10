@@ -119,6 +119,8 @@ session_start();
                 </div>
             </div>
 
+            <button onclick="clientSearch()">Show Search</button>
+
             
             <h2 id="h2_clientSearch">Client Search</h2>
 
