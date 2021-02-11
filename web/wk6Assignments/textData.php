@@ -26,6 +26,11 @@ session_start();
 
     <body>
         <?php
+            if(isset($_POST['client_firstname']) || isset($_POST['client_lastname'])){
+                echo "Name set";
+            }
+
+
             $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
 
