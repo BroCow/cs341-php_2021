@@ -1,7 +1,7 @@
 
 
 function toggleClientSearch() {
-    var x = document.getElementById("clientSearch");
+    var x = document.getElementById("clientSearchForm");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {

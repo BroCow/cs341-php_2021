@@ -105,7 +105,7 @@ session_start();
                 </div>
             </div>
             
-            <div id="clientSearch" style="display:none;">
+            <div id="clientSearchForm" style="display:none;">
                 <h2>Client Search</h2>
                 
                 <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
