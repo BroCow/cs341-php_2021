@@ -129,6 +129,24 @@ session_start();
                         <?php endif; ?>
                     </div>
 
+                    <div class="form-group">
+                        <label for="client_email">Email:</label>
+                        <?php if(isset($_SESSION['client_email'])): ?>
+                        <input type="email" class="form-control" id="client_email" name="client_email" value="<?php echo $_SESSION['client_email']?>">
+                        <?php else: ?>
+                        <input type="email" class="form-control" id="client_email" name="client_email">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_phone">Phone:</label>
+                        <?php if(isset($_SESSION['client_phone'])): ?>
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
+                        <?php else: ?>
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone">
+                        <?php endif; ?>
+                    </div>
+
                     <button type="submit" class="btn-lg btn-primary">Submit</button>
                 </form>
             </div>
