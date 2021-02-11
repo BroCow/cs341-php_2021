@@ -96,16 +96,18 @@ session_start();
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleClientSearch()" id="clientAdd" class="homeButton">Add</button>
+                            <button onclick="toggleClientAdd()" id="clientAdd" class="homeButton">Add</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleClientSearch()" id="clientDelete" class="homeButton">Delete</button>
+                            <button onclick="toggleClientDelete()" id="clientDelete" class="homeButton">Delete</button>
                     </div>
                 </div>
             </div>
             
             <div id="clientSearchForm" style="display:none;">
+                <br>
+                <br>
                 <h2>Client Search</h2>
                 
                 <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
@@ -130,8 +132,67 @@ session_start();
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
+
+            <div id="clientAddForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Add Client</h2>
+                
+                <form id="form_clientAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Add" name="clientAdd">
+                    <div class="form-group">
+                        <label for="client_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['client_firstname'])): ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['client_lastname'])): ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Client</button>
+                </form>
+            </div>
+
+            <div id="clientDeleteForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Delete Client</h2>
+                
+                <form id="form_clientDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Delete" name="clientDelete">
+                    <div class="form-group">
+                        <label for="client_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['client_firstname'])): ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['client_lastname'])): ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Delete Client</button>
+                </form>
+            </div>
+
+
+
+
             <br>
-            
             <br>
 
             <div class="table">
