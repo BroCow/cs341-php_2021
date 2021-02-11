@@ -129,7 +129,7 @@ session_start();
                         <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn-lg btn-primary">Submit</button>
                 </form>
             </div>
 
@@ -175,7 +175,7 @@ session_start();
                         <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Add Client</button>
+                    <button type="submit" class="btn-lg btn-primary">Add Client</button>
                 </form>
             </div>
 
@@ -203,7 +203,7 @@ session_start();
                         <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Delete Client</button>
+                    <button type="submit" class="btn-lg btn-primary">Delete Client</button>
                 </form>
             </div>
 
