@@ -70,24 +70,16 @@ session_start();
 
 
             if(isset($_POST['Addclient_firstname']) || isset($_POST['Addclient_lastname'])){ 
+                
                 $_AddClientFirstName = $_POST['Addclient_firstname'];
                 $_AddClientLastName = $_POST['Addclient_lastname'];
                 $_AddClientEmail = $_POST['Addclient_email'];
                 $_AddClientPhone = $_POST['Addclient_phone'];
-                /*
-                $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:client_firstname, :client_lastname, :client_email, :client_phone)"; 
-                */
-                $stmt = $db->prepare('INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:client_firstname, :client_lastname, :client_email, :client_phone);');
-                $stmt->bindValue(':client_firstname', $_AddClientFirstName, PDO::PARAM_TEXT);
-                $stmt->bindValue(':client_lastname', $_AddClientLastName, PDO::PARAM_TEXT);
-                $stmt->bindValue(':client_email', $_AddClientEmail, PDO::PARAM_TEXT);
-                $stmt->bindValue(':client_phone', $_AddClientPhone, PDO::PARAM_TEXT);
-                $stmt->execute();
                 
-                echo $_AddClientFirstName;
-                echo $_AddClientLastName;
-                echo $_AddClientEmail;
-                echo $_AddClientPhone;
+                $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES ('Test', 'Time', 'tt@gmail.com', '111-222-3333')";
+                
+                $stmt = $db->prepare($query);
+                $stmt->execute();
             }
         ?>
 
