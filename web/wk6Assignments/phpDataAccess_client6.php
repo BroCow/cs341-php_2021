@@ -26,6 +26,11 @@ session_start();
 
     <body>
         <?php
+            if(isset($_POST['client_firstname']) || isset($_POST['client_lastname'])){
+                echo "Name set";
+            }
+
+
             $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
             $statement->execute();
 
@@ -89,38 +94,146 @@ session_start();
         <main>
             <h1>Client Management</h1>
 
-            <h2>Client Search</h2>
+            <div id="test" class="container">
+                <div class="row">
+                    <div class="col">
+                            <button onclick="toggleClientSearch()" id="clientSearch" class="homeButton">Search</button>
+                    </div>
 
-            <!-- Put buttons here to choose between single client or client list -->
+                    <div class="col">
+                            <button onclick="toggleClientAdd()" id="clientAdd" class="homeButton">Add</button>
+                    </div>
 
-            <!-- Put form here to enter client name to appear if "single client" selected -->
-
-            <!-- Put form here to choose between single client or client list -->
-
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
-                <div class="form-group">
-                    <label for="client_firstname">First Name:</label>
-                    <?php if(isset($_SESSION['client_firstname'])): ?>
-                    <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
-                    <?php else: ?>
-                    <input type="text" class="form-control" id="client_firstname" name="client_firstname">
-                    <?php endif; ?>
+                    <div class="col">
+                            <button onclick="toggleClientDelete()" id="clientDelete" class="homeButton">Delete</button>
+                    </div>
                 </div>
+            </div>
+            
+            <div id="clientSearchForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Client Search</h2>
+                
+                <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
+                    <div class="form-group">
+                        <label for="client_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['client_firstname'])): ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                        <?php endif; ?>
+                    </div>
 
-                <div class="form-group">
-                    <label for="client_lastname">Last Name:</label>
-                    <?php if(isset($_SESSION['client_lastname'])): ?>
-                    <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
-                    <?php else: ?>
-                    <input type="text" class="form-control" id="client_lastname" name="client_lastname">
-                    <?php endif; ?>
-                </div>
+                    <div class="form-group">
+                        <label for="client_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['client_lastname'])): ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                        <?php endif; ?>
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                    <div class="form-group">
+                        <label for="client_email">Email:</label>
+                        <?php if(isset($_SESSION['client_email'])): ?>
+                        <input type="email" class="form-control" id="client_email" name="client_email" value="<?php echo $_SESSION['client_email']?>">
+                        <?php else: ?>
+                        <input type="email" class="form-control" id="client_email" name="client_email">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_phone">Phone:</label>
+                        <?php if(isset($_SESSION['client_phone'])): ?>
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
+                        <?php else: ?>
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Submit</button>
+                </form>
+            </div>
+
+            <div id="clientAddForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Add Client</h2>
+                
+                <form id="form_clientAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Add" name="clientAdd">
+                    <div class="form-group">
+                        <label for="client_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['client_firstname'])): ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['client_lastname'])): ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_email">Email:</label>
+                        <?php if(isset($_SESSION['client_email'])): ?>
+                        <input type="email" class="form-control" id="client_email" name="client_email" value="<?php echo $_SESSION['client_email']?>">
+                        <?php else: ?>
+                        <input type="email" class="form-control" id="client_email" name="client_email">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_phone">Phone:</label>
+                        <?php if(isset($_SESSION['client_phone'])): ?>
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
+                        <?php else: ?>
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Add Client</button>
+                </form>
+            </div>
+
+            <div id="clientDeleteForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Delete Client</h2>
+                
+                <form id="form_clientDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Delete" name="clientDelete">
+                    <div class="form-group">
+                        <label for="client_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['client_firstname'])): ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['client_lastname'])): ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Delete Client</button>
+                </form>
+            </div>
+
+
+
 
             <br>
-            
             <br>
 
             <div class="table">
@@ -163,7 +276,7 @@ session_start();
             
         </main>
     
-
+        <script src="project1.js"></script>
     </body>
 
 </html>

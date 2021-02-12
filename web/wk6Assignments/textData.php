@@ -27,49 +27,46 @@ session_start();
     <body>
         <?php
             if(isset($_POST['client_firstname']) || isset($_POST['client_lastname'])){
-                echo "Name set";
-            }
+                $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+                $statement->execute();
 
+                $clientNameArray = array();
+                
+                if(isset($_POST['client_firstname'])){
+                    $search_firstname = $_POST['client_firstname'];
+                }
+                
+                if(isset($_POST['client_lastname'])){
+                    $search_lastname = $_POST['client_lastname'];
+                }
+                
+                // Go through each result
+                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+                {
+                // The variable "row" now holds the complete record for that
+                // row, and we can access the different values based on their
+                // name
+                $firstname = $row['client_firstname'];
+                $lastname = $row['client_lastname'];
+                $email = $row['client_email'];
+                $phone = $row['client_phone'];
+                //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+                
+                    if($search_firstname == $row['client_firstname']) {
+                        array_push($clientNameArray, $row['client_firstname']);
+                        array_push($clientNameArray, $row['client_lastname']);
+                        array_push($clientNameArray, $row['client_email']);
+                        array_push($clientNameArray, $row['client_phone']);
+                    } 
+                    if($search_lastname == $row['client_lastname']) {
+                        array_push($clientNameArray, $row['client_firstname']);
+                        array_push($clientNameArray, $row['client_lastname']);
+                        array_push($clientNameArray, $row['client_email']);
+                        array_push($clientNameArray, $row['client_phone']);
+                    } 
 
-            $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
-            $statement->execute();
-
-            $clientNameArray = array();
-            
-            if(isset($_POST['client_firstname'])){
-                $search_firstname = $_POST['client_firstname'];
-            }
-            
-            if(isset($_POST['client_lastname'])){
-                $search_lastname = $_POST['client_lastname'];
-            }
-            
-            // Go through each result
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC))
-            {
-            // The variable "row" now holds the complete record for that
-            // row, and we can access the different values based on their
-            // name
-            $firstname = $row['client_firstname'];
-            $lastname = $row['client_lastname'];
-            $email = $row['client_email'];
-            $phone = $row['client_phone'];
-            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
-            
-                if($search_firstname == $row['client_firstname']) {
-                    array_push($clientNameArray, $row['client_firstname']);
-                    array_push($clientNameArray, $row['client_lastname']);
-                    array_push($clientNameArray, $row['client_email']);
-                    array_push($clientNameArray, $row['client_phone']);
-                } 
-                if($search_lastname == $row['client_lastname']) {
-                    array_push($clientNameArray, $row['client_firstname']);
-                    array_push($clientNameArray, $row['client_lastname']);
-                    array_push($clientNameArray, $row['client_email']);
-                    array_push($clientNameArray, $row['client_phone']);
-                } 
-
-            }
+                }
+                }
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -239,37 +236,39 @@ session_start();
             <div class="table">
                 
             <?php 
-                if(count($clientNameArray) > 0){
-                    echo "<h3>Search results for " . $search_firstname . "</h3>";
-                    echo "<table class='table table-bordered'>";
-                    echo "<thead>";
-                    echo    "<tr>";
-                    echo        "<th>First Name</th>";
-                    echo        "<th>Last Name</th>";
-                    echo        "<th>Email</th>";
-                    echo        "<th>Phone</th>";
-                    echo    "</tr>";
-                    echo "</thead>";
-                    echo "<tbody>";
-                }
+                if(isset($_POST['client_firstname']) || isset($_POST['client_lastname'])){
+                    if(count($clientNameArray) > 0){
+                        echo "<h3>Search results for " . $search_firstname . "</h3>";
+                        echo "<table class='table table-bordered'>";
+                        echo "<thead>";
+                        echo    "<tr>";
+                        echo        "<th>First Name</th>";
+                        echo        "<th>Last Name</th>";
+                        echo        "<th>Email</th>";
+                        echo        "<th>Phone</th>";
+                        echo    "</tr>";
+                        echo "</thead>";
+                        echo "<tbody>";
+                    }
 
-                $clientArrayCount = count($clientNameArray);
+                    $clientArrayCount = count($clientNameArray);
 
-                for ($x = 0; $x <= $clientArrayCount; $x++) {
-                    echo "<tr>";
-                    echo "<td>$clientNameArray[$x]</td>"; 
-                    $x++;
-                    echo "<td>$clientNameArray[$x]</td>"; 
-                    $x++;
-                    echo "<td>$clientNameArray[$x]</td>"; 
-                    $x++;
-                    echo "<td>$clientNameArray[$x]</td>"; 
-                    echo "</tr>"; 
-                }
-                
-                if(count($clientNameArray) > 0){
-                    echo    "</tbody>";
-                    echo "</table>";
+                    for ($x = 0; $x <= $clientArrayCount; $x++) {
+                        echo "<tr>";
+                        echo "<td>$clientNameArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$clientNameArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$clientNameArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$clientNameArray[$x]</td>"; 
+                        echo "</tr>"; 
+                    }
+                    
+                    if(count($clientNameArray) > 0){
+                        echo    "</tbody>";
+                        echo "</table>";
+                    }
                 }
             ?>
             </div>
