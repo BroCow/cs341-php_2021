@@ -74,7 +74,7 @@ session_start();
                 $_AddClientLastName = $_POST['Addclient_lastname'];
                 $_AddClientEmail = $_POST['Addclient_email'];
                 $_AddClientPhone = $_POST['Addclient_phone'];
-
+                /*
                 $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:client_firstname, :client_lastname, :client_email, :client_phone)"; 
                 $statement = $db->prepare($query);
                 $statement->bindValue(':client_firstname', $_AddClientFirstName, PDO::PARAM_TEXT);
@@ -83,8 +83,11 @@ session_start();
                 $statement->bindValue(':client_phone', $_AddClientPhone, PDO::PARAM_TEXT);
                 
                 $statement->execute();
-
-                echo "Client Added";
+                */
+                echo $_AddClientFirstName;
+                echo $_AddClientLastName;
+                echo $_AddClientEmail;
+                echo $_AddClientPhone;
             }
         ?>
 
