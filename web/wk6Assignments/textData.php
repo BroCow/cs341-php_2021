@@ -205,7 +205,7 @@ session_start();
                         <?php if(isset($_SESSION['Addclient_phone'])): ?>
                         <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="Addclient_phone" name="Addclient_phone" value="<?php echo $_SESSION['Addclient_phone']?>">
                         <?php else: ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="Addclient_phone" name="Addclient_phone">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="Addclient_phone" name="Addclient_phone">
                         <?php endif; ?>
                     </div>
 
