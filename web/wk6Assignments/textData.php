@@ -79,10 +79,10 @@ session_start();
                 $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:AddClientFirstName, :AddClientLastName, :AddClientEmail, :AddClientPhone)";
                 
                 $stmt = $db->prepare($query);
-                $stmt->bindValue(':AddClientFirstName', $AddClientFirstName, PDO::PARAM_TEXT);
-                $stmt->bindValue(':AddClientLastName', $AddClientLastName, PDO::PARAM_TEXT);
-                $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_TEXT);
-                $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_TEXT);
+                $stmt->bindValue(':AddClientFirstName', $AddClientFirstName, PDO::PARAM_STR);
+                $stmt->bindValue(':AddClientLastName', $AddClientLastName, PDO::PARAM_STR);
+                $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_STR);
+                $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
                 $stmt->execute();
             }
         ?>
