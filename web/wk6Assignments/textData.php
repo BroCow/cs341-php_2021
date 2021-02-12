@@ -71,14 +71,18 @@ session_start();
 
             if(isset($_POST['Addclient_firstname']) || isset($_POST['Addclient_lastname'])){ 
                 
-                $_AddClientFirstName = $_POST['Addclient_firstname'];
-                $_AddClientLastName = $_POST['Addclient_lastname'];
-                $_AddClientEmail = $_POST['Addclient_email'];
-                $_AddClientPhone = $_POST['Addclient_phone'];
+                $AddClientFirstName = $_POST['Addclient_firstname'];
+                $AddClientLastName = $_POST['Addclient_lastname'];
+                $AddClientEmail = $_POST['Addclient_email'];
+                $AddClientPhone = $_POST['Addclient_phone'];
                 
-                $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES ('Test', 'Time', 'tt@gmail.com', '111-222-3333')";
+                $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:AddClientFirstName, :AddClientLastName, :AddClientEmail, :AddClientPhone)";
                 
                 $stmt = $db->prepare($query);
+                $stmt->bindValue(':AddClientFirstName', $AddClientFirstName, PDO::PARAM_TEXT);
+                $stmt->bindValue(':AddClientLastName', $AddClientLastName, PDO::PARAM_TEXT);
+                $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_TEXT);
+                $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_TEXT);
                 $stmt->execute();
             }
         ?>
