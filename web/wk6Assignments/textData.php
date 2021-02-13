@@ -84,6 +84,8 @@ session_start();
                 $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_STR);
                 $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
                 $stmt->execute();
+
+                $AddMessage = $AddClientFirstName . " " . $AddClientLastName . " " . "added as a client.";
             }
 
 
@@ -102,6 +104,8 @@ session_start();
                 $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_STR);
                 $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
                 $stmt->execute();
+
+                
             }
 
 
@@ -234,6 +238,13 @@ session_start();
                     </div>
 
                     <button type="submit" class="btn-lg btn-primary">Add Client</button>
+
+                    <?php
+                        if($AddMessage){
+                            echo "<br>";
+                            echo $AddMessage;
+                        }
+                    ?>
                 </form>
             </div>
 
