@@ -225,7 +225,7 @@ session_start();
                         <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn-lg btn-primary">Delete Client</button>
+                    <button type="submit" class="btn-lg btn-primary">Delete Item</button>
                 </form>
             </div>
                 
