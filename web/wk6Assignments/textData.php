@@ -98,58 +98,7 @@ session_start();
                 $query = "DELETE FROM client WHERE client_email = '".$delete_email."'";
                 $stmt = $db->prepare($query);
                 $stmt->execute();
-
-                
-                /*$query = "DELETE FROM client WHERE client_lastname = 'Smith'";
-                $stmt = $db->prepare($query);
-                $stmt->execute();*/
-                
-                /*$DeleteClientArray = array();
-                
-                if(isset($_POST['Delclient_firstname'])){
-                    $delete_firstname = htmlspecialchars($_POST['Delclient_firstname']);
-                }
-                
-                if(isset($_POST['Delclient_lastname'])){
-                    $delete_lastname = htmlspecialchars($_POST['Delclient_lastname']);
-                }
-                
-                $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client";
-                $stmt = $db->prepare($query);
-                $stmt->execute();
-
-                // Go through each result
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-                {
-                // The variable "row" now holds the complete record for that
-                // row, and we can access the different values based on their
-                // name
-                $DelClientId = $row['client_id'];
-                $DelClientFirstName = $row['client_firstname'];
-                $DelClientLastName = $row['client_lastname'];
-                $DelClientEmail = $row['client_email'];
-                $DelClientPhone = $row['client_phone'];
-
-                //echo "<p><strong>$DelClientId $DelClientFirstName $DelClientLastName $DelClientEmail $DelClientPhone</strong><p>";
-
-                    if($delete_firstname == $row['client_firstname']) {
-                        array_push($DeleteClientArray, $row['client_id']);
-                        array_push($DeleteClientArray, $row['client_firstname']);
-                        array_push($DeleteClientArray, $row['client_lastname']);
-                        array_push($DeleteClientArray, $row['client_email']);
-                        array_push($DeleteClientArray, $row['client_phone']);
-                    } 
-                    if($delete_lastname == $row['client_lastname']) {
-                        array_push($DeleteClientArray, $row['client_id']);
-                        array_push($DeleteClientArray, $row['client_firstname']);
-                        array_push($DeleteClientArray, $row['client_lastname']);
-                        array_push($DeleteClientArray, $row['client_email']);
-                        array_push($DeleteClientArray, $row['client_phone']);
-                    } 
-                }*/
             }
-
-
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -354,44 +303,6 @@ session_start();
                         echo "</table>";
                     }
                 }
-            ?>
-
-            <?php 
-                /*if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){
-                    if(count($DeleteClientArray) > 0){
-                        echo "<h3>Search results for " . $delete_firstname . "</h3>";
-                        echo "<table class='table table-bordered'>";
-                        echo "<thead>";
-                        echo    "<tr>";
-                        echo        "<th>First Name</th>";
-                        echo        "<th>Last Name</th>";
-                        echo        "<th>Email</th>";
-                        echo        "<th>Phone</th>";
-                        echo    "</tr>";
-                        echo "</thead>";
-                        echo "<tbody>";
-                    }
-
-                    $DeleteclientArrayCount = count($DeleteClientArray);
-
-                    for ($x = 0; $x <= $DeleteclientArrayCount; $x++) {
-                        echo "<tr>";
-                        $x++;
-                        echo "<td>$DeleteClientArray[$x]</td>"; 
-                        $x++;
-                        echo "<td>$DeleteClientArray[$x]</td>"; 
-                        $x++;
-                        echo "<td>$DeleteClientArray[$x]</td>"; 
-                        $x++;
-                        echo "<td>$DeleteClientArray[$x]</td>"; 
-                        echo "</tr>"; 
-                    }
-                    
-                    if(count($DeleteClientArray) > 0){
-                        echo    "</tbody>";
-                        echo "</table>";
-                    }
-                }*/
             ?>
 
             </div>
