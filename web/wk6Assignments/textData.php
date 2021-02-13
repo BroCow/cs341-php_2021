@@ -158,7 +158,7 @@ session_start();
                     <div class="form-group">
                         <label for="Additem_type">Select item type to add:</label>
                         <br>
-                        <select id="item_type" name="item_type" required>
+                        <select id="Additem_type" name="Additem_type" required>
                             <option value="">Select</option>
                             <option value="Necklace">Necklace</option>
                             <option value="Earrings">Earrings</option>
