@@ -91,17 +91,17 @@ session_start();
 
             if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){ 
                 
-                $DeleteclientArray = array();
+                $DeleteClientArray = array();
                 
                 if(isset($_POST['Delclient_firstname'])){
-                    $search_firstname = htmlspecialchars($_POST['Delclient_firstname']);
+                    $delete_firstname = htmlspecialchars($_POST['Delclient_firstname']);
                 }
                 
                 if(isset($_POST['Delclient_lastname'])){
-                    $search_lastname = htmlspecialchars($_POST['Delclient_lastname']);
+                    $delete_lastname = htmlspecialchars($_POST['Delclient_lastname']);
                 }
                 
-                $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client WHERE client_lastname = :DelClientLastName OR client_firstname = :DelClientFirstName";
+                $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client";
                 $stmt = $db->prepare($query);
                 $stmt->bindValue(':DelClientFirstName', $DelClientFirstName, PDO::PARAM_STR);
                 $stmt->bindValue(':DelClientLastName', $DelClientLastName, PDO::PARAM_STR);
@@ -120,6 +120,19 @@ session_start();
                 $DelClientPhone = $row['client_phone'];
 
                 echo "<p><strong>$DelClientId $DelClientFirstName $DelClientLastName $DelClientEmail $DelClientPhone</strong><p>";
+
+                    if($delete_firstname == $row['client_firstname']) {
+                        array_push($DeleteClientArray, $row['client_firstname']);
+                        array_push($DeleteClientArray, $row['client_lastname']);
+                        array_push($DeleteClientArray, $row['client_email']);
+                        array_push($DeleteClientArray, $row['client_phone']);
+                    } 
+                    if($delete_lastname == $row['client_lastname']) {
+                        array_push($DeleteClientArray, $row['client_firstname']);
+                        array_push($DeleteClientArray, $row['client_lastname']);
+                        array_push($DeleteClientArray, $row['client_email']);
+                        array_push($DeleteClientArray, $row['client_phone']);
+                    } 
                 }
             }
 
