@@ -37,6 +37,7 @@ session_start();
     <!-- If/else statements for each possible order type selection with different statement prepared for each?-->
     <body>
         <?php
+            if(isset($_POST['order_type']) || isset($_POST['month'])){
                 $statement = $db->prepare("SELECT order_type, order_date, public.orderitem.client_id, client_firstname, client_lastname FROM public.order INNER JOIN public.orderitem ON public.order.orderitem_id = public.orderitem.orderitem_id INNER JOIN public.client ON public.orderitem.client_id = public.client.client_id WHERE public.orderitem.client_id = public.client.client_id");
                 $statement->execute();
 
@@ -79,7 +80,10 @@ session_start();
                     array_push($orderArray, $row['client_lastname']);
                     array_push($orderArray, $row['order_date']);
                     } 
-                }  
+                } 
+
+            }
+                 
 /*
                 $stmt_client = $db->prepare("SELECT client_id, client_firstname, client_lastname, client_email FROM client;");
                 $stmt_client->execute();
