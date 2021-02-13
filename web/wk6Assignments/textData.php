@@ -95,14 +95,14 @@ session_start();
                     $delete_email = htmlspecialchars($_POST['Delclient_email']);
                 }
 
-                $query = "DELETE FROM client WHERE client_email = '".$delete_email."'";
-                $stmt = $db->prepare($query);
-                $stmt->execute();
-
-                
-                /*$query = "DELETE FROM client WHERE client_lastname = 'Cowan'";
+                /*$query = "DELETE FROM client WHERE client_email = '".$delete_email."'";
                 $stmt = $db->prepare($query);
                 $stmt->execute();*/
+
+                
+                $query = "DELETE FROM client WHERE client_lastname = 'Smith'";
+                $stmt = $db->prepare($query);
+                $stmt->execute();
                 
                 /*$DeleteClientArray = array();
                 
