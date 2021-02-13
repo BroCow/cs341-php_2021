@@ -136,7 +136,7 @@ session_start();
             </div>
 
             <h2>Order Search</h2>
-            <div id="itemSearchForm" style="display:none;">
+            <div id="orderSearchForm" style="display:none;">
                 <br>
                 <br>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
