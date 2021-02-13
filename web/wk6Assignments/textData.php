@@ -91,14 +91,36 @@ session_start();
 
             if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){ 
                 
-                $DelClientFirstName = htmlspecialchars($_POST['Delclient_firstname']);
-                $DelClientLastName = htmlspecialchars($_POST['Delclient_lastname']);
-                $DelClientEmail = htmlspecialchars($_POST['Delclient_email']);
+                $DeleteclientArray = array();
                 
-                $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client WHERE client_lastname = :DelClientLastName";
+                if(isset($_POST['Delclient_firstname'])){
+                    $search_firstname = htmlspecialchars($_POST['Delclient_firstname']);
+                }
+                
+                if(isset($_POST['Delclient_lastname'])){
+                    $search_lastname = htmlspecialchars($_POST['Delclient_lastname']);
+                }
+                
+                $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client WHERE client_lastname = :DelClientLastName OR client_firstname = :DelClientFirstName";
                 $stmt = $db->prepare($query);
+                $stmt->bindValue(':DelClientFirstName', $DelClientFirstName, PDO::PARAM_STR);
                 $stmt->bindValue(':DelClientLastName', $DelClientLastName, PDO::PARAM_STR);
                 $stmt->execute();
+
+                // Go through each result
+                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+                {
+                // The variable "row" now holds the complete record for that
+                // row, and we can access the different values based on their
+                // name
+                $DelClientId = $row['client_id'];
+                $DelClientFirstName = $row['client_firstname'];
+                $DelClientLastName = $row['client_lastname'];
+                $DelClientEmail = $row['client_email'];
+                $DelClientPhone = $row['client_phone'];
+
+                echo "<p><strong>$DelClientId $DelClientFirstName $DelClientLastName $DelClientEmail $DelClientPhone</strong><p>";
+                }
             }
 
 
