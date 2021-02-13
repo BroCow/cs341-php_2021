@@ -63,6 +63,25 @@ session_start();
                 //$result_lastName = $row['client_lastname'];
                 }
             }  
+
+            if(isset($_POST['Additem_type'])){ 
+                
+                $AddItemType = htmlspecialchars($_POST['Additem_type']);
+                $AddItemDesc = htmlspecialchars($_POST['Additem_desc']);
+                $AddItemPrice = htmlspecialchars($_POST['Additem_price']);
+                $AddItemName = htmlspecialchars($_POST['Additem_name']);
+                
+                $query = "INSERT INTO item (item_type, item_desc, item_price, item_name) VALUES (:AddItemType, :AddItemDesc, :AddItemPrice, :AddItemName)";
+                
+                $stmt = $db->prepare($query);
+                $stmt->bindValue(':AddItemType', $AddItemType, PDO::PARAM_STR);
+                $stmt->bindValue(':AddItemDesc', $AddItemDesc, PDO::PARAM_STR);
+                $stmt->bindValue(':AddItemPrice', $AddItemPrice, PDO::PARAM_INT);
+                $stmt->bindValue(':AddItemName', $AddItemName, PDO::PARAM_STR);
+                $stmt->execute();
+
+                $AddMessage = "New Item Added";
+            }
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -139,7 +158,7 @@ session_start();
                     <div class="form-group">
                         <label for="Additem_type">Select item type to add:</label>
                         <br>
-                        <select id="item_type" name="item_type">
+                        <select id="item_type" name="item_type" required>
                             <option value="">Select</option>
                             <option value="Necklace">Necklace</option>
                             <option value="Earrings">Earrings</option>
@@ -170,7 +189,7 @@ session_start();
                         <?php if(isset($_SESSION['Additem_name'])): ?>
                         <input type="text" class="form-control" id="Additem_name" name="Additem_name" value="<?php echo $_SESSION['Additem_name']?>">
                         <?php else: ?>
-                        <input type="text" class="form-control" id="Additem_name" name="Additem_name">
+                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" required>
                         <?php endif; ?>
                     </div>
 
