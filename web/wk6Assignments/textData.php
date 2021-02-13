@@ -172,7 +172,7 @@ session_start();
 
         </main>
     
-
+        <script src="project1.js"></script>
     </body>
 
 </html>
