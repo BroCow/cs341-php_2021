@@ -104,31 +104,35 @@ session_start();
                 </div>
             </div>
 
-            <h2>Item Search</h2>
-
-            <!-- Put buttons here to choose between single client or client list -->
-
-            <!-- Put form here to enter client name to appear if "single client" selected -->
-
-            <!-- Put form here to choose between single client or client list -->
-
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Search" name="itemSearch">
-                <label for="item_type">Search by item type:</label>
-                <br>
-                <select id="item_type" name="item_type">
-                    <option value="">Select</option>
-                    <option value="Necklace">Necklace</option>
-                    <option value="Earrings">Earrings</option>
-                    <option value="Bracelet">Bracelet</option>
-                </select>
+            <div id="itemSearchForm" style="display:none;">
                 <br>
                 <br>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-            
-            <!-- Make this a table for each one -->
-            <br>
-            <br>
+                <h2>Item Search</h2>
+
+                <!-- Put buttons here to choose between single client or client list -->
+
+                <!-- Put form here to enter client name to appear if "single client" selected -->
+
+                <!-- Put form here to choose between single client or client list -->
+
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Search" name="itemSearch">
+                    <label for="item_type">Search by item type:</label>
+                    <br>
+                    <select id="item_type" name="item_type">
+                        <option value="">Select</option>
+                        <option value="Necklace">Necklace</option>
+                        <option value="Earrings">Earrings</option>
+                        <option value="Bracelet">Bracelet</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+                
+                <!-- Make this a table for each one -->
+                <br>
+                <br>
             <?php 
                 if(count($itemTypeArray) > 0){
                     echo "<h3>" . $search_itemType . " Items</h3>";
