@@ -63,6 +63,36 @@ session_start();
                 //$result_lastName = $row['client_lastname'];
                 }
             }  
+
+            if(isset($_POST['Additem_type'])){ 
+                
+                $AddItemType = htmlspecialchars($_POST['Additem_type']);
+                $AddItemDesc = htmlspecialchars($_POST['Additem_desc']);
+                $AddItemPrice = htmlspecialchars($_POST['Additem_price']);
+                $AddItemName = htmlspecialchars($_POST['Additem_name']);
+                
+                $query = "INSERT INTO item (item_type, item_desc, item_price, item_name) VALUES (:AddItemType, :AddItemDesc, :AddItemPrice, :AddItemName)";
+                
+                $stmt = $db->prepare($query);
+                $stmt->bindValue(':AddItemType', $AddItemType, PDO::PARAM_STR);
+                $stmt->bindValue(':AddItemDesc', $AddItemDesc, PDO::PARAM_STR);
+                $stmt->bindValue(':AddItemPrice', $AddItemPrice, PDO::PARAM_INT);
+                $stmt->bindValue(':AddItemName', $AddItemName, PDO::PARAM_STR);
+                $stmt->execute();
+
+                $AddMessage = "New Item Added";
+            }
+
+            if(isset($_POST['Delitem_name'])){ 
+
+                if(isset($_POST['Delitem_name'])){
+                    $delete_name = $_POST['Delitem_name'];
+                }
+
+                $query = "DELETE FROM item WHERE item_name = '".$delete_name."'";
+                $stmt = $db->prepare($query);
+                $stmt->execute();
+            }
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -88,31 +118,120 @@ session_start();
         <main>
             <h1>Item Management</h1>
 
-            <h2>Item Search</h2>
+            <div id="test" class="container">
+                <div class="row">
+                    <div class="col">
+                            <button onclick="toggleItemSearch()" id="itemSearch" class="homeButton">Search</button>
+                    </div>
 
-            <!-- Put buttons here to choose between single client or client list -->
+                    <div class="col">
+                            <button onclick="toggleItemAdd()" id="itemAdd" class="homeButton">Add</button>
+                    </div>
 
-            <!-- Put form here to enter client name to appear if "single client" selected -->
+                    <div class="col">
+                            <button onclick="toggleItemDelete()" id="itemDelete" class="homeButton">Delete</button>
+                    </div>
+                </div>
+            </div>
 
-            <!-- Put form here to choose between single client or client list -->
-
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Search" name="itemSearch">
-                <label for="item_type">Search by item type:</label>
+            <div id="itemSearchForm" style="display:none;">
                 <br>
-                <select id="item_type" name="item_type">
-                    <option value="">Select</option>
-                    <option value="Necklace">Necklace</option>
-                    <option value="Earrings">Earrings</option>
-                    <option value="Bracelet">Bracelet</option>
-                </select>
+                <br>
+                <h2>Item Search</h2>
+
+                <!-- Put buttons here to choose between single client or client list -->
+
+                <!-- Put form here to enter client name to appear if "single client" selected -->
+
+                <!-- Put form here to choose between single client or client list -->
+
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Search" name="itemSearch">
+                    <label for="item_type">Search by item type:</label>
+                    <br>
+                    <select id="item_type" name="item_type">
+                        <option value="">Select</option>
+                        <option value="Necklace">Necklace</option>
+                        <option value="Earrings">Earrings</option>
+                        <option value="Bracelet">Bracelet</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+
+            <div id="itemAddForm" style="display:none;">
                 <br>
                 <br>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-            
-            <!-- Make this a table for each one -->
+                <h2>Add Item</h2>
+                
+                <form id="form_itemAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Add" name="itemAdd">
+                    <div class="form-group">
+                        <label for="Additem_type">Select item type to add:</label>
+                        <br>
+                        <select id="Additem_type" name="Additem_type" required>
+                            <option value="">Select</option>
+                            <option value="Necklace">Necklace</option>
+                            <option value="Earrings">Earrings</option>
+                            <option value="Bracelet">Bracelet</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_desc">Enter item description:</label>
+                        <?php if(isset($_SESSION['Additem_desc'])): ?>
+                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" value="<?php echo $_SESSION['Additem_desc']?>" required>
+                        <?php else: ?>
+                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_price">Enter item price:</label>
+                        <?php if(isset($_SESSION['Additem_price'])): ?>
+                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" value="<?php echo $_SESSION['Additem_price']?>" required>
+                        <?php else: ?>
+                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_name">Enter item name:</label>
+                        <?php if(isset($_SESSION['Additem_name'])): ?>
+                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" value="<?php echo $_SESSION['Additem_name']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Add Item</button>
+
+                </form>
+            </div>
             <br>
             <br>
+            <div id="itemDeleteForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Delete Item</h2>
+                
+                <form id="form_itemDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Delete" name="itemDelete">
+                    <div class="form-group">
+                        <label for="Delitem_name">Enter Item Name:</label>
+                        <?php if(isset($_SESSION['Delitem_name'])): ?>
+                        <input type="text" class="form-control" id="Delitem_name" name="Delitem_name" value="<?php echo $_SESSION['Delitem_name']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Delitem_name" name="Delitem_name">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Delete Client</button>
+                </form>
+            </div>
+                
+                <!-- Make this a table for each one -->
+                <br>
+                <br>
             <?php 
                 if(count($itemTypeArray) > 0){
                     echo "<h3>" . $search_itemType . " Items</h3>";
@@ -152,7 +271,7 @@ session_start();
 
         </main>
     
-
+        <script src="project1.js"></script>
     </body>
 
 </html>
