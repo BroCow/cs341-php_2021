@@ -222,6 +222,25 @@ session_start();
             </div>
 
             <div id="orderAddForm" style="display:none;">
+                <?php
+                    $statement = $db->prepare("SELECT client_id, client_firstname, client_lastname, client_email FROM client");
+                    $statement->execute();
+        
+                    $lastNameArray = array();
+                    $emailArray = array();
+        
+                    while ($rowClient = $statement->fetch(PDO::FETCH_ASSOC)) {
+                        $add_clientid = $row['client_id'];
+                        $add_firstname = $row['client_firstname'];
+                        $add_lastname = $row['client_lastname'];
+                        array_push($lastNameArray, $row['client_lastname']);
+                        $add_email = $row['client_email'];
+                        array_push($emailArray, $row['client_email']);
+                    }
+                        
+                    $lastNameArrayCount = count($lastNameArray);
+                    echo $lastNameArrayCount;
+                ?>
                 <br>
                 <br>
                 <h2>Add Order</h2>
