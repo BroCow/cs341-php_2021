@@ -85,7 +85,7 @@ session_start();
                 $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
                 $stmt->execute();
 
-                $AddMessage = $AddClientFirstName . " " . $AddClientLastName . " " . "added as a client.";
+                $AddMessage = "New Client Added";
             }
 
 
