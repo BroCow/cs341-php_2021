@@ -108,7 +108,7 @@ session_start();
                 $stmt->execute();
 
                 // Go through each result
-                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
                 {
                 // The variable "row" now holds the complete record for that
                 // row, and we can access the different values based on their
@@ -343,21 +343,6 @@ session_start();
                 }
             ?>
 
-            <?php
-                if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])) {
-                    echo "<h3>Search results for " . $DelClientFirstName . " " . $DelClientLastName . "</h3>";
-                        echo "<table class='table table-bordered'>";
-                        echo "<thead>";
-                        echo    "<tr>";
-                        echo        "<th>First Name</th>";
-                        echo        "<th>Last Name</th>";
-                        echo        "<th>Email</th>";
-                        echo        "<th>Phone</th>";
-                        echo    "</tr>";
-                        echo "</thead>";
-                        echo "<tbody>";
-                }
-            ?>
             </div>
             
         </main>
