@@ -99,8 +99,6 @@ session_start();
                 $stmt = $db->prepare($query);
                 $stmt->execute();
 
-                /*$DelMessage = "Client deleted.";*/
-
                 
                 /*$query = "DELETE FROM client WHERE client_lastname = 'Cowan'";
                 $stmt = $db->prepare($query);
@@ -359,10 +357,6 @@ session_start();
             ?>
 
             <?php 
-                /*echo $DelMessage;*/
-                
-
-
                 /*if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){
                     if(count($DeleteClientArray) > 0){
                         echo "<h3>Search results for " . $delete_firstname . "</h3>";
