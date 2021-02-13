@@ -80,7 +80,7 @@ session_start();
                     array_push($orderArray, $row['order_date']);
                     } 
                 }  
-
+/*
                 $stmt_client = $db->prepare("SELECT client_id, client_firstname, client_lastname, client_email FROM client;");
                 $stmt_client->execute();
 
@@ -94,7 +94,7 @@ session_start();
                 foreach ($clientRow as $value){
                     echo $value;
                 }
-                
+                */
             ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -135,8 +135,8 @@ session_start();
                 </div>
             </div>
 
-            <h2>Order Search</h2>
             <div id="orderSearchForm" style="display:none;">
+                <h2>Order Search</h2>
                 <br>
                 <br>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
