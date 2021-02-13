@@ -53,3 +53,31 @@ function toggleClientSearch() {
       x.style.display = "none";
     }
   }
+
+  /********** Order Page Functions  **************/
+  function toggleOrderSearch() {
+    var x = document.getElementById("orderSearchForm");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  function toggleOrderAdd() {
+    var x = document.getElementById("orderAddForm");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  function toggleOrderDelete() {
+    var x = document.getElementById("orderDeleteForm");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
