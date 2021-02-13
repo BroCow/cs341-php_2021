@@ -33,11 +33,11 @@ session_start();
                 $clientNameArray = array();
                 
                 if(isset($_POST['client_firstname'])){
-                    $search_firstname = $_POST['client_firstname'];
+                    $search_firstname = htmlspecialchars($_POST['client_firstname']);
                 }
                 
                 if(isset($_POST['client_lastname'])){
-                    $search_lastname = $_POST['client_lastname'];
+                    $search_lastname = htmlspecialchars($_POST['client_lastname']);
                 }
                 
                 // Go through each result
@@ -71,10 +71,10 @@ session_start();
 
             if(isset($_POST['Addclient_firstname']) || isset($_POST['Addclient_lastname'])){ 
                 
-                $AddClientFirstName = $_POST['Addclient_firstname'];
-                $AddClientLastName = $_POST['Addclient_lastname'];
-                $AddClientEmail = $_POST['Addclient_email'];
-                $AddClientPhone = $_POST['Addclient_phone'];
+                $AddClientFirstName = htmlspecialchars($_POST['Addclient_firstname']);
+                $AddClientLastName = htmlspecialchars($_POST['Addclient_lastname']);
+                $AddClientEmail = htmlspecialchars($_POST['Addclient_email']);
+                $AddClientPhone = htmlspecialchars($_POST['Addclient_phone']);
                 
                 $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:AddClientFirstName, :AddClientLastName, :AddClientEmail, :AddClientPhone)";
                 
@@ -85,6 +85,26 @@ session_start();
                 $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
                 $stmt->execute();
             }
+
+
+            if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){ 
+                
+                $DelClientFirstName = $_POST['Delclient_firstname'];
+                $DelClientLastName = $_POST['Delclient_lastname'];
+                $DelClientEmail = $_POST['Delclient_email'];
+                $DelClientPhone = $_POST['Delclient_phone'];
+                
+                $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:AddClientFirstName, :AddClientLastName, :AddClientEmail, :AddClientPhone)";
+                
+                $stmt = $db->prepare($query);
+                $stmt->bindValue(':AddClientFirstName', $AddClientFirstName, PDO::PARAM_STR);
+                $stmt->bindValue(':AddClientLastName', $AddClientLastName, PDO::PARAM_STR);
+                $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_STR);
+                $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
+                $stmt->execute();
+            }
+
+
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -180,27 +200,27 @@ session_start();
                     <div class="form-group">
                         <label for="Addclient_firstname">First Name:</label>
                         <?php if(isset($_SESSION['Addclient_firstname'])): ?>
-                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" value="<?php echo $_SESSION['Addclient_firstname']?>">
+                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" value="<?php echo $_SESSION['Addclient_firstname']?>" required>
                         <?php else: ?>
-                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname">
+                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" required>
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
                         <label for="Addclient_lastname">Last Name:</label>
                         <?php if(isset($_SESSION['Addclient_lastname'])): ?>
-                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" value="<?php echo $_SESSION['Addclient_lastname']?>">
+                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" value="<?php echo $_SESSION['Addclient_lastname']?>" required>
                         <?php else: ?>
-                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname">
+                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" required>
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
                         <label for="Addclient_email">Email:</label>
                         <?php if(isset($_SESSION['Addclient_email'])): ?>
-                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" value="<?php echo $_SESSION['Addclient_email']?>">
+                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" value="<?php echo $_SESSION['Addclient_email']?>" required>
                         <?php else: ?>
-                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email">
+                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" required>
                         <?php endif; ?>
                     </div>
 
