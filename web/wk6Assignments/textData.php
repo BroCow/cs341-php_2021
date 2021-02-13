@@ -103,8 +103,6 @@ session_start();
                 
                 $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client";
                 $stmt = $db->prepare($query);
-                $stmt->bindValue(':DelClientFirstName', $DelClientFirstName, PDO::PARAM_STR);
-                $stmt->bindValue(':DelClientLastName', $DelClientLastName, PDO::PARAM_STR);
                 $stmt->execute();
 
                 // Go through each result
@@ -122,12 +120,14 @@ session_start();
                 echo "<p><strong>$DelClientId $DelClientFirstName $DelClientLastName $DelClientEmail $DelClientPhone</strong><p>";
 
                     if($delete_firstname == $row['client_firstname']) {
+                        array_push($DeleteClientArray, $row['client_id']);
                         array_push($DeleteClientArray, $row['client_firstname']);
                         array_push($DeleteClientArray, $row['client_lastname']);
                         array_push($DeleteClientArray, $row['client_email']);
                         array_push($DeleteClientArray, $row['client_phone']);
                     } 
                     if($delete_lastname == $row['client_lastname']) {
+                        array_push($DeleteClientArray, $row['client_id']);
                         array_push($DeleteClientArray, $row['client_firstname']);
                         array_push($DeleteClientArray, $row['client_lastname']);
                         array_push($DeleteClientArray, $row['client_email']);
@@ -337,6 +337,45 @@ session_start();
                     }
                     
                     if(count($clientNameArray) > 0){
+                        echo    "</tbody>";
+                        echo "</table>";
+                    }
+                }
+            ?>
+
+            <?php 
+                if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){
+                    if(count($DeleteClientArray) > 0){
+                        echo "<h3>Search results for " . $delete_firstname . "</h3>";
+                        echo "<table class='table table-bordered'>";
+                        echo "<thead>";
+                        echo    "<tr>";
+                        echo        "<th>First Name</th>";
+                        echo        "<th>Last Name</th>";
+                        echo        "<th>Email</th>";
+                        echo        "<th>Phone</th>";
+                        echo    "</tr>";
+                        echo "</thead>";
+                        echo "<tbody>";
+                    }
+
+                    $DeleteclientArrayCount = count($DeleteClientArray);
+
+                    for ($x = 0; $x <= $DeleteclientArrayCount; $x++) {
+                        echo "<tr>";
+                        echo "<td>$DeleteClientArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$DeleteClientArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$DeleteClientArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$DeleteClientArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$DeleteClientArray[$x]</td>";
+                        echo "</tr>"; 
+                    }
+                    
+                    if(count($DeleteClientArray) > 0){
                         echo    "</tbody>";
                         echo "</table>";
                     }
