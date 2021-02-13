@@ -89,13 +89,13 @@ session_start();
             }
 
 
-            if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){ 
+            if(isset($_POST['Delclient_email']) || isset($_POST['Delclient_lastname'])){ 
 
-                if(isset($_POST['Delclient_lastname'])){
-                    $delete_lastname = htmlspecialchars($_POST['Delclient_lastname']);
+                if(isset($_POST['Delclient_email'])){
+                    $delete_email = htmlspecialchars($_POST['Delclient_email']);
                 }
 
-                $query = "DELETE FROM client WHERE client_lastname = '".$delete_lastname."'";
+                $query = "DELETE FROM client WHERE client_email = '".$delete_email."'";
                 $stmt = $db->prepare($query);
                 $stmt->execute();
                 
@@ -290,11 +290,11 @@ session_start();
                 
                 <form id="form_clientDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Delete" name="clientDelete">
                     <div class="form-group">
-                        <label for="Delclient_firstname">First Name:</label>
-                        <?php if(isset($_SESSION['Delclient_firstname'])): ?>
-                        <input type="text" class="form-control" id="Delclient_firstname" name="Delclient_firstname" value="<?php echo $_SESSION['Delclient_firstname']?>">
+                        <label for="Delclient_email">Enter Client Email:</label>
+                        <?php if(isset($_SESSION['Delclient_email'])): ?>
+                        <input type="text" class="form-control" id="Delclient_email" name="Delclient_email" value="<?php echo $_SESSION['Delclient_email']?>">
                         <?php else: ?>
-                        <input type="text" class="form-control" id="Delclient_firstname" name="Delclient_firstname">
+                        <input type="text" class="form-control" id="Delclient_email" name="Delclient_email">
                         <?php endif; ?>
                     </div>
 
