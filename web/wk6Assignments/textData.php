@@ -99,6 +99,8 @@ session_start();
                 array_push($emailArray, $row['client_email']);
             }
                 
+            $lastNameArrayCount = count($lastNameArray);
+            echo $lastNameArrayCount;
             
         ?>
 
@@ -232,6 +234,7 @@ session_start();
                         <br>
                         <select id="Addorder_client" name="Addorder_client" required>
                         <?php
+                        echo $lastNameArrayCount;
                             foreach ($lastNameArray as $value){
                                 echo "<option value=$value>$value</option>";
                             }
