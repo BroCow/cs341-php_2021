@@ -82,6 +82,17 @@ session_start();
 
                 $AddMessage = "New Item Added";
             }
+
+            if(isset($_POST['Delitem_name'])){ 
+
+                if(isset($_POST['Delitem_name'])){
+                    $delete_name = $_POST['Delitem_name'];
+                }
+
+                $query = "DELETE FROM item WHERE item_name = '".$delete_name."'";
+                $stmt = $db->prepare($query);
+                $stmt->execute();
+            }
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -195,6 +206,26 @@ session_start();
 
                     <button type="submit" class="btn-lg btn-primary">Add Item</button>
 
+                </form>
+            </div>
+            <br>
+            <br>
+            <div id="itemDeleteForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Delete Item</h2>
+                
+                <form id="form_itemDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Delete" name="itemDelete">
+                    <div class="form-group">
+                        <label for="Delitem_name">Enter Item Name:</label>
+                        <?php if(isset($_SESSION['Delitem_name'])): ?>
+                        <input type="text" class="form-control" id="Delitem_name" name="Delitem_name" value="<?php echo $_SESSION['Delitem_name']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Delitem_name" name="Delitem_name">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Delete Client</button>
                 </form>
             </div>
                 
