@@ -87,31 +87,20 @@ session_start();
             $statement = $db->prepare("SELECT client_id, client_firstname, client_lastname, client_email FROM client");
             $statement->execute();
 
+            $lastNameArray = array();
+            $emailArray = array();
+
             while ($rowClient = $statement->fetch(PDO::FETCH_ASSOC)) {
                 $add_clientid = $row['client_id'];
                 $add_firstname = $row['client_firstname'];
                 $add_lastname = $row['client_lastname'];
+                array_push($lastNameArray, $row['client_lastname']);
                 $add_email = $row['client_email'];
+                array_push($emailArray, $row['client_email']);
             }
                 
             
-            
-/*
-                $stmt_client = $db->prepare("SELECT client_id, client_firstname, client_lastname, client_email FROM client;");
-                $stmt_client->execute();
-
-                while ($clientRow = $stmt_client->fetch(PDO::FETCH_ASSOC)){
-                    $add_clientid = $row['client_id'];
-                    $add_firstname = $row['client_firstname'];
-                    $add_lastname = $row['client_lastname'];
-                    $add_email = $row['client_email'];
-                }
-
-                foreach ($clientRow as $value){
-                    echo $value;
-                }
-                */
-            ?>
+        ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
             <!-- Links -->
@@ -242,10 +231,11 @@ session_start();
                         <label for="Addorder_client">Select client:</label>
                         <br>
                         <select id="Addorder_client" name="Addorder_client" required>
-                            <option value="">Select</option>
-                            <option value="Online">Online</option>
-                            <option value="Cash">Cash</option>
-                            <option value="Credit">Credit</option>
+                        <?php
+                            foreach ($lastNameArray as $value){
+                                echo "<option value=$value>$value</option>";
+                            }
+                        ?>
                         </select>
                     </div>
                 
