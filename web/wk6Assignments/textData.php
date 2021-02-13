@@ -95,9 +95,9 @@ session_start();
                 $DelClientLastName = htmlspecialchars($_POST['Delclient_lastname']);
                 $DelClientEmail = htmlspecialchars($_POST['Delclient_email']);
                 
-                $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client WHERE client_email = :DelClientEmail";
+                $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client WHERE client_lastname = :DelClientLastName";
                 $stmt = $db->prepare($query);
-                $stmt->bindValue(':DelClientEmail', $DelClientEmail, PDO::PARAM_STR);
+                $stmt->bindValue(':DelClientLastName', $DelClientLastName, PDO::PARAM_STR);
                 $stmt->execute();
             }
 
