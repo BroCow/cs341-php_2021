@@ -99,7 +99,7 @@ session_start();
                 $stmt = $db->prepare($query);
                 $stmt->execute();
 
-                $DelMessage = "Client deleted.";
+                /*$DelMessage = "Client deleted.";*/
 
                 
                 /*$query = "DELETE FROM client WHERE client_lastname = 'Cowan'";
@@ -359,7 +359,7 @@ session_start();
             ?>
 
             <?php 
-                echo $DelMessage;
+                /*echo $DelMessage;*/
                 
 
 
