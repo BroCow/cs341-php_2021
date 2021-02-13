@@ -81,8 +81,20 @@ session_start();
                     } 
                 }  
 
-                $rowCount = count($row);
-                echo $rowCount;
+                $stmt_client = $db->prepare("SELECT client_id, client_firstname, client_lastname, client_email FROM client;");
+                $stmt_client->execute();
+
+                while ($clientRow = $stmt_client->fetch(PDO::FETCH_ASSOC)){
+                    $add_clientid = $row['client_id'];
+                    $add_firstname = $row['client_firstname'];
+                    $add_lastname = $row['client_lastname'];
+                    $add_email = $row['client_email'];
+                }
+
+                foreach ($clientRow as $value){
+                    echo $value;
+                }
+                
             ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
