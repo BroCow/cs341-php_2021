@@ -90,8 +90,12 @@ session_start();
 
 
             if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){ 
+
+                $query = "DELETE FROM client WHERE client_lastname = 'Cowan'";
+                $stmt = $db->prepare($query);
+                $stmt->execute();
                 
-                $DeleteClientArray = array();
+                /*$DeleteClientArray = array();
                 
                 if(isset($_POST['Delclient_firstname'])){
                     $delete_firstname = htmlspecialchars($_POST['Delclient_firstname']);
@@ -133,7 +137,7 @@ session_start();
                         array_push($DeleteClientArray, $row['client_email']);
                         array_push($DeleteClientArray, $row['client_phone']);
                     } 
-                }
+                }*/
             }
 
 
