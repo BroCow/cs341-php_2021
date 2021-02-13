@@ -91,21 +91,14 @@ session_start();
 
             if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){ 
                 
-                $DelClientFirstName = $_POST['Delclient_firstname'];
-                $DelClientLastName = $_POST['Delclient_lastname'];
-                $DelClientEmail = $_POST['Delclient_email'];
-                $DelClientPhone = $_POST['Delclient_phone'];
+                $DelClientFirstName = htmlspecialchars($_POST['Delclient_firstname']);
+                $DelClientLastName = htmlspecialchars($_POST['Delclient_lastname']);
+                $DelClientEmail = htmlspecialchars($_POST['Delclient_email']);
                 
-                $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:AddClientFirstName, :AddClientLastName, :AddClientEmail, :AddClientPhone)";
-                
+                $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client WHERE client_email = :DelClientEmail";
                 $stmt = $db->prepare($query);
-                $stmt->bindValue(':AddClientFirstName', $AddClientFirstName, PDO::PARAM_STR);
-                $stmt->bindValue(':AddClientLastName', $AddClientLastName, PDO::PARAM_STR);
-                $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_STR);
-                $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
+                $stmt->bindValue(':DelClientEmail', $DelClientEmail, PDO::PARAM_STR);
                 $stmt->execute();
-
-                
             }
 
 
@@ -239,12 +232,6 @@ session_start();
 
                     <button type="submit" class="btn-lg btn-primary">Add Client</button>
 
-                    <?php
-                        if($AddMessage){
-                            echo "<br>";
-                            echo $AddMessage;
-                        }
-                    ?>
                 </form>
             </div>
 
@@ -318,6 +305,22 @@ session_start();
                         echo    "</tbody>";
                         echo "</table>";
                     }
+                }
+            ?>
+
+            <?php
+                if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])) {
+                    echo "<h3>Search results for " . $DelClientFirstName . " " . $DelClientLastName . "</h3>";
+                        echo "<table class='table table-bordered'>";
+                        echo "<thead>";
+                        echo    "<tr>";
+                        echo        "<th>First Name</th>";
+                        echo        "<th>Last Name</th>";
+                        echo        "<th>Email</th>";
+                        echo        "<th>Phone</th>";
+                        echo    "</tr>";
+                        echo "</thead>";
+                        echo "<tbody>";
                 }
             ?>
             </div>
