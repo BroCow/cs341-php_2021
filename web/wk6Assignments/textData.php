@@ -80,6 +80,9 @@ session_start();
                     array_push($orderArray, $row['order_date']);
                     } 
                 }  
+
+                $rowCount = count($row);
+                echo $rowCount;
             ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -121,80 +124,149 @@ session_start();
             </div>
 
             <h2>Order Search</h2>
+            <div id="itemSearchForm" style="display:none;">
+                <br>
+                <br>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
 
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
+                    <label for="order_type">Search by payment type:</label>
+                    <br>
+                    <select id="order_type" name="order_type">
+                        <option value="">Select</option>
+                        <option value="Online">Online</option>
+                        <option value="Credit">Credit</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                    <br>
+                    <p>Search by order date:</p>
+                    <label for="month">Month</label>
+                    <select id="month" name="month">
+                        <option value=""></option>
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <label for="day">Day</label>
+                    <select id="day" name="day">
+                        <option value=""></option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                    </select>
+                    <label for="year">Year</label>
+                    <select id="year" name="year">
+                        <option value=""></option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                    </select>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
 
-                <label for="order_type">Search by payment type:</label>
+            <div id="orderAddForm" style="display:none;">
                 <br>
-                <select id="order_type" name="order_type">
-                    <option value="">Select</option>
-                    <option value="Online">Online</option>
-                    <option value="Credit">Credit</option>
-                    <option value="Cash">Cash</option>
-                </select>
                 <br>
-                <p>Search by order date:</p>
-                <label for="month">Month</label>
-                <select id="month" name="month">
-                    <option value=""></option>
-                    <option value="01">January</option>
-                    <option value="02">February</option>
-                    <option value="03">March</option>
-                    <option value="04">April</option>
-                    <option value="05">May</option>
-                    <option value="06">June</option>
-                    <option value="07">July</option>
-                    <option value="08">August</option>
-                    <option value="09">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
-                <label for="day">Day</label>
-                <select id="day" name="day">
-                    <option value=""></option>
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                </select>
-                <label for="year">Year</label>
-                <select id="year" name="year">
-                    <option value=""></option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                </select>
-                <br>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
+                <h2>Add Order</h2>
+                
+                <form id="form_orderAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add" name="orderAdd">
+                    
+                
+                    <div class="form-group">
+                        <label for="Addorder_client">Select client:</label>
+                        <br>
+                        <select id="Addorder_client" name="Addorder_client" required>
+                            <option value="">Select</option>
+                            <option value="Online">Online</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Credit">Credit</option>
+                        </select>
+                    </div>
+                
+                
+                
+                
+                
+                    <div class="form-group">
+                        <label for="Addorder_type">Select order type to add:</label>
+                        <br>
+                        <select id="Addorder_type" name="Addorder_type" required>
+                            <option value="">Select</option>
+                            <option value="Online">Online</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Credit">Credit</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_desc">Enter item description:</label>
+                        <?php if(isset($_SESSION['Additem_desc'])): ?>
+                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" value="<?php echo $_SESSION['Additem_desc']?>" required>
+                        <?php else: ?>
+                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_price">Enter item price:</label>
+                        <?php if(isset($_SESSION['Additem_price'])): ?>
+                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" value="<?php echo $_SESSION['Additem_price']?>" required>
+                        <?php else: ?>
+                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_name">Enter item name:</label>
+                        <?php if(isset($_SESSION['Additem_name'])): ?>
+                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" value="<?php echo $_SESSION['Additem_name']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Add Item</button>
+
+                </form>
+            </div>
             
             <!-- Make this a table for each one -->
             <br>
