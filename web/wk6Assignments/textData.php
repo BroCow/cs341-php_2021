@@ -101,9 +101,6 @@ session_start();
 
                 $DelMessage = "Client deleted.";
 
-                header("Location: textData.php");
-                die();
-                
                 
                 /*$query = "DELETE FROM client WHERE client_lastname = 'Cowan'";
                 $stmt = $db->prepare($query);
@@ -362,9 +359,8 @@ session_start();
             ?>
 
             <?php 
-                if($DelMessage) {
-                    echo $DelMessage;
-                }
+                echo $DelMessage;
+                
 
 
                 /*if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){
