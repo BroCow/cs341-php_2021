@@ -101,7 +101,7 @@ session_start();
 
                 $DelMessage = "Client deleted.";
 
-                header("Location: 'textData.php'");
+                header("Location: textData.php");
                 die();
                 
                 
