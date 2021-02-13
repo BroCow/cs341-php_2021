@@ -13,8 +13,8 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="author" content="Christopher Cowan">
-        <meta name="description" content="This page serves as the PHP Data Access item page for CSE341 Project 1 Assignment.">
-        <title>CSE 341 PHP Data Access | Item</title>
+        <meta name="description" content="This page serves as the PHP Data Access order page for CSE341 Project 1 Assignment.">
+        <title>CSE 341 PHP Data Access | Order</title>
         <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="normalize.css" media="screen">
@@ -24,76 +24,63 @@ session_start();
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
 
+    <!--
+    SELECT order_type, public.orderitem.client_id, client_firstname, client_lastname 
+    FROM public.order 
+    INNER JOIN public.orderitem 
+    ON public.order.orderitem_id = public.orderitem.orderitem_id
+    INNER JOIN public.client ON public.orderitem.client_id = public.client.client_id
+    WHERE order_type = 'Online';
+    -->
+
+
+    <!-- If/else statements for each possible order type selection with different statement prepared for each?-->
     <body>
         <?php
-            $statement = $db->prepare("SELECT item_type, item_name, item_desc, item_price FROM public.item item_id");
-            $statement->execute();
+                $statement = $db->prepare("SELECT order_type, order_date, public.orderitem.client_id, client_firstname, client_lastname FROM public.order INNER JOIN public.orderitem ON public.order.orderitem_id = public.orderitem.orderitem_id INNER JOIN public.client ON public.orderitem.client_id = public.client.client_id WHERE public.orderitem.client_id = public.client.client_id");
+                $statement->execute();
 
-            if(isset($_POST['item_type'])){
-                $search_itemType = $_POST['item_type'];
-                $itemTypeArray = array();
-            }
-            
+ 
+                $orderArray = array();
 
-            // Go through each result
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC))
-            {
-            // The variable "row" now holds the complete record for that
-            // row, and we can access the different values based on their
-            // name
-            $item_type = $row['item_type'];
-            $item_name = $row['item_name'];
-            $item_desc = $row['item_desc'];
-            $item_price = $row['item_price'];
-
-            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
-
-            // Need to create an array and push results to it instead of variable
-            if($search_itemType == $row['item_type']) {
-                array_push($itemTypeArray, $row['item_type']);
-                array_push($itemTypeArray, $row['item_name']);
-                array_push($itemTypeArray, $row['item_desc']);
-                array_push($itemTypeArray, $row['item_price']);
-                
-                //echo $row['client_firstname'] . "<br>";
-                //$result_orderType = $row['order_type'];
-                //$result_orderDate = $row['order_date'];
-                //$result_firstName = $row['client_firstname'];
-                //echo $row['client_lastname'] . "<br>";
-                //$result_lastName = $row['client_lastname'];
-                }
-            }  
-
-            if(isset($_POST['Additem_type'])){ 
-                
-                $AddItemType = htmlspecialchars($_POST['Additem_type']);
-                $AddItemDesc = htmlspecialchars($_POST['Additem_desc']);
-                $AddItemPrice = htmlspecialchars($_POST['Additem_price']);
-                $AddItemName = htmlspecialchars($_POST['Additem_name']);
-                
-                $query = "INSERT INTO item (item_type, item_desc, item_price, item_name) VALUES (:AddItemType, :AddItemDesc, :AddItemPrice, :AddItemName)";
-                
-                $stmt = $db->prepare($query);
-                $stmt->bindValue(':AddItemType', $AddItemType, PDO::PARAM_STR);
-                $stmt->bindValue(':AddItemDesc', $AddItemDesc, PDO::PARAM_STR);
-                $stmt->bindValue(':AddItemPrice', $AddItemPrice, PDO::PARAM_INT);
-                $stmt->bindValue(':AddItemName', $AddItemName, PDO::PARAM_STR);
-                $stmt->execute();
-
-                $AddMessage = "New Item Added";
-            }
-
-            if(isset($_POST['Delitem_name'])){ 
-
-                if(isset($_POST['Delitem_name'])){
-                    $delete_name = $_POST['Delitem_name'];
+                if(isset($_POST['order_type'])){
+                    $search_orderType = $_POST['order_type'];
                 }
 
-                $query = "DELETE FROM item WHERE item_name = '".$delete_name."'";
-                $stmt = $db->prepare($query);
-                $stmt->execute();
-            }
-        ?>
+                
+                if(null !==($_POST['year'] && $_POST['month'] && $_POST['day'])){
+                    $search_orderDate = $_POST['year'] . "-" . $_POST['month'] . "-" . $_POST['day'];
+                }
+                //echo $search_orderDate;
+
+                // Go through each result
+                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+                {
+                // The variable "row" now holds the complete record for that
+                // row, and we can access the different values based on their
+                // name
+                $order_type = $row['order_type'];
+                $order_date = $row['order_date'];
+                $firstname = $row['client_firstname'];
+                $lastname = $row['client_lastname'];
+
+                //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+
+                // Need to create an array and push results to it instead of variable
+                if($search_orderType == $row['order_type']) {
+                    array_push($orderArray, $row['order_type']);
+                    array_push($orderArray, $row['client_firstname']);
+                    array_push($orderArray, $row['client_lastname']);
+                    array_push($orderArray, $row['order_date']);
+                    }
+                if($search_orderDate == $row['order_date']) {
+                    array_push($orderArray, $row['order_type']);
+                    array_push($orderArray, $row['client_firstname']);
+                    array_push($orderArray, $row['client_lastname']);
+                    array_push($orderArray, $row['order_date']);
+                    } 
+                }  
+            ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
             <!-- Links -->
@@ -114,150 +101,130 @@ session_start();
             <h1 class="gemHunter">Gem Hunter Designs</h1>
         </nav>
 
-
         <main>
-            <h1>Item Management</h1>
+            <h1>Order Management</h1>
 
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                            <button onclick="toggleItemSearch()" id="itemSearch" class="homeButton">Search</button>
+                            <button onclick="toggleOrderSearch()" id="OrderSearch" class="homeButton">Search</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleItemAdd()" id="itemAdd" class="homeButton">Add</button>
+                            <button onclick="toggleOrderAdd()" id="OrderAdd" class="homeButton">Add</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleItemDelete()" id="itemDelete" class="homeButton">Delete</button>
+                            <button onclick="toggleOrderDelete()" id="orderDelete" class="homeButton">Delete</button>
                     </div>
                 </div>
             </div>
 
-            <div id="itemSearchForm" style="display:none;">
+            <h2>Order Search</h2>
+
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
+
+                <label for="order_type">Search by payment type:</label>
                 <br>
+                <select id="order_type" name="order_type">
+                    <option value="">Select</option>
+                    <option value="Online">Online</option>
+                    <option value="Credit">Credit</option>
+                    <option value="Cash">Cash</option>
+                </select>
                 <br>
-                <h2>Item Search</h2>
-
-                <!-- Put buttons here to choose between single client or client list -->
-
-                <!-- Put form here to enter client name to appear if "single client" selected -->
-
-                <!-- Put form here to choose between single client or client list -->
-
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Search" name="itemSearch">
-                    <label for="item_type">Search by item type:</label>
-                    <br>
-                    <select id="item_type" name="item_type">
-                        <option value="">Select</option>
-                        <option value="Necklace">Necklace</option>
-                        <option value="Earrings">Earrings</option>
-                        <option value="Bracelet">Bracelet</option>
-                    </select>
-                    <br>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
-            </div>
-
-            <div id="itemAddForm" style="display:none;">
+                <p>Search by order date:</p>
+                <label for="month">Month</label>
+                <select id="month" name="month">
+                    <option value=""></option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <label for="day">Day</label>
+                <select id="day" name="day">
+                    <option value=""></option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select>
+                <label for="year">Year</label>
+                <select id="year" name="year">
+                    <option value=""></option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                </select>
                 <br>
-                <br>
-                <h2>Add Item</h2>
-                
-                <form id="form_itemAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Add" name="itemAdd">
-                    <div class="form-group">
-                        <label for="Additem_type">Select item type to add:</label>
-                        <br>
-                        <select id="Additem_type" name="Additem_type" required>
-                            <option value="">Select</option>
-                            <option value="Necklace">Necklace</option>
-                            <option value="Earrings">Earrings</option>
-                            <option value="Bracelet">Bracelet</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Additem_desc">Enter item description:</label>
-                        <?php if(isset($_SESSION['Additem_desc'])): ?>
-                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" value="<?php echo $_SESSION['Additem_desc']?>" required>
-                        <?php else: ?>
-                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Additem_price">Enter item price:</label>
-                        <?php if(isset($_SESSION['Additem_price'])): ?>
-                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" value="<?php echo $_SESSION['Additem_price']?>" required>
-                        <?php else: ?>
-                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Additem_name">Enter item name:</label>
-                        <?php if(isset($_SESSION['Additem_name'])): ?>
-                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" value="<?php echo $_SESSION['Additem_name']?>">
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <button type="submit" class="btn-lg btn-primary">Add Item</button>
-
-                </form>
-            </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            
+            <!-- Make this a table for each one -->
             <br>
             <br>
-            <div id="itemDeleteForm" style="display:none;">
-                <br>
-                <br>
-                <h2>Delete Item</h2>
-                
-                <form id="form_itemDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Delete" name="itemDelete">
-                    <div class="form-group">
-                        <label for="Delitem_name">Enter Item Name:</label>
-                        <?php if(isset($_SESSION['Delitem_name'])): ?>
-                        <input type="text" class="form-control" id="Delitem_name" name="Delitem_name" value="<?php echo $_SESSION['Delitem_name']?>">
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="Delitem_name" name="Delitem_name">
-                        <?php endif; ?>
-                    </div>
-
-                    <button type="submit" class="btn-lg btn-primary">Delete Client</button>
-                </form>
-            </div>
-                
-                <!-- Make this a table for each one -->
-                <br>
-                <br>
             <?php 
-                if(count($itemTypeArray) > 0){
-                    echo "<h3>" . $search_itemType . " Items</h3>";
+                if(count($orderArray) > 0){
+                    echo "<h3>" . $search_orderType . " Orders</h3>";
                     echo "<table class='table table-bordered'>";
                     echo "<thead>";
                     echo    "<tr>";
-                    echo        "<th>Item Type</th>";
-                    echo        "<th>Item Name</th>";
-                    echo        "<th>Item Description</th>";
-                    echo        "<th>Item Price</th>";
+                    echo        "<th>Order Type</th>";
+                    echo        "<th>First Name</th>";
+                    echo        "<th>Last Name</th>";
+                    echo        "<th>Order Date</th>";
                     echo    "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
                 }
 
-                $itemArrayCount = count($itemTypeArray);
+                $orderArrayCount = count($orderArray);
 
-                for ($x = 0; $x <= $itemArrayCount; $x++) {
+                for ($x = 0; $x <= $orderArrayCount; $x++) {
                     echo "<tr>";
-                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "<td>$orderArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "<td>$orderArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "<td>$orderArray[$x]</td>"; 
                     $x++;
-                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "<td>$orderArray[$x]</td>"; 
                     echo "</tr>"; 
                 }
                   
@@ -265,13 +232,8 @@ session_start();
                 echo "</table>";
             ?>
 
-
-
-
-
         </main>
     
-        <script src="project1.js"></script>
     </body>
 
 </html>
