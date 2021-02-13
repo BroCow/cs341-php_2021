@@ -88,6 +88,22 @@ session_start();
         <main>
             <h1>Item Management</h1>
 
+            <div id="test" class="container">
+                <div class="row">
+                    <div class="col">
+                            <button onclick="toggleItemSearch()" id="itemSearch" class="homeButton">Search</button>
+                    </div>
+
+                    <div class="col">
+                            <button onclick="toggleItemAdd()" id="itemAdd" class="homeButton">Add</button>
+                    </div>
+
+                    <div class="col">
+                            <button onclick="toggleItemDelete()" id="itemDelete" class="homeButton">Delete</button>
+                    </div>
+                </div>
+            </div>
+
             <h2>Item Search</h2>
 
             <!-- Put buttons here to choose between single client or client list -->
