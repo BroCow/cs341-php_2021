@@ -363,7 +363,6 @@ session_start();
 
                     for ($x = 0; $x <= $DeleteclientArrayCount; $x++) {
                         echo "<tr>";
-                        echo "<td>$DeleteClientArray[$x]</td>"; 
                         $x++;
                         echo "<td>$DeleteClientArray[$x]</td>"; 
                         $x++;
@@ -371,7 +370,7 @@ session_start();
                         $x++;
                         echo "<td>$DeleteClientArray[$x]</td>"; 
                         $x++;
-                        echo "<td>$DeleteClientArray[$x]</td>";
+                        echo "<td>$DeleteClientArray[$x]</td>"; 
                         echo "</tr>"; 
                     }
                     
