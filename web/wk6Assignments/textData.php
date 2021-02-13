@@ -85,7 +85,7 @@ session_start();
 
 
             $stmtClient = $db->prepare("SELECT client_id, client_firstname, client_lastname, client_email FROM client;");
-            $stmt_client->execute();
+            $stmtClient->execute();
 
             while ($clientRow = $stmt_client->fetch(PDO::FETCH_ASSOC)){
                 $add_clientid = $row['client_id'];
