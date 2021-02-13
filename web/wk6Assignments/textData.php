@@ -117,7 +117,7 @@ session_start();
                 $DelClientEmail = $row['client_email'];
                 $DelClientPhone = $row['client_phone'];
 
-                echo "<p><strong>$DelClientId $DelClientFirstName $DelClientLastName $DelClientEmail $DelClientPhone</strong><p>";
+                //echo "<p><strong>$DelClientId $DelClientFirstName $DelClientLastName $DelClientEmail $DelClientPhone</strong><p>";
 
                     if($delete_firstname == $row['client_firstname']) {
                         array_push($DeleteClientArray, $row['client_id']);
