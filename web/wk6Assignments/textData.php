@@ -129,6 +129,55 @@ session_start();
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
+
+            <div id="itemAddForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Add Item</h2>
+                
+                <form id="form_itemAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Add" name="itemAdd">
+                    <div class="form-group">
+                        <label for="Additem_type">Select item type to add:</label>
+                        <br>
+                        <select id="item_type" name="item_type">
+                            <option value="">Select</option>
+                            <option value="Necklace">Necklace</option>
+                            <option value="Earrings">Earrings</option>
+                            <option value="Bracelet">Bracelet</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_desc">Enter item description:</label>
+                        <?php if(isset($_SESSION['Additem_desc'])): ?>
+                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" value="<?php echo $_SESSION['Additem_desc']?>" required>
+                        <?php else: ?>
+                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_price">Enter item price:</label>
+                        <?php if(isset($_SESSION['Additem_price'])): ?>
+                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" value="<?php echo $_SESSION['Additem_price']?>" required>
+                        <?php else: ?>
+                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_name">Enter item name:</label>
+                        <?php if(isset($_SESSION['Additem_name'])): ?>
+                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" value="<?php echo $_SESSION['Additem_name']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Additem_name" name="Additem_name">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Add Item</button>
+
+                </form>
+            </div>
                 
                 <!-- Make this a table for each one -->
                 <br>
