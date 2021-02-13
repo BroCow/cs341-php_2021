@@ -91,9 +91,18 @@ session_start();
 
             if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){ 
 
-                $query = "DELETE FROM client WHERE client_lastname = 'Cowan'";
+                if(isset($_POST['Delclient_lastname'])){
+                    $delete_lastname = htmlspecialchars($_POST['Delclient_lastname']);
+                }
+
+                $query = "DELETE FROM client WHERE client_lastname = '".$delete_lastname."'";
                 $stmt = $db->prepare($query);
                 $stmt->execute();
+                
+                
+                /*$query = "DELETE FROM client WHERE client_lastname = 'Cowan'";
+                $stmt = $db->prepare($query);
+                $stmt->execute();*/
                 
                 /*$DeleteClientArray = array();
                 
@@ -348,7 +357,7 @@ session_start();
             ?>
 
             <?php 
-                if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){
+                /*if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){
                     if(count($DeleteClientArray) > 0){
                         echo "<h3>Search results for " . $delete_firstname . "</h3>";
                         echo "<table class='table table-bordered'>";
@@ -382,7 +391,7 @@ session_start();
                         echo    "</tbody>";
                         echo "</table>";
                     }
-                }
+                }*/
             ?>
 
             </div>
