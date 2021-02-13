@@ -27,49 +27,120 @@ session_start();
     <body>
         <?php
             if(isset($_POST['client_firstname']) || isset($_POST['client_lastname'])){
-                echo "Name set";
+                $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+                $statement->execute();
+
+                $clientNameArray = array();
+                
+                if(isset($_POST['client_firstname'])){
+                    $search_firstname = htmlspecialchars($_POST['client_firstname']);
+                }
+                
+                if(isset($_POST['client_lastname'])){
+                    $search_lastname = htmlspecialchars($_POST['client_lastname']);
+                }
+                
+                // Go through each result
+                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+                {
+                // The variable "row" now holds the complete record for that
+                // row, and we can access the different values based on their
+                // name
+                $firstname = $row['client_firstname'];
+                $lastname = $row['client_lastname'];
+                $email = $row['client_email'];
+                $phone = $row['client_phone'];
+                //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+                
+                    if($search_firstname == $row['client_firstname']) {
+                        array_push($clientNameArray, $row['client_firstname']);
+                        array_push($clientNameArray, $row['client_lastname']);
+                        array_push($clientNameArray, $row['client_email']);
+                        array_push($clientNameArray, $row['client_phone']);
+                    } 
+                    if($search_lastname == $row['client_lastname']) {
+                        array_push($clientNameArray, $row['client_firstname']);
+                        array_push($clientNameArray, $row['client_lastname']);
+                        array_push($clientNameArray, $row['client_email']);
+                        array_push($clientNameArray, $row['client_phone']);
+                    } 
+
+                }
             }
 
 
-            $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
-            $statement->execute();
+            if(isset($_POST['Addclient_firstname']) || isset($_POST['Addclient_lastname'])){ 
+                
+                $AddClientFirstName = htmlspecialchars($_POST['Addclient_firstname']);
+                $AddClientLastName = htmlspecialchars($_POST['Addclient_lastname']);
+                $AddClientEmail = htmlspecialchars($_POST['Addclient_email']);
+                $AddClientPhone = htmlspecialchars($_POST['Addclient_phone']);
+                
+                $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:AddClientFirstName, :AddClientLastName, :AddClientEmail, :AddClientPhone)";
+                
+                $stmt = $db->prepare($query);
+                $stmt->bindValue(':AddClientFirstName', $AddClientFirstName, PDO::PARAM_STR);
+                $stmt->bindValue(':AddClientLastName', $AddClientLastName, PDO::PARAM_STR);
+                $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_STR);
+                $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
+                $stmt->execute();
 
-            $clientNameArray = array();
-            
-            if(isset($_POST['client_firstname'])){
-                $search_firstname = $_POST['client_firstname'];
+                $AddMessage = "New Client Added";
             }
-            
-            if(isset($_POST['client_lastname'])){
-                $search_lastname = $_POST['client_lastname'];
-            }
-            
-            // Go through each result
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC))
-            {
-            // The variable "row" now holds the complete record for that
-            // row, and we can access the different values based on their
-            // name
-            $firstname = $row['client_firstname'];
-            $lastname = $row['client_lastname'];
-            $email = $row['client_email'];
-            $phone = $row['client_phone'];
-            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
-            
-                if($search_firstname == $row['client_firstname']) {
-                    array_push($clientNameArray, $row['client_firstname']);
-                    array_push($clientNameArray, $row['client_lastname']);
-                    array_push($clientNameArray, $row['client_email']);
-                    array_push($clientNameArray, $row['client_phone']);
-                } 
-                if($search_lastname == $row['client_lastname']) {
-                    array_push($clientNameArray, $row['client_firstname']);
-                    array_push($clientNameArray, $row['client_lastname']);
-                    array_push($clientNameArray, $row['client_email']);
-                    array_push($clientNameArray, $row['client_phone']);
-                } 
 
+
+            if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){ 
+
+                $query = "DELETE FROM client WHERE client_lastname = 'Smith'";
+                $stmt = $db->prepare($query);
+                $stmt->execute();
+                
+                /*$DeleteClientArray = array();
+                
+                if(isset($_POST['Delclient_firstname'])){
+                    $delete_firstname = htmlspecialchars($_POST['Delclient_firstname']);
+                }
+                
+                if(isset($_POST['Delclient_lastname'])){
+                    $delete_lastname = htmlspecialchars($_POST['Delclient_lastname']);
+                }
+                
+                $query = "SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client";
+                $stmt = $db->prepare($query);
+                $stmt->execute();
+
+                // Go through each result
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                // The variable "row" now holds the complete record for that
+                // row, and we can access the different values based on their
+                // name
+                $DelClientId = $row['client_id'];
+                $DelClientFirstName = $row['client_firstname'];
+                $DelClientLastName = $row['client_lastname'];
+                $DelClientEmail = $row['client_email'];
+                $DelClientPhone = $row['client_phone'];
+
+                //echo "<p><strong>$DelClientId $DelClientFirstName $DelClientLastName $DelClientEmail $DelClientPhone</strong><p>";
+
+                    if($delete_firstname == $row['client_firstname']) {
+                        array_push($DeleteClientArray, $row['client_id']);
+                        array_push($DeleteClientArray, $row['client_firstname']);
+                        array_push($DeleteClientArray, $row['client_lastname']);
+                        array_push($DeleteClientArray, $row['client_email']);
+                        array_push($DeleteClientArray, $row['client_phone']);
+                    } 
+                    if($delete_lastname == $row['client_lastname']) {
+                        array_push($DeleteClientArray, $row['client_id']);
+                        array_push($DeleteClientArray, $row['client_firstname']);
+                        array_push($DeleteClientArray, $row['client_lastname']);
+                        array_push($DeleteClientArray, $row['client_email']);
+                        array_push($DeleteClientArray, $row['client_phone']);
+                    } 
+                }*/
             }
+
+
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -163,42 +234,43 @@ session_start();
                 
                 <form id="form_clientAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Add" name="clientAdd">
                     <div class="form-group">
-                        <label for="client_firstname">First Name:</label>
-                        <?php if(isset($_SESSION['client_firstname'])): ?>
-                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                        <label for="Addclient_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['Addclient_firstname'])): ?>
+                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" value="<?php echo $_SESSION['Addclient_firstname']?>" required>
                         <?php else: ?>
-                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" required>
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
-                        <label for="client_lastname">Last Name:</label>
-                        <?php if(isset($_SESSION['client_lastname'])): ?>
-                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                        <label for="Addclient_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['Addclient_lastname'])): ?>
+                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" value="<?php echo $_SESSION['Addclient_lastname']?>" required>
                         <?php else: ?>
-                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" required>
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
-                        <label for="client_email">Email:</label>
-                        <?php if(isset($_SESSION['client_email'])): ?>
-                        <input type="email" class="form-control" id="client_email" name="client_email" value="<?php echo $_SESSION['client_email']?>">
+                        <label for="Addclient_email">Email:</label>
+                        <?php if(isset($_SESSION['Addclient_email'])): ?>
+                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" value="<?php echo $_SESSION['Addclient_email']?>" required>
                         <?php else: ?>
-                        <input type="email" class="form-control" id="client_email" name="client_email">
+                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" required>
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
-                        <label for="client_phone">Phone:</label>
-                        <?php if(isset($_SESSION['client_phone'])): ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
+                        <label for="Addclient_phone">Phone:</label>
+                        <?php if(isset($_SESSION['Addclient_phone'])): ?>
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="Addclient_phone" name="Addclient_phone" value="<?php echo $_SESSION['Addclient_phone']?>">
                         <?php else: ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="Addclient_phone" name="Addclient_phone">
                         <?php endif; ?>
                     </div>
 
                     <button type="submit" class="btn-lg btn-primary">Add Client</button>
+
                 </form>
             </div>
 
@@ -209,20 +281,20 @@ session_start();
                 
                 <form id="form_clientDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Delete" name="clientDelete">
                     <div class="form-group">
-                        <label for="client_firstname">First Name:</label>
-                        <?php if(isset($_SESSION['client_firstname'])): ?>
-                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                        <label for="Delclient_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['Delclient_firstname'])): ?>
+                        <input type="text" class="form-control" id="Delclient_firstname" name="Delclient_firstname" value="<?php echo $_SESSION['Delclient_firstname']?>">
                         <?php else: ?>
-                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                        <input type="text" class="form-control" id="Delclient_firstname" name="Delclient_firstname">
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
-                        <label for="client_lastname">Last Name:</label>
-                        <?php if(isset($_SESSION['client_lastname'])): ?>
-                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                        <label for="Delclient_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['Delclient_lastname'])): ?>
+                        <input type="text" class="form-control" id="Delclient_lastname" name="Delclient_lastname" value="<?php echo $_SESSION['Delclient_lastname']?>">
                         <?php else: ?>
-                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                        <input type="text" class="form-control" id="Delclient_lastname" name="Delclient_lastname">
                         <?php endif; ?>
                     </div>
 
@@ -239,39 +311,80 @@ session_start();
             <div class="table">
                 
             <?php 
-                if(count($clientNameArray) > 0){
-                    echo "<h3>Search results for " . $search_firstname . "</h3>";
-                    echo "<table class='table table-bordered'>";
-                    echo "<thead>";
-                    echo    "<tr>";
-                    echo        "<th>First Name</th>";
-                    echo        "<th>Last Name</th>";
-                    echo        "<th>Email</th>";
-                    echo        "<th>Phone</th>";
-                    echo    "</tr>";
-                    echo "</thead>";
-                    echo "<tbody>";
-                }
+                if(isset($_POST['client_firstname']) || isset($_POST['client_lastname'])){
+                    if(count($clientNameArray) > 0){
+                        echo "<h3>Search results for " . $search_firstname . "</h3>";
+                        echo "<table class='table table-bordered'>";
+                        echo "<thead>";
+                        echo    "<tr>";
+                        echo        "<th>First Name</th>";
+                        echo        "<th>Last Name</th>";
+                        echo        "<th>Email</th>";
+                        echo        "<th>Phone</th>";
+                        echo    "</tr>";
+                        echo "</thead>";
+                        echo "<tbody>";
+                    }
 
-                $clientArrayCount = count($clientNameArray);
+                    $clientArrayCount = count($clientNameArray);
 
-                for ($x = 0; $x <= $clientArrayCount; $x++) {
-                    echo "<tr>";
-                    echo "<td>$clientNameArray[$x]</td>"; 
-                    $x++;
-                    echo "<td>$clientNameArray[$x]</td>"; 
-                    $x++;
-                    echo "<td>$clientNameArray[$x]</td>"; 
-                    $x++;
-                    echo "<td>$clientNameArray[$x]</td>"; 
-                    echo "</tr>"; 
-                }
-                
-                if(count($clientNameArray) > 0){
-                    echo    "</tbody>";
-                    echo "</table>";
+                    for ($x = 0; $x <= $clientArrayCount; $x++) {
+                        echo "<tr>";
+                        echo "<td>$clientNameArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$clientNameArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$clientNameArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$clientNameArray[$x]</td>"; 
+                        echo "</tr>"; 
+                    }
+                    
+                    if(count($clientNameArray) > 0){
+                        echo    "</tbody>";
+                        echo "</table>";
+                    }
                 }
             ?>
+
+            <?php 
+                if(isset($_POST['Delclient_firstname']) || isset($_POST['Delclient_lastname'])){
+                    if(count($DeleteClientArray) > 0){
+                        echo "<h3>Search results for " . $delete_firstname . "</h3>";
+                        echo "<table class='table table-bordered'>";
+                        echo "<thead>";
+                        echo    "<tr>";
+                        echo        "<th>First Name</th>";
+                        echo        "<th>Last Name</th>";
+                        echo        "<th>Email</th>";
+                        echo        "<th>Phone</th>";
+                        echo    "</tr>";
+                        echo "</thead>";
+                        echo "<tbody>";
+                    }
+
+                    $DeleteclientArrayCount = count($DeleteClientArray);
+
+                    for ($x = 0; $x <= $DeleteclientArrayCount; $x++) {
+                        echo "<tr>";
+                        $x++;
+                        echo "<td>$DeleteClientArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$DeleteClientArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$DeleteClientArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$DeleteClientArray[$x]</td>"; 
+                        echo "</tr>"; 
+                    }
+                    
+                    if(count($DeleteClientArray) > 0){
+                        echo    "</tbody>";
+                        echo "</table>";
+                    }
+                }
+            ?>
+
             </div>
             
         </main>
