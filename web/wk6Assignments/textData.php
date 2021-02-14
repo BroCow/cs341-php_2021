@@ -234,7 +234,11 @@ session_start();
                     <div class="form-group">
                         <label for="Addorder_client">Select client:</label>
                         <br>
-                        <?php echo $lastNameArrayCount; ?>
+                        <?php echo $lastNameArrayCount; 
+                        for ($x = 0; $x <= $clientArrayCount; $x++) {
+                            echo $lastNameArray[$x];
+                        }
+                        ?>
                         <select id="Addorder_client" name="Addorder_client" required>
                         <option value="Cash">Cash</option>
                         </select>
