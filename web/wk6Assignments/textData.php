@@ -255,7 +255,8 @@ session_start();
                         <?php
                         echo $lastNameArrayCount;
                             foreach ($lastNameArray as $value){
-                                echo "<option value='value'>Client</option>";
+                                echo $value;
+                                //echo "<option value='value'>Client</option>";
                             }
                         ?>
                         </select>
