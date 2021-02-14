@@ -203,51 +203,73 @@ session_start();
             </div>
 
             <div id="orderAddForm" style="display:none;">
-                <?php
-                    $statement = $db->prepare("SELECT client_id, client_firstname, client_lastname, client_email FROM client");
-                    $statement->execute();
-        
-                    $lastNameArray = array();
-                    $emailArray = array();
-        
-                    while ($rowClient = $statement->fetch(PDO::FETCH_ASSOC)) {
-                        $add_clientid = $row['client_id'];
-                        $add_firstname = $row['client_firstname'];
-                        $add_lastname = $row['client_lastname'];
-                        echo $add_lastname;
-                        $add_email = $row['client_email'];
-                        
-
-                        array_push($lastNameArray, $row['client_lastname']);
-                        array_push($emailArray, $row['client_email']);
-                    }
-                        
-                    $lastNameArrayCount = count($lastNameArray);
-                    echo $lastNameArrayCount;
-                ?>
                 <br>
                 <br>
                 <h2>Add Order</h2>
-                <?php echo $lastNameArrayCount; ?>
                 <form id="form_orderAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add" name="orderAdd">
                     
-                
                     <div class="form-group">
-                        <label for="Addorder_client">Select client:</label>
-                        <br>
-                        <?php echo $lastNameArrayCount; 
-                        for ($x = 0; $x <= $clientArrayCount; $x++) {
-                            echo $lastNameArray[$x];
-                        }
-                        ?>
-                        <select id="Addorder_client" name="Addorder_client" required>
-                        <option value="Cash">Cash</option>
+                        <p>Select Order Date:</p>
+                        <label for="add_month">Month</label>
+                        <select id="add_month" name="add_month">
+                            <option value=""></option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
                         </select>
+                        <label for="add_day">Day</label>
+                        <select id="add_day" name="add_day">
+                            <option value=""></option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                        <label for="add_year">Year</label>
+                        <select id="add_year" name="add_year">
+                            <option value=""></option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                        </select>
+                        <br>
                     </div>
-                
-                
-                
-                
                 
                     <div class="form-group">
                         <label for="Addorder_type">Select order type to add:</label>
@@ -260,34 +282,7 @@ session_start();
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="Additem_desc">Enter item description:</label>
-                        <?php if(isset($_SESSION['Additem_desc'])): ?>
-                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" value="<?php echo $_SESSION['Additem_desc']?>" required>
-                        <?php else: ?>
-                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Additem_price">Enter item price:</label>
-                        <?php if(isset($_SESSION['Additem_price'])): ?>
-                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" value="<?php echo $_SESSION['Additem_price']?>" required>
-                        <?php else: ?>
-                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Additem_name">Enter item name:</label>
-                        <?php if(isset($_SESSION['Additem_name'])): ?>
-                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" value="<?php echo $_SESSION['Additem_name']?>">
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <button type="submit" class="btn-lg btn-primary">Add Item</button>
+                    <button type="submit" class="btn-lg btn-primary">Add Order</button>
 
                 </form>
             </div>
