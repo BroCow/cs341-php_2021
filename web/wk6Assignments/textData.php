@@ -236,9 +236,9 @@ session_start();
                         <br>
                         <select id="Addorder_client" name="Addorder_client" required>
                         <?php
-                        echo $lastNameArrayCount;
-                            foreach ($lastNameArray as $value){
-                                echo $value;
+                            echo $lastNameArrayCount;
+                            for ($x = 0; $x <= $lastNameArrayCount; $x++) {
+                                echo $lastNameArray[$x];
                                 //echo "<option value='value'>Client</option>";
                             }
                         ?>
