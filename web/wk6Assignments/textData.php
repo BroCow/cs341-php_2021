@@ -234,14 +234,9 @@ session_start();
                     <div class="form-group">
                         <label for="Addorder_client">Select client:</label>
                         <br>
+                        <?php echo $lastNameArrayCount; ?>
                         <select id="Addorder_client" name="Addorder_client" required>
-                        <?php
-                            echo $lastNameArrayCount;
-                            for ($x = 0; $x <= $lastNameArrayCount; $x++) {
-                                echo $lastNameArray[$x];
-                                //echo "<option value='value'>Client</option>";
-                            }
-                        ?>
+                        <option value="Cash">Cash</option>
                         </select>
                     </div>
                 
