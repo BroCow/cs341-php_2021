@@ -227,7 +227,7 @@ session_start();
                 <br>
                 <br>
                 <h2>Add Order</h2>
-                
+                <?php echo $lastNameArrayCount; ?>
                 <form id="form_orderAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add" name="orderAdd">
                     
                 
