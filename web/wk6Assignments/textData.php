@@ -82,6 +82,25 @@ session_start();
                     } 
                 } 
             }
+
+
+            if(isset($_POST['Addorder_type'])){ 
+                
+                $AddOrderType = htmlspecialchars($_POST['Addorder_type']);
+                $AddOrderMonth = htmlspecialchars($_POST['add_month']);
+                $AddOrderDay = htmlspecialchars($_POST['add_day']);
+                $AddOrderYear = htmlspecialchars($_POST['add_year']);
+
+                $AddOrderDate = $AddOrderYear . "-" . $AddOrderMonth . "-" . $AddOrderDay;
+                echo $AddOrderDate;
+                
+                $query = "INSERT INTO public.order (order_date, order_type) VALUES (:AddOrderDate, :AddOrderType)";
+                
+                $stmt = $db->prepare($query);
+                $stmt->bindValue(':AddOrderDate', $AddOrderDate, PDO::PARAM_STR);
+                $stmt->bindValue(':AddOrderType', $AddOrderType, PDO::PARAM_STR);
+                $stmt->execute();
+            }
             
         ?>
 
