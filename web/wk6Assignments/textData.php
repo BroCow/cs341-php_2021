@@ -214,6 +214,7 @@ session_start();
                         $add_clientid = $row['client_id'];
                         $add_firstname = $row['client_firstname'];
                         $add_lastname = $row['client_lastname'];
+                        echo $add_lastname;
                         $add_email = $row['client_email'];
                         
 
