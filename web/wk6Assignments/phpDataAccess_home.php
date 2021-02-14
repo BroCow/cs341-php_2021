@@ -31,16 +31,16 @@ session_start();
                 <!-- Links -->
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="phpDataAccess_home6.php">HOME</a>
+                    <a class="nav-link" href="phpDataAccess_home.php">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="phpDataAccess_client6.php">Client</a>
+                    <a class="nav-link" href="phpDataAccess_client.php">Client</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="phpDataAccess_order6.php">Order</a>
+                    <a class="nav-link" href="phpDataAccess_order.php">Order</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="phpDataAccess_item6.php">Item</a>
+                    <a class="nav-link" href="phpDataAccess_item.php">Item</a>
                 </li>
                 </ul>
                 <h1 class="gemHunter">Gem Hunter Designs</h1>
@@ -52,7 +52,7 @@ session_start();
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                    <form class="homeForm" method="post" action="phpDataAccess_client6.php">
+                    <form class="homeForm" method="post" action="phpDataAccess_client.php">
                         
                         <img src="" alt="">
                         <button type="submit" id="clientButton" class="homeButton">Client</button>
@@ -61,7 +61,7 @@ session_start();
                     </div>
 
                     <div class="col">
-                    <form class="homeForm" method="post" action="phpDataAccess_order6.php">
+                    <form class="homeForm" method="post" action="phpDataAccess_order.php">
                         
                         <img src="" alt="">
                         <button type="submit" id="orderButton" class="homeButton">Order</button>
@@ -70,7 +70,7 @@ session_start();
                     </div>
 
                     <div class="col">
-                    <form class="homeForm" method="post" action="phpDataAccess_item6.php">
+                    <form class="homeForm" method="post" action="phpDataAccess_item.php">
                         
                         <img src="" alt="">
                         <button type="submit" id="itemButton" class="homeButton">Item</button>
