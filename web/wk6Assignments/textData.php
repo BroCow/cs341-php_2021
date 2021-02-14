@@ -100,6 +100,12 @@ session_start();
                 $stmt->bindValue(':AddOrderDate', $AddOrderDate, PDO::PARAM_STR);
                 $stmt->bindValue(':AddOrderType', $AddOrderType, PDO::PARAM_STR);
                 $stmt->execute();
+
+                $last_order_id = $db->lastInsertId();
+                echo $last_order_id;
+
+
+                
             }
             
         ?>
