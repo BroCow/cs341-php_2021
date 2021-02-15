@@ -14,7 +14,7 @@ $stmt->execute();
 $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-
+ 
 
 <!DOCTYPE html>
 <html>

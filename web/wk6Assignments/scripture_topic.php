@@ -2,9 +2,15 @@
     require('dbConnect.php');
     $db = get_db();
 
-    //$scripture_id = htmlspecialchars($_POST['scripture_id']);
+    $book = htmlspecialchars($_POST['book']);
+    $chapter = htmlspecialchars($_POST['chapter']);
+    $verse = htmlspecialchars($_POST['verse']);
+    $content = htmlspecialchars($_POST['content']);
+    $topic = htmlspecialchars($_POST['topic']);
 
-    //$stmt = $db->prepare('INSERT INTO scripture_topic(course_id, content) VALUES (:course_id, :content);');
+    $stmt = $db->prepare('INSERT INTO scriptures (book, chapter, verse, content) VALUES (:book, :chapter, :verse, :content);');
+    $stmt->bindValue(':book', $course_id, PDO::PARAM_INT);
+    $stmt->bindValue(':content', $content, PDO::PARAM_STR);
     //$stmt->execute();
 
     //$scriptureTopic_rows = $stmt->fetchAll(PDO::FETCH_ASSOC);

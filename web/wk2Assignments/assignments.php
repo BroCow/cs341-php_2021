@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="normalize.css" media="screen">
         <link rel="stylesheet" href="homepage.css" media="screen">
     </head>
-
+ 
     <body>
         <header>
             <?php include 'header.php'; ?>
@@ -26,7 +26,17 @@
         </nav>
 
         <main>
-            <h2>This page is currently in development</h2>
+            <h2>Weekly Assignment Links</h2>
+
+            <h3>Week 2</h3>
+            <ul>
+                <li><a href="https://peaceful-shelf-24480.herokuapp.com/wk2Assignments/3divs.html">3-Div's</a></li>
+            </ul>
+            <h3>Week 3</h3>
+            <ul>
+                <li><a href="https://peaceful-shelf-24480.herokuapp.com/wk3Assignments/HTML_form.php">HTML/PHP Form</a></li>
+                <li><a href="https://peaceful-shelf-24480.herokuapp.com/wk3Assignments/browseItems.php">Shopping Cart</a></li>
+            </ul>
         </main>
 
 

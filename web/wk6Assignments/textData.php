@@ -104,6 +104,8 @@ session_start();
                 $last_order_id = $db->lastInsertId();
                 echo $last_order_id;
 
+                
+
 
                 
             }
