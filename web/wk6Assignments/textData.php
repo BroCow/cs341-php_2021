@@ -103,11 +103,49 @@ session_start();
 
                 $last_order_id = $db->lastInsertId();
                 echo $last_order_id;
+            }
 
+            /********* Select Client Data to create client drop-down */
+            if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
+                $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+                $statement->execute();
+
+                $orderNameArray = array();
                 
-
-
+                if(isset($_POST['Addorder_firstname'])){
+                    $order_firstname = htmlspecialchars($_POST['Addorder_firstname']);
+                }
                 
+                if(isset($_POST['Addorder_lastname'])){
+                    $order_lastname = htmlspecialchars($_POST['Addorder_lastname']);
+                }
+                
+                // Go through each result
+                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+                {
+                // The variable "row" now holds the complete record for that
+                // row, and we can access the different values based on their
+                // name
+                $orderFirstname = $row['client_firstname'];
+                $orderLastname = $row['client_lastname'];
+                $orderEmail = $row['client_email'];
+                $orderPhone = $row['client_phone'];
+                echo "<p><strong>$orderFirstname $orderLastname $orderEmail $orderPhone</strong><p>";
+                
+                    if($order_firstname == $row['client_firstname']) {
+                        array_push($orderNameArray, $row['client_firstname']);
+                        array_push($orderNameArray, $row['client_lastname']);
+                        array_push($orderNameArray, $row['client_email']);
+                        array_push($orderNameArray, $row['client_phone']);
+                    } 
+                    if($order_lastname == $row['client_lastname']) {
+                        array_push($orderNameArray, $row['client_firstname']);
+                        array_push($orderNameArray, $row['client_lastname']);
+                        array_push($orderNameArray, $row['client_email']);
+                        array_push($orderNameArray, $row['client_phone']);
+                    } 
+
+                }
             }
             
         ?>
@@ -310,22 +348,24 @@ session_start();
                     </div>
 
                     <div class="form-group">
-                        <label for="Addclient_firstname">First Name:</label>
-                        <?php if(isset($_SESSION['Addclient_firstname'])): ?>
-                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" value="<?php echo $_SESSION['Addclient_firstname']?>" required>
+                        <label for="Addorder_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['Addorder_firstname'])): ?>
+                        <input type="text" class="form-control" id="Addorder_firstname" name="Addorder_firstname" value="<?php echo $_SESSION['Addorder_firstname']?>" required>
                         <?php else: ?>
-                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" required>
+                        <input type="text" class="form-control" id="Addorder_firstname" name="Addorder_firstname" required>
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
-                        <label for="Addclient_lastname">Last Name:</label>
-                        <?php if(isset($_SESSION['Addclient_lastname'])): ?>
-                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" value="<?php echo $_SESSION['Addclient_lastname']?>" required>
+                        <label for="Addorder_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['Addorder_lastname'])): ?>
+                        <input type="text" class="form-control" id="Addorder_lastname" name="Addorder_lastname" value="<?php echo $_SESSION['Addorder_lastname']?>" required>
                         <?php else: ?>
-                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" required>
+                        <input type="text" class="form-control" id="Addorder_lastname" name="Addorder_lastname" required>
                         <?php endif; ?>
                     </div>
+
+                    
 
                     <button type="submit" class="btn-lg btn-primary">Add Order</button>
 
