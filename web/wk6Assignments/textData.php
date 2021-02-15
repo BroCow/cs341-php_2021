@@ -130,7 +130,7 @@ session_start();
                 $orderLastname = $row['client_lastname'];
                 $orderEmail = $row['client_email'];
                 $orderPhone = $row['client_phone'];
-                echo "<p><strong>$orderFirstname $orderLastname $orderEmail $orderPhone</strong><p>";
+                //echo "<p><strong>$orderFirstname $orderLastname $orderEmail $orderPhone</strong><p>";
                 
                     if($order_firstname == $row['client_firstname']) {
                         array_push($orderNameArray, $row['client_firstname']);
@@ -407,6 +407,47 @@ session_start();
                 echo    "</tbody>";
                 echo "</table>";
             ?>
+
+        <div class="table">
+                
+            <?php 
+                if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
+                    if(count($orderNameArray) > 0){
+                        echo "<h3>Client results for " . $order_firstname . "</h3>";
+                        echo "<table class='table table-bordered'>";
+                        echo "<thead>";
+                        echo    "<tr>";
+                        echo        "<th>First Name</th>";
+                        echo        "<th>Last Name</th>";
+                        echo        "<th>Email</th>";
+                        echo        "<th>Phone</th>";
+                        echo    "</tr>";
+                        echo "</thead>";
+                        echo "<tbody>";
+                    }
+
+                    $orderNameArrayCount = count($orderNameArray);
+
+                    for ($x = 0; $x <= $orderNameArrayCount; $x++) {
+                        echo "<tr>";
+                        echo "<td>$orderNameArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$orderNameArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$orderNameArray[$x]</td>"; 
+                        $x++;
+                        echo "<td>$orderNameArray[$x]</td>"; 
+                        echo "</tr>"; 
+                    }
+                    
+                    if(count($orderNameArray) > 0){
+                        echo    "</tbody>";
+                        echo "</table>";
+                    }
+                }
+            ?>
+    
+        </div>
 
         </main>
         <script src="project1.js"></script>
