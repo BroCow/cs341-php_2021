@@ -132,18 +132,13 @@ session_start();
                 $orderPhone = $row['client_phone'];
                 //echo "<p><strong>$orderFirstname $orderLastname $orderEmail $orderPhone</strong><p>";
                 
-                    if($order_firstname == $row['client_firstname']) {
+                    if($order_firstname == $row['client_firstname'] || $order_lastname == $row['client_lastname']) {
                         array_push($orderNameArray, $row['client_firstname']);
                         array_push($orderNameArray, $row['client_lastname']);
                         array_push($orderNameArray, $row['client_email']);
                         array_push($orderNameArray, $row['client_phone']);
                     } 
-                    if($order_lastname == $row['client_lastname']) {
-                        array_push($orderNameArray, $row['client_firstname']);
-                        array_push($orderNameArray, $row['client_lastname']);
-                        array_push($orderNameArray, $row['client_email']);
-                        array_push($orderNameArray, $row['client_phone']);
-                    } 
+            
 
                 }
             }
