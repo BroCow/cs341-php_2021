@@ -309,6 +309,24 @@ session_start();
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="Addclient_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['Addclient_firstname'])): ?>
+                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" value="<?php echo $_SESSION['Addclient_firstname']?>" required>
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Addclient_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['Addclient_lastname'])): ?>
+                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" value="<?php echo $_SESSION['Addclient_lastname']?>" required>
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" required>
+                        <?php endif; ?>
+                    </div>
+
                     <button type="submit" class="btn-lg btn-primary">Add Order</button>
 
                 </form>
