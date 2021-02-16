@@ -413,8 +413,15 @@ session_start();
                     for ($x = 0; $x <= $orderNameArrayCount; $x++) {
                         echo "<div class='form-check'>";
                         echo    "<label class='form-check-label'>";
-                        echo        "<input type='checkbox' class='form-check-input' value=''>$orderNameArray[$x]";
+                        echo        "<input type='checkbox' class='form-check-input' value=''>Select this client:";
                         echo    "</label>";
+                        echo    "<p>$orderNameArray[$x]<br>";
+                        $x++;
+                        echo    $orderNameArray[$x] . "<br>";
+                        $x++;
+                        echo    $orderNameArray[$x] . "<br>";
+                        $x++;
+                        echo    $orderNameArray[$x];
                         echo "</div>"; 
         
                     }
