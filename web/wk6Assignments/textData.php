@@ -266,14 +266,14 @@ session_start();
 
             <?php
                 if(isset($_POST['clientSelect'])) {
-                    $confirmedFirstname = $_POST['Addorder_firstname'];
-                    $confirmedLastname = $_POST['Addorder_lastname'];
+                    $confirmedFirstname = $_SESSION['Addorder_firstname'];
+                    $confirmedLastname = $_SESSION['Addorder_lastname'];
                     echo "<div id='orderAddForm'>";
                 } else {
                     echo "<div id='orderAddForm' style='display:none;'>";
                 }
             ?>
-                <h2>Add Order for <?php echo $confirmedFirstname . " " . $confirmedLastname?></h2>
+                <h2>Add Order for <?php echo $confirmedFirstname . " " . $confirmedLastname ?></h2>
                 <form id="form_orderAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add" name="orderAdd">
                     
                     <div class="form-group">
