@@ -184,17 +184,11 @@ session_start();
                     </div>
                 </div>
             </div>
-
-            <?php
-                if(isset($_POST['clientSelect'])) {
-                    echo "<div id='orderSearchForm'>";
-                } else {
-                    echo "<div id='orderSearchForm' style='display:none;'>";
-                }
-            ?>
+            <br>
+            <br>
+            
+            <div id='orderSearchForm' style='display:none;'>
                 <h2>Order Search</h2>
-                <br>
-                <br>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
 
                     <label for="order_type">Search by payment type:</label>
@@ -270,6 +264,13 @@ session_start();
                 </form>
             </div>
 
+            <?php
+                if(isset($_POST['clientSelect'])) {
+                    echo "<div id='orderAddForm'>";
+                } else {
+                    echo "<div id='orderAddForm' style='display:none;'>";
+                }
+            ?>
             <div id="orderAddForm" style="display:none;">
                 <br>
                 <br>
