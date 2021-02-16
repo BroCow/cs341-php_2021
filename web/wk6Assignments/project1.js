@@ -77,9 +77,9 @@ function toggleClientSearch() {
     var x = document.getElementById("orderAddForm");
     if (x.style.display === "none") {
       x.style.display = "block";
-    } else {
+    } /*else {
       x.style.display = "none";
-    }
+    }*/
   }
 
   function toggleOrderDelete() {
