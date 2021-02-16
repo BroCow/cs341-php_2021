@@ -73,15 +73,6 @@ function toggleClientSearch() {
     }
   }
 
-  function toggleOrderAddForm() {
-    var x = document.getElementById("orderAddForm");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } /*else {
-      x.style.display = "none";
-    }*/
-  }
-
   function toggleOrderDelete() {
     var x = document.getElementById("orderDeleteForm");
     if (x.style.display === "none") {

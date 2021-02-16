@@ -185,7 +185,12 @@ session_start();
                 </div>
             </div>
 
-            <div id="orderSearchForm" style="display:none;">
+            <?php
+                if(isset($_POST['clientSelect'])) {
+                    echo "<div id='orderSearchForm'>";
+                } else {
+                    echo "<div id='orderSearchForm' style='display:none;'>";
+            ?>
                 <h2>Order Search</h2>
                 <br>
                 <br>
@@ -436,7 +441,7 @@ session_start();
                             echo "</div>"; 
             
                         }
-                        echo "<button type='submit' class='btn-lg btn-primary' onclick='toggleOrderAddForm()'>Confirm Client</button>";
+                        echo "<button type='submit' class='btn-lg btn-primary'>Confirm Client</button>";
                     }
                 ?>
             </form>
