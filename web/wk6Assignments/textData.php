@@ -415,7 +415,7 @@ session_start();
                         echo    "<label class='form-check-label'>";
                         echo        "<input type='checkbox' class='form-check-input' value=''>Select this client:";
                         echo    "</label>";
-                        echo    "<p>$orderNameArray[$x]<br>";
+                        echo    "<p>$orderNameArray[$x] ";
                         $x++;
                         echo    $orderNameArray[$x] . "<br>";
                         $x++;
