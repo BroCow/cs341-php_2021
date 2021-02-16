@@ -271,7 +271,6 @@ session_start();
                     echo "<div id='orderAddForm' style='display:none;'>";
                 }
             ?>
-            <div id="orderAddForm" style="display:none;">
                 <br>
                 <br>
                 <h2>Add Order</h2>
