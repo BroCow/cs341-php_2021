@@ -176,7 +176,7 @@ session_start();
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleOrderAdd()" id="OrderAdd" class="homeButton">Add</button>
+                            <button onclick="toggleOrderAddName()" id="OrderAdd" class="homeButton">Add</button>
                     </div>
 
                     <div class="col">
@@ -344,6 +344,11 @@ session_start();
                         </select>
                     </div>
 
+            <div id="orderAddName" style="display:none;">
+                <br>
+                <br>
+                <h2>Add Order</h2>
+                <form id="form_orderAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add" name="orderAdd">
                     <div class="form-group">
                         <label for="Addorder_firstname">First Name:</label>
                         <?php if(isset($_SESSION['Addorder_firstname'])): ?>
@@ -361,10 +366,8 @@ session_start();
                         <input type="text" class="form-control" id="Addorder_lastname" name="Addorder_lastname" required>
                         <?php endif; ?>
                     </div>
-
-                    
-
-                    <button type="submit" class="btn-lg btn-primary">Add Order</button>
+                
+                    <button type="submit" class="btn-lg btn-primary">Proceed With Order</button>
 
                 </form>
             </div>
