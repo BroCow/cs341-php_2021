@@ -403,46 +403,25 @@ session_start();
                 echo "</table>";
             ?>
 
-        <div class="table">
+        
                 
             <?php 
                 if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
-                    if(count($orderNameArray) > 0){
-                        echo "<h3>Client results for " . $order_firstname . "</h3>";
-                        echo "<table class='table table-bordered'>";
-                        echo "<thead>";
-                        echo    "<tr>";
-                        echo        "<th>First Name</th>";
-                        echo        "<th>Last Name</th>";
-                        echo        "<th>Email</th>";
-                        echo        "<th>Phone</th>";
-                        echo    "</tr>";
-                        echo "</thead>";
-                        echo "<tbody>";
-                    }
-
+                    
                     $orderNameArrayCount = count($orderNameArray);
 
                     for ($x = 0; $x <= $orderNameArrayCount; $x++) {
-                        echo "<tr>";
-                        echo "<td>$orderNameArray[$x]</td>"; 
-                        $x++;
-                        echo "<td>$orderNameArray[$x]</td>"; 
-                        $x++;
-                        echo "<td>$orderNameArray[$x]</td>"; 
-                        $x++;
-                        echo "<td>$orderNameArray[$x]</td>"; 
-                        echo "</tr>"; 
-                    }
-                    
-                    if(count($orderNameArray) > 0){
-                        echo    "</tbody>";
-                        echo "</table>";
+                        echo "<div class='form-check'>";
+                        echo    "<label class='form-check-label'>";
+                        echo        "<input type='checkbox' class='form-check-input' value=''>$orderNameArray[$x]";
+                        echo    "</label>";
+                        echo "</div>"; 
+        
                     }
                 }
             ?>
     
-        </div>
+        
 
         </main>
         <script src="project1.js"></script>
