@@ -176,7 +176,7 @@ session_start();
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleOrderAddName()" id="OrderAdd" class="homeButton">Add</button>
+                            <button onclick="toggleOrderAddForm()" id="OrderAdd" class="homeButton">Add</button>
                     </div>
 
                     <div class="col">
