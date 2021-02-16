@@ -266,14 +266,14 @@ session_start();
 
             <?php
                 if(isset($_POST['clientSelect'])) {
+                    $confirmedFirstname = $_POST['Addorder_firstname'];
+                    $confirmedLastname = $_POST['Addorder_lastname'];
                     echo "<div id='orderAddForm'>";
                 } else {
                     echo "<div id='orderAddForm' style='display:none;'>";
                 }
             ?>
-                <br>
-                <br>
-                <h2>Add Order</h2>
+                <h2>Add Order for <?php echo $confirmedFirstname . " " . $confirmedLastname?></h2>
                 <form id="form_orderAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add" name="orderAdd">
                     
                     <div class="form-group">
@@ -353,8 +353,6 @@ session_start();
             </div>
 
             <div id="orderAddName" style="display:none;">
-                <br>
-                <br>
                 <h3>Enter name of client for new order</h3>
                 <form id="form_orderAddName" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add Name" name="orderAddName">
             
