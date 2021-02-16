@@ -134,6 +134,9 @@ session_start();
                 //echo "<p><strong>$orderFirstname $orderLastname $orderEmail $orderPhone</strong><p>";
                 
                     if($order_firstname == $row['client_firstname'] || $order_lastname == $row['client_lastname']) {
+                        $_SESSION['Addorder_firstname'] = $row['client_firstname'];
+                        $_SESSION['Addorder_lastname'] = $row['client_lastname'];
+
                         array_push($orderNameArray, $row['client_id']);
                         array_push($orderNameArray, $row['client_firstname']);
                         array_push($orderNameArray, $row['client_lastname']);
@@ -275,7 +278,7 @@ session_start();
                     echo "<div id='orderAddForm' style='display:none;'>";
                 }
             ?>
-                <h2>Add Order for <?php echo $confirmedFirstname . " " . $confirmedLastname ?></h2>
+                <h2>Add Order for <?php echo $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'] ?></h2>
                 <form id="form_orderAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add" name="orderAdd">
                     
                     <div class="form-group">
