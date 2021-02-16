@@ -64,8 +64,8 @@ function toggleClientSearch() {
     }
   }
 
-  function toggleOrderAddForm() {
-    var x = document.getElementById("orderAddForm");
+  function toggleOrderAddName() {
+    var x = document.getElementById("orderAddName");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
