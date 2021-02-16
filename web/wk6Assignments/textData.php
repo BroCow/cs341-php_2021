@@ -347,6 +347,8 @@ session_start();
             </div>
 
             <div id="orderAddName" style="display:none;">
+                <br>
+                <br>
                 <h3>Enter name of client for new order</h3>
                 <form id="form_orderAddName" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add Name" name="orderAddName">
             
@@ -367,7 +369,7 @@ session_start();
                         <input type="text" class="form-control" id="Addorder_lastname" name="Addorder_lastname" required>
                         <?php endif; ?>
                     </div>
-                
+                    <!-- Submitting this form triggers client info to show so it can be confirmed -->
                     <button type="submit" class="btn-lg btn-primary">Proceed With Order</button>
 
                 </form>
@@ -410,7 +412,7 @@ session_start();
             ?>
 
         
-                <!--  MAKE THIS A FORM SO IT CAN BE SUBMITTED -->
+            
             <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
                 <?php 
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
@@ -434,7 +436,7 @@ session_start();
                             echo "</div>"; 
             
                         }
-                        echo "<button type='submit' class='btn-lg btn-primary'>Confirm Client</button>";
+                        echo "<button type='submit' class='btn-lg btn-primary' onclick='toggleOrderAddForm()'>Confirm Client</button>";
                     }
                 ?>
             </form>
