@@ -415,7 +415,7 @@ session_start();
                     for ($x = 0; $x <= $orderNameArrayCount; $x++) {
                         echo "<div class='form-check'>";
                         echo    "<label class='form-check-label'>";
-                        echo        "<input type='checkbox' class='form-check-input' value=$orderNameArray[$x]>Select this client:"; //first value of $orderNameArray = client_id
+                        echo        "<input type='checkbox' class='form-check-input' name='clientSelect' value=$orderNameArray[$x]>Select this client:"; //first value of $orderNameArray = client_id
                         echo    "</label>";
                         $x++;
                         echo    "<p>$orderNameArray[$x] "; //2nd value is first name
@@ -425,6 +425,7 @@ session_start();
                         echo    $orderNameArray[$x] . "<br>"; // 4th value is email
                         $x++;
                         echo    $orderNameArray[$x]; // 5th value is phone
+                        $x++;
                         echo "</div>"; 
         
                     }
