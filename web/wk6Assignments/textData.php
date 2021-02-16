@@ -166,6 +166,8 @@ session_start();
             <h1 class="gemHunter">Gem Hunter Designs</h1>
         </nav>
 
+        <p>Move the DIV's around so that Name selection first, order date/type last</p>
+
         <main>
             <h1>Order Management</h1>
 
@@ -379,7 +381,7 @@ session_start();
                 </form>
             </div>
             
-            <!-- Make this a table for each one -->
+            
             <br>
             <br>
             <?php 
