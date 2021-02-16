@@ -190,6 +190,7 @@ session_start();
                     echo "<div id='orderSearchForm'>";
                 } else {
                     echo "<div id='orderSearchForm' style='display:none;'>";
+                }
             ?>
                 <h2>Order Search</h2>
                 <br>
