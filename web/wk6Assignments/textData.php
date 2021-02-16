@@ -107,7 +107,7 @@ session_start();
 
             /********* Select Client Data to create client drop-down */
             if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
-                $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+                $statement = $db->prepare("SELECT client_id, client_firstname, client_lastname, client_email, client_phone FROM client");
                 $statement->execute();
 
                 $orderNameArray = array();
@@ -126,6 +126,7 @@ session_start();
                 // The variable "row" now holds the complete record for that
                 // row, and we can access the different values based on their
                 // name
+                $orderClientId = $row['client_id'];
                 $orderFirstname = $row['client_firstname'];
                 $orderLastname = $row['client_lastname'];
                 $orderEmail = $row['client_email'];
@@ -133,6 +134,7 @@ session_start();
                 //echo "<p><strong>$orderFirstname $orderLastname $orderEmail $orderPhone</strong><p>";
                 
                     if($order_firstname == $row['client_firstname'] || $order_lastname == $row['client_lastname']) {
+                        array_push($orderNameArray, $row['client_id']);
                         array_push($orderNameArray, $row['client_firstname']);
                         array_push($orderNameArray, $row['client_lastname']);
                         array_push($orderNameArray, $row['client_email']);
@@ -413,15 +415,16 @@ session_start();
                     for ($x = 0; $x <= $orderNameArrayCount; $x++) {
                         echo "<div class='form-check'>";
                         echo    "<label class='form-check-label'>";
-                        echo        "<input type='checkbox' class='form-check-input' value=''>Select this client:";
+                        echo        "<input type='checkbox' class='form-check-input' value=$orderNameArray[$x]>Select this client:"; //first value of $orderNameArray = client_id
                         echo    "</label>";
-                        echo    "<p>$orderNameArray[$x] ";
                         $x++;
-                        echo    $orderNameArray[$x] . "<br>";
+                        echo    "<p>$orderNameArray[$x] "; //2nd value is first name
                         $x++;
-                        echo    $orderNameArray[$x] . "<br>";
+                        echo    $orderNameArray[$x] . "<br>"; //3rd value is last name
                         $x++;
-                        echo    $orderNameArray[$x];
+                        echo    $orderNameArray[$x] . "<br>"; // 4th value is email
+                        $x++;
+                        echo    $orderNameArray[$x]; // 5th value is phone
                         echo "</div>"; 
         
                     }
