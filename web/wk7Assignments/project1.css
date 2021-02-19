@@ -1,0 +1,36 @@
+body {
+    background-color: lightgray;
+}
+
+main {
+    margin: 5%;
+}
+
+.gemHunter {
+    right: 30px;
+    position: absolute;
+}
+
+.col {
+    margin-top: 20px;
+}
+
+.table {
+    background-color: black;
+    border: 2px solid turquoise;
+    color: white;
+}
+
+.homeButton {
+    height: 150px;
+    width: 300px;
+    
+    font-size: 3em;
+    color: aliceblue;
+    background-color: darkslategray;
+}
+
+.homeButton:hover {
+    box-shadow: 0 4px 8px 0 turquoise, 0 6px 20px 0 turquoise;
+}
+
