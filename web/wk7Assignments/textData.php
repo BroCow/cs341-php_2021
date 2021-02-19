@@ -387,6 +387,8 @@ session_start();
                     $last_order_id = $db->lastInsertId();
                     $_SESSION['last_order_id'] = $last_order_id;
                     //echo "last orderId " . $_SESSION['last_order_id'];
+
+                    echo "<h3>Order added for " . $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'];
                 }
             ?>
                 <h2>Add Order for <?php echo $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'] ?></h2>
@@ -470,6 +472,154 @@ session_start();
                 </form>
             </div>
 
+            <!------------ DELETE Order Code -------------------------------->
+            <?php
+            if(isset($_POST['Deleteorder_firstname']) || isset($_POST['Deleteorder_lastname'])){
+                
+                if(isset($_POST['Deleteorder_firstname'])){
+                    $deleteOrder_firstname = htmlspecialchars($_POST['Deleteorder_firstname']);
+                }
+                
+                if(isset($_POST['Deleteorder_lastname'])){
+                    $deleteOrder_lastname = htmlspecialchars($_POST['Deleteorder_lastname']);
+                }
+
+                $statement = $db->prepare("SELECT order_type, order_date, public.orderitem.client_id, client_firstname, client_lastname FROM public.order INNER JOIN public.orderitem ON public.order.orderitem_id = public.orderitem.orderitem_id INNER JOIN public.client ON public.orderitem.client_id = public.client.client_id WHERE public.orderitem.client_id = public.client.client_id");
+                $statement->execute();
+
+ 
+                $deleteOrderArray = array();
+
+                // Go through each result
+                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+                {
+                // The variable "row" now holds the complete record for that
+                // row, and we can access the different values based on their
+                // name
+                $Delete_clientId = $row['public.orderitem.client_id'];
+
+                $DeleteOrder_type = $row['order_type'];
+                $DeleteOrder_date = $row['order_date'];
+                $Delete_firstname = $row['client_firstname'];
+                $Delete_lastname = $row['client_lastname'];
+
+                
+
+                //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+
+                if($deleteOrder_firstname == $row['client_firstname'] || $deleteOrder_lastname == $row['client_lastname']) {
+                    array_push($deleteOrderArray, $row['order_type']);
+                    array_push($deleteOrderArray, $row['client_firstname']);
+                    array_push($deleteOrderArray, $row['client_lastname']);
+                    array_push($deleteOrderArray, $row['order_date']);
+                    }
+                
+                } 
+
+                
+            }
+            ?>
+
+            <div id="orderDelete" style="display:none;">
+                <h3>Enter name of client to delete order</h3>
+                <form id="form_orderDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Delete" name="orderDelete">
+            
+                    <div class="form-group">
+                        <label for="Deleteorder_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['Deleteorder_firstname'])): ?>
+                        <input type="text" class="form-control" id="Deleteorder_firstname" name="Deleteorder_firstname" value="<?php echo $_SESSION['Deleteorder_firstname']?>" required>
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Deleteorder_firstname" name="Deleteorder_firstname" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Deleteorder_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['Deleteorder_lastname'])): ?>
+                        <input type="text" class="form-control" id="Deleteorder_lastname" name="Deleteorder_lastname" value="<?php echo $_SESSION['Deleteorder_lastname']?>" required>
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Deleteorder_lastname" name="Deleteorder_lastname" required>
+                        <?php endif; ?>
+                    </div>
+                    <!-- Submitting this form triggers order info to show so it can be confirmed -->
+                    <button type="submit" class="btn-lg btn-primary">Proceed With Delete Order</button>
+
+                </form>
+            </div>
+
+            <!---------- DELETE Order - Confirm Order code -------------->
+            <form id="form_orderDeleteConfirm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Delete" name="orderDeleteConfirm">
+                <?php 
+                    if(isset($_POST['Deleteorder_firstname']) || isset($_POST['Deleteorder_lastname'])){
+                        echo "<h3>After verifying order information, check the box and then select <q>Confirm Delete</q></h3>";
+                        
+                        $deleteOrderArrayCount = count($deleteOrderArray);
+
+                        if(count($deleteOrderArray) > 0){
+                            echo "<h3>Order results for " . $Delete_firstname . " " . $Delete_lastname . "</h3>";
+                            echo "<table class='table table-bordered'>";
+                            echo "<thead>";
+                            echo    "<tr>";
+                            echo        "<th>Order Type</th>";
+                            echo        "<th>First Name</th>";
+                            echo        "<th>Last Name</th>";
+                            echo        "<th>Order Date</th>";
+                            echo    "</tr>";
+                            echo "</thead>";
+                            echo "<tbody>";
+                        }
+        
+                        for ($x = 0; $x <= $deleteOrderArrayCount; $x++) {
+                            echo "<div class='form-check'>";
+                            echo    "<label class='form-check-label'>";
+                            echo        "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' . $x value=$orderDeleteArray[$x]><strong>Select this order:</strong>"; //first value of $orderDeleteArray = orderitem_client_id
+                            echo    "</label>";
+                            
+        
+                            echo "<tr>";
+                            echo "<td>$deleteOrderArray[$x]</td>"; 
+                            $x++;
+                            echo "<td>$deleteOrderArray[$x]</td>"; 
+                            $x++;
+                            echo "<td>$deleteOrderArray[$x]</td>"; 
+                            $x++;
+                            echo "<td>$deleteOrderArray[$x]</td>"; 
+                            echo "</tr>"; 
+                        }
+                          
+                        echo    "</tbody>";
+                        echo "</table>";
+
+                        echo "<button type='submit' class='btn-lg btn-primary'>Delete Order</button>";
+                        
+                    }
+                ?>
+            </form>
+
+            <!-------- DELETE Order - Details code ----------------->
+            <?php
+            
+                if(isset($_POST['deleteOrderSelect'])) {
+                    $confirmedDeleteClientId = $_SESSION['Addorder_clientId'];
+                    $confirmedFirstname = $_SESSION['Addorder_firstname'];
+                    $confirmedLastname = $_SESSION['Addorder_lastname'];
+
+                    $query = "INSERT INTO public.orderitem (client_id) VALUES (:confirmedClientId)";
+                
+                    $stmt = $db->prepare($query);
+                    $stmt->bindValue(':confirmedClientId', $confirmedClientId, PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    $last_orderitem_id = $db->lastInsertId();
+                    $_SESSION['last_orderitem_id'] = $last_orderitem_id;
+                    //echo "last orderitemID " . $_SESSION['last_orderitem_id'];
+
+
+                    echo "<div id='orderAddForm'>";
+                } else {
+                    echo "<div id='orderAddForm' style='display:none;'>";
+                }
+            ?>
 
         </main>
         <script src="project1.js"></script>
