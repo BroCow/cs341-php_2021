@@ -566,6 +566,7 @@ session_start();
                             echo "<table class='table table-bordered'>";
                             echo "<thead>";
                             echo    "<tr>";
+                            echo        "<th>Order Select</th>";
                             echo        "<th>Order Type</th>";
                             echo        "<th>First Name</th>";
                             echo        "<th>Last Name</th>";
