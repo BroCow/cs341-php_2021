@@ -510,10 +510,14 @@ session_start();
                 //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
                 if($deleteOrder_firstname == $row['client_firstname'] || $deleteOrder_lastname == $row['client_lastname']) {
+                    array_push($deleteOrderArray, $row['public.orderitem.client_id']);
                     array_push($deleteOrderArray, $row['order_type']);
                     array_push($deleteOrderArray, $row['client_firstname']);
                     array_push($deleteOrderArray, $row['client_lastname']);
                     array_push($deleteOrderArray, $row['order_date']);
+
+                    $confirmedDelOrderFN = $_SESSION['Deleteorder_firstname'];
+                    $confirmedDelOrderLN = $_SESSION['Deleteorder_lastname'];
                     }
                 
                 } 
@@ -558,7 +562,7 @@ session_start();
                         $deleteOrderArrayCount = count($deleteOrderArray);
 
                         if(count($deleteOrderArray) > 0){
-                            echo "<h3>Order results for " . $Delete_firstname . " " . $Delete_lastname . "</h3>";
+                            echo "<h3>Order results for " . $confirmedDelOrderFN . " " . $confirmedDelOrderLN . "</h3>";
                             echo "<table class='table table-bordered'>";
                             echo "<thead>";
                             echo    "<tr>";
@@ -576,6 +580,7 @@ session_start();
                             echo    "<label class='form-check-label'>";
                             echo        "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' . $x value=$orderDeleteArray[$x]><strong>Select this order:</strong>"; //first value of $orderDeleteArray = orderitem_client_id
                             echo    "</label>";
+                            echo "</div>";
                             
         
                             echo "<tr>";
