@@ -134,6 +134,7 @@ session_start();
                 //echo "<p><strong>$orderFirstname $orderLastname $orderEmail $orderPhone</strong><p>";
                 
                     if($order_firstname == $row['client_firstname'] || $order_lastname == $row['client_lastname']) {
+                        $_SESSION['Addorder_clientId'] = $row['client_id'];
                         $_SESSION['Addorder_firstname'] = $row['client_firstname'];
                         $_SESSION['Addorder_lastname'] = $row['client_lastname'];
 
@@ -190,7 +191,8 @@ session_start();
             </div>
             <br>
             <br>
-            
+
+            <!----------- SEARCH Order code -------------->
             <div id='orderSearchForm' style='display:none;'>
                 <h2>Order Search</h2>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
@@ -268,8 +270,101 @@ session_start();
                 </form>
             </div>
 
+            <?php 
+                if(count($orderArray) > 0){
+                    echo "<h3>" . $search_orderType . " Orders</h3>";
+                    echo "<table class='table table-bordered'>";
+                    echo "<thead>";
+                    echo    "<tr>";
+                    echo        "<th>Order Type</th>";
+                    echo        "<th>First Name</th>";
+                    echo        "<th>Last Name</th>";
+                    echo        "<th>Order Date</th>";
+                    echo    "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+                }
+
+                $orderArrayCount = count($orderArray);
+
+                for ($x = 0; $x <= $orderArrayCount; $x++) {
+                    echo "<tr>";
+                    echo "<td>$orderArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$orderArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$orderArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$orderArray[$x]</td>"; 
+                    echo "</tr>"; 
+                }
+                  
+                echo    "</tbody>";
+                echo "</table>";
+            ?>
+
+            <!------------ ADD Order Code -------------------------------->
+            <div id="orderAddName" style="display:none;">
+                <h3>Enter name of client for new order</h3>
+                <form id="form_orderAddName" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add Name" name="orderAddName">
+            
+                    <div class="form-group">
+                        <label for="Addorder_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['Addorder_firstname'])): ?>
+                        <input type="text" class="form-control" id="Addorder_firstname" name="Addorder_firstname" value="<?php echo $_SESSION['Addorder_firstname']?>" required>
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Addorder_firstname" name="Addorder_firstname" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Addorder_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['Addorder_lastname'])): ?>
+                        <input type="text" class="form-control" id="Addorder_lastname" name="Addorder_lastname" value="<?php echo $_SESSION['Addorder_lastname']?>" required>
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Addorder_lastname" name="Addorder_lastname" required>
+                        <?php endif; ?>
+                    </div>
+                    <!-- Submitting this form triggers client info to show so it can be confirmed -->
+                    <button type="submit" class="btn-lg btn-primary">Proceed With Order</button>
+
+                </form>
+            </div>
+
+            <!---------- ADD Order - Confirm Client code -------------->
+            <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
+                <?php 
+                    if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
+                        echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
+                        
+                        $orderNameArrayCount = count($orderNameArray);
+
+                        for ($x = 0; $x <= $orderNameArrayCount; $x++) {
+                            echo "<div class='form-check'>";
+                            echo    "<label class='form-check-label'>";
+                            echo        "<input type='checkbox' class='form-check-input' name='clientSelect' value=$orderNameArray[$x]><strong>Select this client:</strong>"; //first value of $orderNameArray = client_id
+                            echo    "</label>";
+                            $x++;
+                            echo    "<p>$orderNameArray[$x] "; //2nd value is first name
+                            $x++;
+                            echo    $orderNameArray[$x] . "<br>"; //3rd value is last name
+                            $x++;
+                            echo    $orderNameArray[$x] . "<br>"; // 4th value is email
+                            $x++;
+                            echo    $orderNameArray[$x]; // 5th value is phone
+                            $x++;
+                            echo "</div>"; 
+            
+                        }
+                        echo "<button type='submit' class='btn-lg btn-primary'>Confirm Client</button>";
+                    }
+                ?>
+            </form>
+
+            <!-------- ADD Order - Details code ----------------->
             <?php
                 if(isset($_POST['clientSelect'])) {
+                    $confirmedClientId = $_SESSION['Addorder_clientId'];
                     $confirmedFirstname = $_SESSION['Addorder_firstname'];
                     $confirmedLastname = $_SESSION['Addorder_lastname'];
                     echo "<div id='orderAddForm'>";
@@ -356,100 +451,6 @@ session_start();
                 </form>
             </div>
 
-            <div id="orderAddName" style="display:none;">
-                <h3>Enter name of client for new order</h3>
-                <form id="form_orderAddName" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add Name" name="orderAddName">
-            
-                    <div class="form-group">
-                        <label for="Addorder_firstname">First Name:</label>
-                        <?php if(isset($_SESSION['Addorder_firstname'])): ?>
-                        <input type="text" class="form-control" id="Addorder_firstname" name="Addorder_firstname" value="<?php echo $_SESSION['Addorder_firstname']?>" required>
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="Addorder_firstname" name="Addorder_firstname" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Addorder_lastname">Last Name:</label>
-                        <?php if(isset($_SESSION['Addorder_lastname'])): ?>
-                        <input type="text" class="form-control" id="Addorder_lastname" name="Addorder_lastname" value="<?php echo $_SESSION['Addorder_lastname']?>" required>
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="Addorder_lastname" name="Addorder_lastname" required>
-                        <?php endif; ?>
-                    </div>
-                    <!-- Submitting this form triggers client info to show so it can be confirmed -->
-                    <button type="submit" class="btn-lg btn-primary">Proceed With Order</button>
-
-                </form>
-            </div>
-            
-            
-            <br>
-            <br>
-            <?php 
-                if(count($orderArray) > 0){
-                    echo "<h3>" . $search_orderType . " Orders</h3>";
-                    echo "<table class='table table-bordered'>";
-                    echo "<thead>";
-                    echo    "<tr>";
-                    echo        "<th>Order Type</th>";
-                    echo        "<th>First Name</th>";
-                    echo        "<th>Last Name</th>";
-                    echo        "<th>Order Date</th>";
-                    echo    "</tr>";
-                    echo "</thead>";
-                    echo "<tbody>";
-                }
-
-                $orderArrayCount = count($orderArray);
-
-                for ($x = 0; $x <= $orderArrayCount; $x++) {
-                    echo "<tr>";
-                    echo "<td>$orderArray[$x]</td>"; 
-                    $x++;
-                    echo "<td>$orderArray[$x]</td>"; 
-                    $x++;
-                    echo "<td>$orderArray[$x]</td>"; 
-                    $x++;
-                    echo "<td>$orderArray[$x]</td>"; 
-                    echo "</tr>"; 
-                }
-                  
-                echo    "</tbody>";
-                echo "</table>";
-            ?>
-
-        
-            
-            <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
-                <?php 
-                    if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
-                        echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
-                        
-                        $orderNameArrayCount = count($orderNameArray);
-
-                        for ($x = 0; $x <= $orderNameArrayCount; $x++) {
-                            echo "<div class='form-check'>";
-                            echo    "<label class='form-check-label'>";
-                            echo        "<input type='checkbox' class='form-check-input' name='clientSelect' value=$orderNameArray[$x]><strong>Select this client:</strong>"; //first value of $orderNameArray = client_id
-                            echo    "</label>";
-                            $x++;
-                            echo    "<p>$orderNameArray[$x] "; //2nd value is first name
-                            $x++;
-                            echo    $orderNameArray[$x] . "<br>"; //3rd value is last name
-                            $x++;
-                            echo    $orderNameArray[$x] . "<br>"; // 4th value is email
-                            $x++;
-                            echo    $orderNameArray[$x]; // 5th value is phone
-                            $x++;
-                            echo "</div>"; 
-            
-                        }
-                        echo "<button type='submit' class='btn-lg btn-primary'>Confirm Client</button>";
-                    }
-                ?>
-            </form>
-        
 
         </main>
         <script src="project1.js"></script>
