@@ -173,6 +173,8 @@ session_start();
             <br>
             <br>
 
+            <h1 id='test2' style='display:none;'>Delete Test</h1>
+
             <!----------- SEARCH Order code -------------->
             <div id='orderSearchForm' style='display:none;'>
                 <h2>Order Search</h2>

@@ -74,7 +74,7 @@ function toggleClientSearch() {
   }
 
   function toggleOrderDelete() {
-    var x = document.getElementById("test");
+    var x = document.getElementById("test2");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
