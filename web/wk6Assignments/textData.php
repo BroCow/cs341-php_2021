@@ -425,13 +425,14 @@ session_start();
             <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
                 <?php 
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
+                        echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
                         
                         $orderNameArrayCount = count($orderNameArray);
 
                         for ($x = 0; $x <= $orderNameArrayCount; $x++) {
                             echo "<div class='form-check'>";
                             echo    "<label class='form-check-label'>";
-                            echo        "<input type='checkbox' class='form-check-input' name='clientSelect' value=$orderNameArray[$x]>Select this client:"; //first value of $orderNameArray = client_id
+                            echo        "<input type='checkbox' class='form-check-input' name='clientSelect' value=$orderNameArray[$x]><strong>Select this client:</strong>"; //first value of $orderNameArray = client_id
                             echo    "</label>";
                             $x++;
                             echo    "<p>$orderNameArray[$x] "; //2nd value is first name
