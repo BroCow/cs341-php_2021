@@ -173,7 +173,7 @@ session_start();
             <br>
             <br>
 
-            <h1 id='test2' style='display:none;'>Delete Test</h1>
+            
 
             <!----------- SEARCH Order code -------------->
             <div id='orderSearchForm' style='display:none;'>
@@ -522,7 +522,7 @@ session_start();
             }
             ?>
 
-            <div id="test" style="display:none;">
+            <div id="deleteOrder" style="display:none;">
                 <h3>Enter name of client to delete order</h3>
                 <form id="form_orderDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Delete" name="orderDelete">
             
