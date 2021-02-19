@@ -576,14 +576,17 @@ session_start();
                         }
         
                         for ($x = 0; $x <= $deleteOrderArrayCount; $x++) {
+                            /*
                             echo "<div class='form-check'>";
                             echo    "<label class='form-check-label'>";
                             echo        "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' . $x value=$orderDeleteArray[$x]><strong>Select this order:</strong>"; //first value of $orderDeleteArray = orderitem_client_id
                             echo    "</label>";
                             echo "</div>";
+                            */
                             
-        
                             echo "<tr>";
+                            echo "<td><input type='checkbox' class='form-check-input' name='deleteOrderSelect' . $x value=$orderDeleteArray[$x]></td>";
+                            $x++;
                             echo "<td>$deleteOrderArray[$x]</td>"; 
                             $x++;
                             echo "<td>$deleteOrderArray[$x]</td>"; 
