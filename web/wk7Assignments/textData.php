@@ -357,7 +357,7 @@ session_start();
 
                     $last_orderitem_id = $db->lastInsertId();
                     $_SESSION['last_orderitem_id'] = $last_orderitem_id;
-                    echo "last orderitemID " . $_SESSION['last_orderitem_id'];
+                    //echo "last orderitemID " . $_SESSION['last_orderitem_id'];
 
 
                     echo "<div id='orderAddForm'>";
@@ -374,7 +374,7 @@ session_start();
                     $AddOrder_OrderItemId = $_SESSION['last_orderitem_id'];
     
                     $AddOrderDate = $AddOrderYear . "-" . $AddOrderMonth . "-" . $AddOrderDay;
-                    echo $AddOrderDate;
+                    //echo $AddOrderDate;
                     
                     $query = "INSERT INTO public.order (order_date, order_type, orderitem_id) VALUES (:AddOrderDate, :AddOrderType, :AddOrder_OrderItemId)";
                     
@@ -386,7 +386,7 @@ session_start();
     
                     $last_order_id = $db->lastInsertId();
                     $_SESSION['last_order_id'] = $last_order_id;
-                    echo "last orderId " . $_SESSION['last_order_id'];
+                    //echo "last orderId " . $_SESSION['last_order_id'];
                 }
             ?>
                 <h2>Add Order for <?php echo $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'] ?></h2>
