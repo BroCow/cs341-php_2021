@@ -586,7 +586,7 @@ session_start();
                             */
                             
                             echo "<tr>";
-                            echo "<td><input type='checkbox' class='form-check-input' name='deleteOrderSelect' . $x value=$orderDeleteArray[$x]></td>";
+                            echo "<td>" . "     " . "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' . $x value=$orderDeleteArray[$x]><strong>Select this order:</strong></td>";
                             $x++;
                             echo "<td>$deleteOrderArray[$x]</td>"; 
                             $x++;
