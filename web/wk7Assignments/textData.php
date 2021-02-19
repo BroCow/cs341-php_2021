@@ -520,7 +520,7 @@ session_start();
             }
             ?>
 
-            <div id="orderDelete" style="display:none;">
+            <div id="orderDelete">
                 <h3>Enter name of client to delete order</h3>
                 <form id="form_orderDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Delete" name="orderDelete">
             
