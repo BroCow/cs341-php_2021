@@ -166,7 +166,7 @@ session_start();
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleOrderDelete()" id="orderDelete" class="homeButton">Delete</button>
+                            <button onclick="toggleDelete()" id="orderDelete" class="homeButton">Delete</button>
                     </div>
                 </div>
             </div>

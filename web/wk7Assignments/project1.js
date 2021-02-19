@@ -73,11 +73,11 @@ function toggleClientSearch() {
     }
   }
 
-  function toggleOrderDelete() {
-    var x = document.getElementById("test2");
-    if (x.style.display === "none") {
-      x.style.display = "block";
+  function toggleDelete() {
+    var x = document.getElementById('test2');
+    if (x.style.display === 'none') {
+      x.style.display = 'block';
     } else {
-      x.style.display = "none";
+      x.style.display = 'none';
     }
   }
