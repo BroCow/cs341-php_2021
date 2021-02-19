@@ -84,28 +84,7 @@ session_start();
             //}
 
 
-            if(isset($_POST['Addorder_type'])){ 
-                
-                $AddOrderType = htmlspecialchars($_POST['Addorder_type']);
-                $AddOrderMonth = htmlspecialchars($_POST['add_month']);
-                $AddOrderDay = htmlspecialchars($_POST['add_day']);
-                $AddOrderYear = htmlspecialchars($_POST['add_year']);
-                $AddOrder_OrderId = $_SESSION['Addorder_clientId'];
-
-                $AddOrderDate = $AddOrderYear . "-" . $AddOrderMonth . "-" . $AddOrderDay;
-                echo $AddOrderDate;
-                
-                $query = "INSERT INTO public.order (order_date, order_type, orderitem_id) VALUES (:AddOrderDate, :AddOrderType, :AddOrder_OrderId)";
-                
-                $stmt = $db->prepare($query);
-                $stmt->bindValue(':AddOrderDate', $AddOrderDate, PDO::PARAM_STR);
-                $stmt->bindValue(':AddOrderType', $AddOrderType, PDO::PARAM_STR);
-                $stmt->bindValue(':AddOrder_OrderId', $AddOrder_OrderId, PDO::PARAM_INT);
-                $stmt->execute();
-
-                $_SESSION['last_order_id'] = $db->lastInsertId();
-                echo "last orderId " . $last_order_id;
-            }
+            
 
             /********* Select Client Data to create client drop-down */
             if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
@@ -376,13 +355,38 @@ session_start();
                     $stmt->bindValue(':confirmedClientId', $confirmedClientId, PDO::PARAM_INT);
                     $stmt->execute();
 
-                    $_SESSION['last_orderitem_id'] = $db->lastInsertId();
+                    $last_orderitem_id = $db->lastInsertId();
+                    $_SESSION['last_orderitem_id'] = $last_orderitem_id;
                     echo "last orderitemID " . $_SESSION['last_orderitem_id'];
 
 
                     echo "<div id='orderAddForm'>";
                 } else {
                     echo "<div id='orderAddForm' style='display:none;'>";
+                }
+
+                if(isset($_POST['Addorder_type'])){ 
+                
+                    $AddOrderType = htmlspecialchars($_POST['Addorder_type']);
+                    $AddOrderMonth = htmlspecialchars($_POST['add_month']);
+                    $AddOrderDay = htmlspecialchars($_POST['add_day']);
+                    $AddOrderYear = htmlspecialchars($_POST['add_year']);
+                    $AddOrder_OrderItemId = $_SESSION['last_orderitem_id'];
+    
+                    $AddOrderDate = $AddOrderYear . "-" . $AddOrderMonth . "-" . $AddOrderDay;
+                    echo $AddOrderDate;
+                    
+                    $query = "INSERT INTO public.order (order_date, order_type, orderitem_id) VALUES (:AddOrderDate, :AddOrderType, :AddOrder_OrderItemId)";
+                    
+                    $stmt = $db->prepare($query);
+                    $stmt->bindValue(':AddOrderDate', $AddOrderDate, PDO::PARAM_STR);
+                    $stmt->bindValue(':AddOrderType', $AddOrderType, PDO::PARAM_STR);
+                    $stmt->bindValue(':AddOrder_OrderItemId', $AddOrder_OrderItemId, PDO::PARAM_INT);
+                    $stmt->execute();
+    
+                    $last_order_id = $db->lastInsertId();
+                    $_SESSION['last_order_id'] = $last_order_id;
+                    echo "last orderId " . $_SESSION['last_order_id'];
                 }
             ?>
                 <h2>Add Order for <?php echo $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'] ?></h2>
