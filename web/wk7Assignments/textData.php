@@ -101,8 +101,8 @@ session_start();
                 $stmt->bindValue(':AddOrderType', $AddOrderType, PDO::PARAM_STR);
                 $stmt->execute();
 
-                $last_order_id = $db->lastInsertId();
-                echo $last_order_id;
+                $_SESSION['last_order_id'] = $db->lastInsertId();
+                echo "last orderId " . $last_order_id;
             }
 
             /********* Select Client Data to create client drop-down */
@@ -367,6 +367,17 @@ session_start();
                     $confirmedClientId = $_SESSION['Addorder_clientId'];
                     $confirmedFirstname = $_SESSION['Addorder_firstname'];
                     $confirmedLastname = $_SESSION['Addorder_lastname'];
+
+                    $query = "INSERT INTO public.orderitem (client_id) VALUES (:confirmedClientId)";
+                
+                    $stmt = $db->prepare($query);
+                    $stmt->bindValue(':confirmedClientId', $confirmedClientId, PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    $_SESSION['last_orderitem_id'] = $db->lastInsertId();
+                    echo "last orderitemID " . $last_orderitem_id;
+
+
                     echo "<div id='orderAddForm'>";
                 } else {
                     echo "<div id='orderAddForm' style='display:none;'>";
@@ -448,6 +459,8 @@ session_start();
                             <option value="Credit">Credit</option>
                         </select>
                     </div>
+
+                    <button type='submit' class='btn-lg btn-primary'>Place Order</button>
                 </form>
             </div>
 
