@@ -507,7 +507,7 @@ session_start();
 
                 
 
-                //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+                echo "<p><strong>$firstname $lastname $Delete_clientId</strong><p>";
 
                 if($deleteOrder_firstname == $row['client_firstname'] || $deleteOrder_lastname == $row['client_lastname']) {
                     array_push($deleteOrderArray, $row['public.orderitem.client_id']);
