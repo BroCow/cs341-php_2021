@@ -146,6 +146,7 @@ session_start();
                 <br>
                 <br>
                 <h2>Client Search</h2>
+                <h4>Use any of the search fields below to search for client</h4>
                 
                 <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
                     <div class="form-group">
@@ -227,7 +228,7 @@ session_start();
                 echo "<div id='viewClientList' style='display:none;'>";
             }
             ?>
-                <h4>Client List</h4>
+                <h3>Client List</h3>
                 <div class="row">
                 <?php
                     $clientListArrayCount = count($clientListArray);
