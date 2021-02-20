@@ -26,7 +26,7 @@ session_start();
 
     <body>
         <?php
-            if(isset($_POST['client_firstname']) || isset($_POST['client_lastname'])){
+            if(isset($_POST['client_firstname']) || isset($_POST['client_lastname']) || isset($_POST['client_email']) || isset($_POST['client_phone'])){
                 $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
                 $statement->execute();
 
@@ -176,7 +176,7 @@ session_start();
                         <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn-lg btn-primary">Submit</button>
+                    <button type="submit" class="btn-lg btn-primary">Search</button>
                 </form>
             </div>
 
