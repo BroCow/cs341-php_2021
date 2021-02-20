@@ -141,6 +141,7 @@ session_start();
             </div>
             <?php 
             if(isset($_POST['Addclient_firstname']) || isset($_POST['Addclient_lastname'])){ 
+                echo "<br>";
                 echo $_SESSION['AddMessage']; 
             }
             ?>
