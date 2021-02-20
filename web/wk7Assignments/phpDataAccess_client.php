@@ -181,6 +181,7 @@ session_start();
                 echo '<div id="viewClientList" style="display:none;">';
             }
             ?>
+                <br>
                 <h3 class="turqHeader">Client List</h3>
                 <div class="row">
                     <?php
