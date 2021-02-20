@@ -248,13 +248,13 @@ session_start();
 
                         for ($x = 0; $x <= $itemListArrayCount; $x++) {
                             echo "<div class='col-sm-3'>";
-                                echo "<p class='clientList_P'>$itemListArray[$x] "; 
+                                echo "<p class='clientList_P'>Item Type:  " . $itemListArray[$x] . "<br>"; 
                                 $x++;
-                                echo "$itemListArray[$x]<br>"; 
+                                echo "Item Name:  " . $itemListArray[$x] . "<br>"; 
                                 $x++;
-                                echo "$itemListArray[$x]<br>"; 
+                                echo "Item Description:  " . $itemListArray[$x] . "<br>"; 
                                 $x++;
-                                echo "$itemListArray[$x]</p>"; 
+                                echo "Item Price:  " . $itemListArray[$x] . "</p>"; 
                             echo "</div>";
                         }
                     ?>
