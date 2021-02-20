@@ -59,7 +59,7 @@ session_start();
                     $lastname = $row['client_lastname'];
                     $email = $row['client_email'];
                     $phone = $row['client_phone'];
-                    echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+                    //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
                     if($search_firstname == $row['client_firstname'] || $search_lastname == $row['client_lastname'] || $search_email == $row['client_email'] || $search_phone == $row['client_phone']) {
                         array_push($clientNameArray, $row['client_firstname']);
@@ -129,25 +129,18 @@ session_start();
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                            <button onclick="toggleClientSearch()" id="clientSearch" class="homeButton">Search<br>Client</button>
+                            <button onclick="toggleClientSearch()" id="clientSearch" class="homeButton">Search Client</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleClientAdd()" id="clientAdd" class="homeButton">Add<br>Client</button>
+                            <button onclick="toggleClientAdd()" id="clientAdd" class="homeButton">Add Client</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleClientDelete()" id="clientDelete" class="homeButton">Delete<br>Client</button>
+                            <button onclick="toggleClientDelete()" id="clientDelete" class="homeButton">Delete Client</button>
                     </div>
                 </div>
             </div>
-            
-            
-                <br>
-
-                
-           
-            <br>
             <?php
                 if(isset($_POST['client_list'])){
                     $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
@@ -172,40 +165,44 @@ session_start();
                     }
                 }
             ?>
-
             <?php 
             if(isset($_POST['client_list'])){
-                echo "<div id='viewClientList'>";
+                echo '<div id="viewClientList">';
             } else {
-                echo "<div id='viewClientList' style='display:none;'>";
+                echo '<div id="viewClientList" style="display:none;">';
             }
             ?>
                 <h3 class="turqHeader">Client List</h3>
                 <div class="row">
-                <?php
-                    $clientListArrayCount = count($clientListArray);
+                    <?php
+                        $clientListArrayCount = count($clientListArray);
 
-                    for ($x = 0; $x <= $clientListArrayCount; $x++) {
-                        echo "<div class='col-sm-3'>";
-                            echo "<p class='clientList_P'>$clientListArray[$x] "; 
-                            $x++;
-                            echo "$clientListArray[$x]<br>"; 
-                            $x++;
-                            echo "$clientListArray[$x]<br>"; 
-                            $x++;
-                            echo "$clientListArray[$x]</p>"; 
-                        echo "</div>";
-                    }
-                ?>
+                        for ($x = 0; $x <= $clientListArrayCount; $x++) {
+                            echo "<div class='col-sm-3'>";
+                                echo "<p class='clientList_P'>$clientListArray[$x] "; 
+                                $x++;
+                                echo "$clientListArray[$x]<br>"; 
+                                $x++;
+                                echo "$clientListArray[$x]<br>"; 
+                                $x++;
+                                echo "$clientListArray[$x]</p>"; 
+                            echo "</div>";
+                        }
+                    ?>
                 </div>
+                
             </div>
 
             <div id="clientSearchForm" style="display:none;">
-                <br>
-                <br>
                 <h2>Client Search</h2>
                 <h4 class="turqHeader"><em>Use any of the search fields below to search for client</em></h4>
-                
+
+                <h4>Not sure about the client's information?</h4>
+                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
+                    <input type="hidden" id="client_list" name="client_list" value="client_list">
+                    <button type="submit" class="btn-sm btn-info">View Client List</button>
+                </form>
+                <br>
                 <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
                     <div class="form-group">
                         <label for="client_firstname">First Name:</label>
@@ -230,32 +227,28 @@ session_start();
                         <?php if(isset($_SESSION['client_email'])): ?>
                         <input type="email" class="form-control" id="client_email" name="client_email" value="<?php echo $_SESSION['client_email']?>">
                         <?php else: ?>
-                        <input type="email" class="form-control" id="client_email" name="client_email">
+                        <input type="email" class="form-control" id="client_email" name="client_email" placeholder="your@email.com">
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
                         <label for="client_phone">Phone:</label>
                         <?php if(isset($_SESSION['client_phone'])): ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-456-7890" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
                         <?php else: ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-456-7890" class="form-control" id="client_phone" name="client_phone">
                         <?php endif; ?>
                     </div>
 
                     <button type="submit" class="btn-lg btn-primary">Search</button>
                 </form>
-                <br>
-                <h4>Not sure about the client's information?</h4>
-                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
-                    <input type="hidden" id="client_list" name="client_list" value="client_list">
-                    <button type="submit" class="btn-sm btn-info">View Client List</button>
-                </form>
+                
+                
             </div>
             
             <div id="clientAddForm" style="display:none;">
-                <br>
-                <br>
+                
+                
                 <h2>Add Client</h2>
                 
                 <form id="form_clientAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Add" name="clientAdd">
@@ -282,16 +275,16 @@ session_start();
                         <?php if(isset($_SESSION['Addclient_email'])): ?>
                         <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" value="<?php echo $_SESSION['Addclient_email']?>" required>
                         <?php else: ?>
-                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" required>
+                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" placeholder="your@email.com" required>
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
                         <label for="Addclient_phone">Phone:</label>
                         <?php if(isset($_SESSION['Addclient_phone'])): ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="Addclient_phone" name="Addclient_phone" value="<?php echo $_SESSION['Addclient_phone']?>">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-456-7890" class="form-control" id="Addclient_phone" name="Addclient_phone" value="<?php echo $_SESSION['Addclient_phone']?>">
                         <?php else: ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="Addclient_phone" name="Addclient_phone">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" class="form-control" id="Addclient_phone" name="Addclient_phone">
                         <?php endif; ?>
                     </div>
 
