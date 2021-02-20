@@ -82,6 +82,7 @@ session_start();
 
                 $AddMessage = "New Item Added";
             }
+            $_SESSION['AddItemMessage'] = "New Item Added. To view item info, use <q>Search Item</q>";
 
             if(isset($_POST['Delitem_name'])){ 
 
@@ -93,6 +94,7 @@ session_start();
                 $stmt = $db->prepare($query);
                 $stmt->execute();
             }
+            $_SESSION['DeleteItemMessage'] = "Item has been deleted.";
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -133,6 +135,17 @@ session_start();
                     </div>
                 </div>
             </div>
+
+            <?php 
+            if(isset($_POST['Additem_type'])){ 
+                echo "<br>";
+                echo $_SESSION['AddItemMessage']; 
+            }
+            if(isset($_POST['Delitem_name'])){
+                echo "<br>";
+                echo $_SESSION['DeleteItemMessage']; 
+            }
+            ?>
 
             <div id="itemSearchForm" style="display:none;">
                 <br>
