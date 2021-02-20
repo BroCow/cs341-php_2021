@@ -202,7 +202,7 @@ session_start();
                     <input type="hidden" id="client_list" name="client_list" value="client_list">
                     <button type="submit" class="btn-sm btn-info">View Client List</button>
                 </form>
-                
+                <br>
                 <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
                     <div class="form-group">
                         <label for="client_firstname">First Name:</label>
