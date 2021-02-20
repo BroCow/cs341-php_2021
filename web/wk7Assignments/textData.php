@@ -148,6 +148,7 @@ session_start();
             if(isset($_POST['Delclient_email']) || isset($_POST['Delclient_lastname'])){
                 echo "<br>";
                 echo $_SESSION['DeleteClientMessage']; 
+            }
             ?>
             <?php
                 if(isset($_POST['client_list'])){
