@@ -145,12 +145,8 @@ session_start();
             
                 <br>
 
-                <h4>Not sure about the client's information?</h4>
-                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
-                    <input type="hidden" id="client_list" name="client_list" value="client_list">
-                    <button type="submit" class="btn-sm btn-info">View Client List</button>
-                </form>
-            </div>
+                
+           
             <br>
             <?php
                 if(isset($_POST['client_list'])){
@@ -249,7 +245,14 @@ session_start();
 
                     <button type="submit" class="btn-lg btn-primary">Search</button>
                 </form>
-
+                <br>
+                <h4>Not sure about the client's information?</h4>
+                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
+                    <input type="hidden" id="client_list" name="client_list" value="client_list">
+                    <button type="submit" class="btn-sm btn-info">View Client List</button>
+                </form>
+            </div>
+            
             <div id="clientAddForm" style="display:none;">
                 <br>
                 <br>
