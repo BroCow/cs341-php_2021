@@ -558,7 +558,6 @@ session_start();
                 <?php 
                     if(isset($_POST['deleteOrderSelect'])) {
                         $_SESSION['deleteOrderSelect'] = $_POST['deleteOrderSelect'];
-                        echo "It is set";
                     } 
 
                     if(isset($_POST['Deleteorder_firstname']) || isset($_POST['Deleteorder_lastname'])){
@@ -615,39 +614,7 @@ session_start();
             </form>
 
             <!-------- DELETE Order - Details code ----------------->
-            <?php
             
-            
-                
-                
-                if(isset($_SESSION['deleteOrderSelect'])) {
-                    echo "It is set Part 2 <br>";
-                    echo $_SESSION['deleteOrderSelect'];
-                    /*
-                    $confirmedDeleteClientId = $_SESSION['Addorder_clientId'];
-                    $confirmedFirstname = $_SESSION['Addorder_firstname'];
-                    $confirmedLastname = $_SESSION['Addorder_lastname'];
-
-                    $query = "INSERT INTO public.orderitem (client_id) VALUES (:confirmedClientId)";
-                
-                    $stmt = $db->prepare($query);
-                    $stmt->bindValue(':confirmedClientId', $confirmedClientId, PDO::PARAM_INT);
-                    $stmt->execute();
-
-                    $last_orderitem_id = $db->lastInsertId();
-                    $_SESSION['last_orderitem_id'] = $last_orderitem_id;
-                    //echo "last orderitemID " . $_SESSION['last_orderitem_id'];
-
-
-                    echo "<div id='orderAddForm'>";
-                } else {
-                    echo "<div id='orderAddForm' style='display:none;'>";
-                }*/
-                } else {
-                    echo "It is not set Part 2";
-                }
-            
-            ?>
 
         </main>
         <script src="project1.js"></script>
