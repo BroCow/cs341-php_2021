@@ -13,8 +13,8 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="author" content="Christopher Cowan">
-        <meta name="description" content="This page serves as the PHP Data Access client page for CSE341 Project 1 Assignment.">
-        <title>CSE 341 PHP Data Access | Client</title>
+        <meta name="description" content="This page serves as the PHP Data Access item page for CSE341 Project 1 Assignment.">
+        <title>CSE 341 PHP Data Access | Item</title>
         <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="normalize.css" media="screen">
@@ -26,80 +26,73 @@ session_start();
 
     <body>
         <?php
-            if(isset($_POST['client_firstname']) || isset($_POST['client_lastname']) || isset($_POST['client_email']) || isset($_POST['client_phone'])){
-                $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
-                $statement->execute();
+            $statement = $db->prepare("SELECT item_type, item_name, item_desc, item_price FROM public.item item_id");
+            $statement->execute();
 
-                $clientNameArray = array();
-                
-                
-                if(isset($_POST['client_firstname'])){
-                    $search_firstname = htmlspecialchars($_POST['client_firstname']);
-                }
-                
-                if(isset($_POST['client_lastname'])){
-                    $search_lastname = htmlspecialchars($_POST['client_lastname']);
-                }
-
-                if(isset($_POST['client_email'])){
-                    $search_email = htmlspecialchars($_POST['client_email']);
-                }
-
-                if(isset($_POST['client_phone'])){
-                    $search_phone = htmlspecialchars($_POST['client_phone']);
-                }
-                
-                // Go through each result
-                while ($row = $statement->fetch(PDO::FETCH_ASSOC))
-                {
-                    // The variable "row" now holds the complete record for that
-                    // row, and we can access the different values based on their
-                    // name
-                    $firstname = $row['client_firstname'];
-                    $lastname = $row['client_lastname'];
-                    $email = $row['client_email'];
-                    $phone = $row['client_phone'];
-                    //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
-
-                    if($search_firstname == $row['client_firstname'] || $search_lastname == $row['client_lastname'] || $search_email == $row['client_email'] || $search_phone == $row['client_phone']) {
-                        array_push($clientNameArray, $row['client_firstname']);
-                        array_push($clientNameArray, $row['client_lastname']);
-                        array_push($clientNameArray, $row['client_email']);
-                        array_push($clientNameArray, $row['client_phone']);
-                    } 
-                }
+            if(isset($_POST['item_type'])){
+                $search_itemType = $_POST['item_type'];
+                $itemTypeArray = array();
             }
-
             
-            if(isset($_POST['Addclient_firstname']) || isset($_POST['Addclient_lastname'])){ 
+
+            // Go through each result
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+            {
+            // The variable "row" now holds the complete record for that
+            // row, and we can access the different values based on their
+            // name
+            $item_type = $row['item_type'];
+            $item_name = $row['item_name'];
+            $item_desc = $row['item_desc'];
+            $item_price = $row['item_price'];
+
+            //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
+
+            // Need to create an array and push results to it instead of variable
+            if($search_itemType == $row['item_type']) {
+                array_push($itemTypeArray, $row['item_type']);
+                array_push($itemTypeArray, $row['item_name']);
+                array_push($itemTypeArray, $row['item_desc']);
+                array_push($itemTypeArray, $row['item_price']);
                 
-                $AddClientFirstName = htmlspecialchars($_POST['Addclient_firstname']);
-                $AddClientLastName = htmlspecialchars($_POST['Addclient_lastname']);
-                $AddClientEmail = htmlspecialchars($_POST['Addclient_email']);
-                $AddClientPhone = htmlspecialchars($_POST['Addclient_phone']);
+                //echo $row['client_firstname'] . "<br>";
+                //$result_orderType = $row['order_type'];
+                //$result_orderDate = $row['order_date'];
+                //$result_firstName = $row['client_firstname'];
+                //echo $row['client_lastname'] . "<br>";
+                //$result_lastName = $row['client_lastname'];
+                }
+            }  
+
+            if(isset($_POST['Additem_type'])){ 
                 
-                $query = "INSERT INTO client (client_firstname, client_lastname, client_email, client_phone) VALUES (:AddClientFirstName, :AddClientLastName, :AddClientEmail, :AddClientPhone)";
+                $AddItemType = htmlspecialchars($_POST['Additem_type']);
+                $AddItemDesc = htmlspecialchars($_POST['Additem_desc']);
+                $AddItemPrice = htmlspecialchars($_POST['Additem_price']);
+                $AddItemName = htmlspecialchars($_POST['Additem_name']);
+                
+                $query = "INSERT INTO item (item_type, item_desc, item_price, item_name) VALUES (:AddItemType, :AddItemDesc, :AddItemPrice, :AddItemName)";
                 
                 $stmt = $db->prepare($query);
-                $stmt->bindValue(':AddClientFirstName', $AddClientFirstName, PDO::PARAM_STR);
-                $stmt->bindValue(':AddClientLastName', $AddClientLastName, PDO::PARAM_STR);
-                $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_STR);
-                $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
+                $stmt->bindValue(':AddItemType', $AddItemType, PDO::PARAM_STR);
+                $stmt->bindValue(':AddItemDesc', $AddItemDesc, PDO::PARAM_STR);
+                $stmt->bindValue(':AddItemPrice', $AddItemPrice, PDO::PARAM_INT);
+                $stmt->bindValue(':AddItemName', $AddItemName, PDO::PARAM_STR);
                 $stmt->execute();
+
+                $AddMessage = "New Item Added";
             }
-            $_SESSION['AddMessage'] = "New Client Added. To view client info, use <q>Search Client</q>";
 
-            if(isset($_POST['Delclient_email']) || isset($_POST['Delclient_lastname'])){ 
+            if(isset($_POST['Delitem_name'])){ 
 
-                if(isset($_POST['Delclient_email'])){
-                    $delete_email = $_POST['Delclient_email'];
+                if(isset($_POST['Delitem_name'])){
+                    $delete_name = $_POST['Delitem_name'];
                 }
 
-                $query = "DELETE FROM client WHERE client_email = '".$delete_email."'";
+                $query = "DELETE FROM item WHERE item_name = '".$delete_name."'";
                 $stmt = $db->prepare($query);
                 $stmt->execute();
             }
-            $_SESSION['DeleteClientMessage'] = "Client has been deleted.";
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -121,260 +114,161 @@ session_start();
             <h1 class="gemHunter">Gem Hunter Designs</h1>
         </nav>
 
+
         <main>
-            <h1>Client Management</h1>
-            <h3>
+            <h1>Item Management</h1>
 
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                            <button onclick="toggleClientSearch()" id="clientSearch" class="homeButton">Search Client</button>
+                            <button onclick="toggleItemSearch()" id="itemSearch" class="homeButton">Search Item</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleClientAdd()" id="clientAdd" class="homeButton">Add Client</button>
+                            <button onclick="toggleItemAdd()" id="itemAdd" class="homeButton">Add Item</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleClientDelete()" id="clientDelete" class="homeButton">Delete Client</button>
+                            <button onclick="toggleItemDelete()" id="itemDelete" class="homeButton">Delete Item</button>
                     </div>
                 </div>
             </div>
-            <?php 
-            if(isset($_POST['Addclient_firstname']) || isset($_POST['Addclient_lastname'])){ 
-                echo "<br>";
-                echo $_SESSION['AddMessage']; 
-            }
-            if(isset($_POST['Delclient_email']) || isset($_POST['Delclient_lastname'])){
-                echo "<br>";
-                echo $_SESSION['DeleteClientMessage']; 
-            }
-            ?>
-            <?php
-                if(isset($_POST['client_list'])){
-                    $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
-                    $statement->execute();
 
-                    $clientListArray = array();
-
-                    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                    
-                        // The variable "row" now holds the complete record for that
-                        // row, and we can access the different values based on their
-                        // name
-                        $firstname = $row['client_firstname'];
-                        $lastname = $row['client_lastname'];
-                        $email = $row['client_email'];
-                        $phone = $row['client_phone'];
-
-                        array_push($clientListArray, $row['client_firstname']);
-                        array_push($clientListArray, $row['client_lastname']);
-                        array_push($clientListArray, $row['client_email']);
-                        array_push($clientListArray, $row['client_phone']);
-                    }
-                }
-            ?>
-            <?php 
-            if(isset($_POST['client_list'])){
-                echo '<div id="viewClientList">';
-            } else {
-                echo '<div id="viewClientList" style="display:none;">';
-            }
-            ?>
-                <h3 class="turqHeader">Client List</h3>
-                <div class="row">
-                    <?php
-                        $clientListArrayCount = count($clientListArray);
-
-                        for ($x = 0; $x <= $clientListArrayCount; $x++) {
-                            echo "<div class='col-sm-3'>";
-                                echo "<p class='clientList_P'>$clientListArray[$x] "; 
-                                $x++;
-                                echo "$clientListArray[$x]<br>"; 
-                                $x++;
-                                echo "$clientListArray[$x]<br>"; 
-                                $x++;
-                                echo "$clientListArray[$x]</p>"; 
-                            echo "</div>";
-                        }
-                    ?>
-                </div>
-                
-            </div>
-
-            <div id="clientSearchForm" style="display:none;">
+            <div id="itemSearchForm" style="display:none;">
                 <br>
-                <h2>Client Search</h2>
-                <h4 class="turqHeader"><em>Use any of the search fields below to search for client</em></h4>
-
-                <h4>Not sure about the client's information?</h4>
-                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
-                    <input type="hidden" id="client_list" name="client_list" value="client_list">
-                    <button type="submit" class="btn-sm btn-info">View Client List</button>
-                </form>
                 <br>
-                <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
-                    <div class="form-group">
-                        <label for="client_firstname">First Name:</label>
-                        <?php if(isset($_SESSION['client_firstname'])): ?>
-                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
-                        <?php endif; ?>
-                    </div>
+                <h2>Item Search</h2>
 
-                    <div class="form-group">
-                        <label for="client_lastname">Last Name:</label>
-                        <?php if(isset($_SESSION['client_lastname'])): ?>
-                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
-                        <?php endif; ?>
-                    </div>
+                <!-- Put buttons here to choose between single client or client list -->
 
-                    <div class="form-group">
-                        <label for="client_email">Email:</label>
-                        <?php if(isset($_SESSION['client_email'])): ?>
-                        <input type="email" class="form-control" id="client_email" name="client_email" value="<?php echo $_SESSION['client_email']?>">
-                        <?php else: ?>
-                        <input type="email" class="form-control" id="client_email" name="client_email" placeholder="your@email.com">
-                        <?php endif; ?>
-                    </div>
+                <!-- Put form here to enter client name to appear if "single client" selected -->
 
-                    <div class="form-group">
-                        <label for="client_phone">Phone:</label>
-                        <?php if(isset($_SESSION['client_phone'])): ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-456-7890" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
-                        <?php else: ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-456-7890" class="form-control" id="client_phone" name="client_phone">
-                        <?php endif; ?>
-                    </div>
+                <!-- Put form here to choose between single client or client list -->
 
-                    <button type="submit" class="btn-lg btn-primary">Search</button>
-                </form>
-                
-                
-            </div>
-            
-            <div id="clientAddForm" style="display:none;">
-                
-                <br>
-                <h2>Add Client</h2>
-                
-                <form id="form_clientAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Add" name="clientAdd">
-                    <div class="form-group">
-                        <label for="Addclient_firstname">First Name:</label>
-                        <?php if(isset($_SESSION['Addclient_firstname'])): ?>
-                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" value="<?php echo $_SESSION['Addclient_firstname']?>" required>
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="Addclient_firstname" name="Addclient_firstname" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Addclient_lastname">Last Name:</label>
-                        <?php if(isset($_SESSION['Addclient_lastname'])): ?>
-                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" value="<?php echo $_SESSION['Addclient_lastname']?>" required>
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="Addclient_lastname" name="Addclient_lastname" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Addclient_email">Email:</label>
-                        <?php if(isset($_SESSION['Addclient_email'])): ?>
-                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" value="<?php echo $_SESSION['Addclient_email']?>" required>
-                        <?php else: ?>
-                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" placeholder="your@email.com" required>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Addclient_phone">Phone:</label>
-                        <?php if(isset($_SESSION['Addclient_phone'])): ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-456-7890" class="form-control" id="Addclient_phone" name="Addclient_phone" value="<?php echo $_SESSION['Addclient_phone']?>">
-                        <?php else: ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" class="form-control" id="Addclient_phone" name="Addclient_phone">
-                        <?php endif; ?>
-                    </div>
-
-                    <button type="submit" class="btn-lg btn-primary">Add Client</button>
-
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Search" name="itemSearch">
+                    <label for="item_type">Search by item type:</label>
+                    <br>
+                    <select id="item_type" name="item_type">
+                        <option value="">Select</option>
+                        <option value="Necklace">Necklace</option>
+                        <option value="Earrings">Earrings</option>
+                        <option value="Bracelet">Bracelet</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
 
-            <div id="clientDeleteForm" style="display:none;">
+            <div id="itemAddForm" style="display:none;">
                 <br>
                 <br>
-                <h2>Delete Client</h2>
+                <h2>Add Item</h2>
                 
-                <form id="form_clientDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Delete" name="clientDelete">
+                <form id="form_itemAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Add" name="itemAdd">
                     <div class="form-group">
-                        <label for="Delclient_email">Enter Client Email:</label>
-                        <?php if(isset($_SESSION['Delclient_email'])): ?>
-                        <input type="text" class="form-control" id="Delclient_email" name="Delclient_email" value="<?php echo $_SESSION['Delclient_email']?>">
+                        <label for="Additem_type">Select item type to add:</label>
+                        <br>
+                        <select id="Additem_type" name="Additem_type" required>
+                            <option value="">Select</option>
+                            <option value="Necklace">Necklace</option>
+                            <option value="Earrings">Earrings</option>
+                            <option value="Bracelet">Bracelet</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Additem_desc">Enter item description:</label>
+                        <?php if(isset($_SESSION['Additem_desc'])): ?>
+                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" value="<?php echo $_SESSION['Additem_desc']?>" required>
                         <?php else: ?>
-                        <input type="text" class="form-control" id="Delclient_email" name="Delclient_email">
+                        <input type="textarea" class="form-control" id="Additem_desc" name="Additem_desc" required>
                         <?php endif; ?>
                     </div>
 
                     <div class="form-group">
-                        <label for="Delclient_lastname">Last Name:</label>
-                        <?php if(isset($_SESSION['Delclient_lastname'])): ?>
-                        <input type="text" class="form-control" id="Delclient_lastname" name="Delclient_lastname" value="<?php echo $_SESSION['Delclient_lastname']?>">
+                        <label for="Additem_price">Enter item price:</label>
+                        <?php if(isset($_SESSION['Additem_price'])): ?>
+                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" value="<?php echo $_SESSION['Additem_price']?>" required>
                         <?php else: ?>
-                        <input type="text" class="form-control" id="Delclient_lastname" name="Delclient_lastname">
+                        <input type="number" class="form-control" id="Additem_price" name="Additem_price" required>
                         <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn-lg btn-primary">Delete Client</button>
+                    <div class="form-group">
+                        <label for="Additem_name">Enter item name:</label>
+                        <?php if(isset($_SESSION['Additem_name'])): ?>
+                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" value="<?php echo $_SESSION['Additem_name']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Additem_name" name="Additem_name" required>
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Add Item</button>
+
                 </form>
             </div>
-
             <br>
             <br>
-
-            <div class="table">
+            <div id="itemDeleteForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Delete Item</h2>
                 
+                <form id="form_itemDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Delete" name="itemDelete">
+                    <div class="form-group">
+                        <label for="Delitem_name">Enter Item Name:</label>
+                        <?php if(isset($_SESSION['Delitem_name'])): ?>
+                        <input type="text" class="form-control" id="Delitem_name" name="Delitem_name" value="<?php echo $_SESSION['Delitem_name']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="Delitem_name" name="Delitem_name">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Delete Item</button>
+                </form>
+            </div>
+                
+                <!-- Make this a table for each one -->
+                <br>
+                <br>
             <?php 
-                if(isset($_POST['client_firstname']) || isset($_POST['client_lastname'])){
-                    if(count($clientNameArray) > 0){
-                        echo "<h3>Search results for " . $search_firstname . "</h3>";
-                        echo "<table class='table table-bordered'>";
-                        echo "<thead>";
-                        echo    "<tr>";
-                        echo        "<th>First Name</th>";
-                        echo        "<th>Last Name</th>";
-                        echo        "<th>Email</th>";
-                        echo        "<th>Phone</th>";
-                        echo    "</tr>";
-                        echo "</thead>";
-                        echo "<tbody>";
-                    }
-
-                    $clientArrayCount = count($clientNameArray);
-
-                    for ($x = 0; $x <= $clientArrayCount; $x++) {
-                        echo "<tr>";
-                        echo "<td>$clientNameArray[$x]</td>"; 
-                        $x++;
-                        echo "<td>$clientNameArray[$x]</td>"; 
-                        $x++;
-                        echo "<td>$clientNameArray[$x]</td>"; 
-                        $x++;
-                        echo "<td>$clientNameArray[$x]</td>"; 
-                        echo "</tr>"; 
-                    }
-                    
-                    if(count($clientNameArray) > 0){
-                        echo    "</tbody>";
-                        echo "</table>";
-                    }
+                if(count($itemTypeArray) > 0){
+                    echo "<h3>" . $search_itemType . " Items</h3>";
+                    echo "<table class='table table-bordered'>";
+                    echo "<thead>";
+                    echo    "<tr>";
+                    echo        "<th>Item Type</th>";
+                    echo        "<th>Item Name</th>";
+                    echo        "<th>Item Description</th>";
+                    echo        "<th>Item Price</th>";
+                    echo    "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
                 }
+
+                $itemArrayCount = count($itemTypeArray);
+
+                for ($x = 0; $x <= $itemArrayCount; $x++) {
+                    echo "<tr>";
+                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    $x++;
+                    echo "<td>$itemTypeArray[$x]</td>"; 
+                    echo "</tr>"; 
+                }
+                  
+                echo    "</tbody>";
+                echo "</table>";
             ?>
 
-            </div>
-            
+
+
+
+
         </main>
     
         <script src="project1.js"></script>
