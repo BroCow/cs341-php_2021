@@ -259,7 +259,7 @@ session_start();
                     <?php
                         $itemListArrayCount = count($itemListArray);
 
-                        for ($x = 0; $x <= $itemListArrayCount; $x++) {
+                        for ($x = 0; $x < $itemListArrayCount; $x++) {
                             echo "<div class='col-sm-3'>";
                                 echo "<p class='clientList_P'><strong>Item Type:</strong>  " . $itemListArray[$x] . "<br>"; 
                                 $x++;
