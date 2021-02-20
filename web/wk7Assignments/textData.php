@@ -139,11 +139,11 @@ session_start();
             <?php 
             if(isset($_POST['Additem_type'])){ 
                 echo "<br>";
-                echo $_SESSION['AddItemMessage']; 
+                echo "<h3>" . $_SESSION['AddItemMessage'] . "</h3>"; 
             }
             if(isset($_POST['Delitem_name'])){
                 echo "<br>";
-                echo $_SESSION['DeleteItemMessage']; 
+                echo "<h3>" . $_SESSION['DeleteItemMessage'] . "</h3>"; 
             }
             ?>
 
