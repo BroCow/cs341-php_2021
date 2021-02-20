@@ -99,6 +99,7 @@ session_start();
                 $stmt = $db->prepare($query);
                 $stmt->execute();
             }
+            $_SESSION['DeleteClientMessage'] = "Client has been deleted.";
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -144,6 +145,9 @@ session_start();
                 echo "<br>";
                 echo $_SESSION['AddMessage']; 
             }
+            if(isset($_POST['Delclient_email']) || isset($_POST['Delclient_lastname'])){
+                echo "<br>";
+                echo $_SESSION['DeleteClientMessage']; 
             ?>
             <?php
                 if(isset($_POST['client_list'])){
@@ -198,6 +202,7 @@ session_start();
             </div>
 
             <div id="clientSearchForm" style="display:none;">
+                <br>
                 <h2>Client Search</h2>
                 <h4 class="turqHeader"><em>Use any of the search fields below to search for client</em></h4>
 
