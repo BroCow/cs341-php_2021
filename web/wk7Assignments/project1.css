@@ -35,6 +35,7 @@ main {
 }
 
 .clientList_P {
+    font-size: 20px;
     border-left: 2px turquoise;
     border-right: 2px turquoise;
 }
