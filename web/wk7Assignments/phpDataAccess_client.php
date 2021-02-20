@@ -168,9 +168,9 @@ session_start();
             ?>
             <?php 
             if(isset($_POST['client_list'])){
-                echo "<div id='viewClientList'>";
+                echo '<div id="viewClientList">';
             } else {
-                echo "<div id='viewClientList' style='display:none;'>";
+                echo '<div id="viewClientList" style="display:none;">';
             }
             ?>
                 <h3 class="turqHeader">Client List</h3>
