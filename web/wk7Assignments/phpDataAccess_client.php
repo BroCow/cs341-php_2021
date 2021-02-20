@@ -228,9 +228,9 @@ session_start();
                     <div class="form-group">
                         <label for="client_phone">Phone:</label>
                         <?php if(isset($_SESSION['client_phone'])): ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-456-7890" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
                         <?php else: ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-456-7890" class="form-control" id="client_phone" name="client_phone">
                         <?php endif; ?>
                     </div>
 
@@ -280,9 +280,9 @@ session_start();
                     <div class="form-group">
                         <label for="Addclient_phone">Phone:</label>
                         <?php if(isset($_SESSION['Addclient_phone'])): ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="Addclient_phone" name="Addclient_phone" value="<?php echo $_SESSION['Addclient_phone']?>">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="123-456-7890" class="form-control" id="Addclient_phone" name="Addclient_phone" value="<?php echo $_SESSION['Addclient_phone']?>">
                         <?php else: ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="Addclient_phone" name="Addclient_phone">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" class="form-control" id="Addclient_phone" name="Addclient_phone">
                         <?php endif; ?>
                     </div>
 
