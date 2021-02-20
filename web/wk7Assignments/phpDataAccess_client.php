@@ -86,10 +86,8 @@ session_start();
                 $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_STR);
                 $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
                 $stmt->execute();
-
-                $AddMessage = "New Client Added";
             }
-
+            $_SESSION['AddMessage'] = "New Client Added. To view client info, use <q>Search Client</q>";
 
             if(isset($_POST['Delclient_email']) || isset($_POST['Delclient_lastname'])){ 
 
@@ -101,6 +99,7 @@ session_start();
                 $stmt = $db->prepare($query);
                 $stmt->execute();
             }
+            $_SESSION['DeleteClientMessage'] = "Client has been deleted.";
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -141,7 +140,16 @@ session_start();
                     </div>
                 </div>
             </div>
-            <br>
+            <?php 
+            if(isset($_POST['Addclient_firstname']) || isset($_POST['Addclient_lastname'])){ 
+                echo "<br>";
+                echo $_SESSION['AddMessage']; 
+            }
+            if(isset($_POST['Delclient_email']) || isset($_POST['Delclient_lastname'])){
+                echo "<br>";
+                echo $_SESSION['DeleteClientMessage']; 
+            }
+            ?>
             <?php
                 if(isset($_POST['client_list'])){
                     $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
@@ -191,10 +199,11 @@ session_start();
                         }
                     ?>
                 </div>
-                <button onclick="hideClientList()" class="btn-sm btn-info">Hide Client List</button>
+                
             </div>
 
             <div id="clientSearchForm" style="display:none;">
+                <br>
                 <h2>Client Search</h2>
                 <h4 class="turqHeader"><em>Use any of the search fields below to search for client</em></h4>
 
