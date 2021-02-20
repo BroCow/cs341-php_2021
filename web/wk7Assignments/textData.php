@@ -125,19 +125,20 @@ session_start();
 
         <main>
             <h1>Client Management</h1>
+            <h3>
 
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                            <button onclick="toggleClientSearch()" id="clientSearch" class="homeButton">Search</button>
+                            <button onclick="toggleClientSearch()" id="clientSearch" class="homeButton">Search<br>Client</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleClientAdd()" id="clientAdd" class="homeButton">Add</button>
+                            <button onclick="toggleClientAdd()" id="clientAdd" class="homeButton">Add<br>Client</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleClientDelete()" id="clientDelete" class="homeButton">Delete</button>
+                            <button onclick="toggleClientDelete()" id="clientDelete" class="homeButton">Delete<br>Client</button>
                     </div>
                 </div>
             </div>
