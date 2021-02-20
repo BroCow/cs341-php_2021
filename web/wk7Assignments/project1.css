@@ -34,3 +34,8 @@ main {
     box-shadow: 0 4px 8px 0 turquoise, 0 6px 20px 0 turquoise;
 }
 
+.clientList_P {
+    border-left: 2px turquoise;
+    border-right: 2px turquoise;
+}
+

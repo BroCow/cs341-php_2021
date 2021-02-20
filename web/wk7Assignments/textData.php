@@ -233,7 +233,7 @@ session_start();
                     $clientListArrayCount = count($clientListArray);
 
                     for ($x = 0; $x <= $clientListArrayCount; $x++) {
-                        echo "<div class='col'>";
+                        echo "<div class='col-sm-3'>";
                             echo "<p class='clientList_P'>$clientListArray[$x] "; 
                             $x++;
                             echo "$clientListArray[$x]<br>"; 
