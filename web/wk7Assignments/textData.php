@@ -591,7 +591,7 @@ session_start();
                             */
                             
                             echo "<tr>";
-                            echo "<td>" . "     " . "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' value='testValue'><strong>Select this order:</strong></td>";
+                            echo "<td>" . "     " . "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' value=$x><strong>Select this order:</strong></td>";
                             $x++;
                             echo "<td>$deleteOrderArray[$x]</td>"; 
                             $x++;
@@ -621,7 +621,8 @@ session_start();
                 
                 
                 if(isset($_SESSION['deleteOrderSelect'])) {
-                    echo "It is set Part 2";
+                    echo "It is set Part 2 <br>";
+                    echo $_SESSION['deleteOrderSelect'];
                     /*
                     $confirmedDeleteClientId = $_SESSION['Addorder_clientId'];
                     $confirmedFirstname = $_SESSION['Addorder_firstname'];
