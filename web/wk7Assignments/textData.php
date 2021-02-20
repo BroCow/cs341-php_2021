@@ -556,6 +556,11 @@ session_start();
             <!---------- DELETE Order - Confirm Order code -------------->
             <form id="form_orderDeleteConfirm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Delete" name="orderDeleteConfirm">
                 <?php 
+                    if(isset($_POST['deleteOrderSelect'])) {
+                        $_SESSION['deleteOrderSelect'] = $_POST['deleteOrderSelect'];
+                        echo "It is set";
+                    } 
+
                     if(isset($_POST['Deleteorder_firstname']) || isset($_POST['Deleteorder_lastname'])){
                         echo "<h3>After verifying order information, check the box and then select <q>Confirm Delete</q></h3>";
                         
@@ -586,7 +591,7 @@ session_start();
                             */
                             
                             echo "<tr>";
-                            echo "<td>" . "     " . "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' value=$orderDeleteArray[$x]><strong>Select this order:</strong></td>";
+                            echo "<td>" . "     " . "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' value='testValue'><strong>Select this order:</strong></td>";
                             $x++;
                             echo "<td>$deleteOrderArray[$x]</td>"; 
                             $x++;
@@ -603,10 +608,7 @@ session_start();
 
                         echo "<button type='submit' class='btn-lg btn-primary'>Delete Order</button>";
 
-                        if(isset($_POST['deleteOrderSelect'])) {
-                            $_SESSION['deleteOrderSelect'] = $_POST['deleteOrderSelect'];
-                            echo "It is set";
-                        } 
+                        
                         
                     }
                 ?>
@@ -619,7 +621,7 @@ session_start();
                 
                 
                 if(isset($_SESSION['deleteOrderSelect'])) {
-                    echo "It is set";
+                    echo "It is set Part 2";
                     /*
                     $confirmedDeleteClientId = $_SESSION['Addorder_clientId'];
                     $confirmedFirstname = $_SESSION['Addorder_firstname'];
@@ -641,7 +643,7 @@ session_start();
                     echo "<div id='orderAddForm' style='display:none;'>";
                 }*/
                 } else {
-                    echo "It is not set";
+                    echo "It is not set Part 2";
                 }
             
             ?>
