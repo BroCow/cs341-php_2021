@@ -191,6 +191,7 @@ session_start();
                         }
                     ?>
                 </div>
+                <button onclick="hideClientList()" class="btn-sm btn-info">Hide Client List</button>
             </div>
 
             <div id="clientSearchForm" style="display:none;">
@@ -275,7 +276,7 @@ session_start();
                         <?php if(isset($_SESSION['Addclient_email'])): ?>
                         <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" value="<?php echo $_SESSION['Addclient_email']?>" required>
                         <?php else: ?>
-                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" required>
+                        <input type="email" class="form-control" id="Addclient_email" name="Addclient_email" placeholder="your@email.com" required>
                         <?php endif; ?>
                     </div>
 
