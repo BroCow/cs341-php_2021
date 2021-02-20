@@ -221,26 +221,30 @@ session_start();
             ?>
 
             <?php 
-                if(isset($_POST['client_list'])){
-                    echo "<div id='viewClientList'>";
-                } else {
-                    echo "<div id='viewClientList' style='display:none;'>";
-                }
+            if(isset($_POST['client_list'])){
+                echo "<div id='viewClientList'>";
+            } else {
+                echo "<div id='viewClientList' style='display:none;'>";
+            }
             ?>
                 <h4>Client List</h4>
+                <div class="row">
                 <?php
                     $clientListArrayCount = count($clientListArray);
 
                     for ($x = 0; $x <= $clientListArrayCount; $x++) {
-                        echo "<p>$clientListArray[$x] "; 
-                        $x++;
-                        echo "$clientListArray[$x]<br>"; 
-                        $x++;
-                        echo "$clientListArray[$x]<br>"; 
-                        $x++;
-                        echo "$clientListArray[$x]</p>"; 
+                        echo "<div class='col'>";
+                            echo "<p class='clientList_P'>$clientListArray[$x] "; 
+                            $x++;
+                            echo "$clientListArray[$x]<br>"; 
+                            $x++;
+                            echo "$clientListArray[$x]<br>"; 
+                            $x++;
+                            echo "$clientListArray[$x]</p>"; 
+                        echo "</div>";
                     }
                 ?>
+                </div>
             </div>
 
             <div id="clientAddForm" style="display:none;">
