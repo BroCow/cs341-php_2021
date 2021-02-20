@@ -82,6 +82,7 @@ session_start();
 
                 $AddMessage = "New Item Added";
             }
+            $_SESSION['AddItemMessage'] = "New Item Added. To view item info, use <q>Search Item</q>";
 
             if(isset($_POST['Delitem_name'])){ 
 
@@ -93,6 +94,7 @@ session_start();
                 $stmt = $db->prepare($query);
                 $stmt->execute();
             }
+            $_SESSION['DeleteItemMessage'] = "Item has been deleted.";
         ?>
 
         <nav class="navbar navbar-expand-sm bg-light">
@@ -133,6 +135,17 @@ session_start();
                     </div>
                 </div>
             </div>
+
+            <?php 
+            if(isset($_POST['Additem_type'])){ 
+                echo "<br>";
+                echo "<h3>" . $_SESSION['AddItemMessage'] . "</h3>"; 
+            }
+            if(isset($_POST['Delitem_name'])){
+                echo "<br>";
+                echo "<h3>" . $_SESSION['DeleteItemMessage'] . "</h3>"; 
+            }
+            ?>
 
             <div id="itemSearchForm" style="display:none;">
                 <br>
@@ -208,12 +221,70 @@ session_start();
 
                 </form>
             </div>
-            <br>
-            <br>
+
+            <?php
+                if(isset($_POST['item_list'])){
+                    $statement = $db->prepare("SELECT item_type, item_name, item_desc, item_price FROM public.item");
+                    $statement->execute();
+
+                    $itemListArray = array();
+
+                    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                    
+                        // The variable "row" now holds the complete record for that
+                        // row, and we can access the different values based on their
+                        // name
+                        $itemType = $row['item_type'];
+                        $itemName = $row['item_name'];
+                        $itemDesc = $row['item_desc'];
+                        $itemPrice = $row['item_price'];
+
+                        array_push($itemListArray, $row['item_type']);
+                        array_push($itemListArray, $row['item_name']);
+                        array_push($itemListArray, $row['item_desc']);
+                        array_push($itemListArray, $row['item_price']);
+                    }
+                }
+            ?>
+            <?php 
+            if(isset($_POST['item_list'])){
+                echo '<div id="viewItemList">';
+            } else {
+                echo '<div id="viewItemList" style="display:none;">';
+            }
+            ?>
+                <br>
+                <h3 class="turqHeader">Item List</h3>
+                <div class="row">
+                    <?php
+                        $itemListArrayCount = count($itemListArray);
+
+                        for ($x = 0; $x <= $itemListArrayCount; $x++) {
+                            echo "<div class='col-sm-3'>";
+                                echo "<p class='clientList_P'><strong>Item Type:</strong>  " . $itemListArray[$x] . "<br>"; 
+                                $x++;
+                                echo "<strong>Item Name:</strong>  " . $itemListArray[$x] . "<br>"; 
+                                $x++;
+                                echo "<strong>Item Description:</strong>  " . $itemListArray[$x] . "<br>"; 
+                                $x++;
+                                echo "<strong>Item Price:</strong>  " . $itemListArray[$x] . "</p>"; 
+                            echo "</div>";
+                        }
+                    ?>
+                </div>
+                
+            </div>
+            
             <div id="itemDeleteForm" style="display:none;">
                 <br>
-                <br>
                 <h2>Delete Item</h2>
+
+                <h4>Not sure about the item's name?</h4>
+                <form id="itemList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item List" name="itemList">
+                    <input type="hidden" id="item_list" name="item_list" value="item_list">
+                    <button type="submit" class="btn-sm btn-info">View Item List</button>
+                </form>
+                <br>
                 
                 <form id="form_itemDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Item Delete" name="itemDelete">
                     <div class="form-group">
