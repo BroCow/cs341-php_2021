@@ -9,6 +9,15 @@ function toggleClientSearch() {
     }
   }
 
+  function toggleClientList() {
+    var x = document.getElementById("viewClientList");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
   function toggleClientAdd() {
     var x = document.getElementById("clientAddForm");
     if (x.style.display === "none") {
