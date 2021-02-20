@@ -121,15 +121,15 @@ session_start();
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
-                            <button onclick="toggleItemSearch()" id="itemSearch" class="homeButton">Search</button>
+                            <button onclick="toggleItemSearch()" id="itemSearch" class="homeButton">Search Item</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleItemAdd()" id="itemAdd" class="homeButton">Add</button>
+                            <button onclick="toggleItemAdd()" id="itemAdd" class="homeButton">Add Item</button>
                     </div>
 
                     <div class="col">
-                            <button onclick="toggleItemDelete()" id="itemDelete" class="homeButton">Delete</button>
+                            <button onclick="toggleItemDelete()" id="itemDelete" class="homeButton">Delete Item</button>
                     </div>
                 </div>
             </div>
