@@ -61,11 +61,13 @@ session_start();
                     $phone = $row['client_phone'];
                     echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
+                    if(isset($_POST['client_list'])){
                     array_push($clientListArray, $row['client_firstname']);
                     array_push($clientListArray, $row['client_lastname']);
                     array_push($clientListArray, $row['client_email']);
                     array_push($clientListArray, $row['client_phone']);
-                
+                    }
+                    
                     if($search_firstname == $row['client_firstname'] || $search_lastname == $row['client_lastname'] || $search_email == $row['client_email'] || $search_phone == $row['client_phone']) {
                         array_push($clientNameArray, $row['client_firstname']);
                         array_push($clientNameArray, $row['client_lastname']);
@@ -196,12 +198,19 @@ session_start();
                 <br>
 
                 <h4>Not sure about the client's information?</h4>
-                <button onclick="toggleClientList()" class="btn-sm btn-info">View Client List</button>
+                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
+                    <input type="hidden" id="client_list" name="client_list" value="client_list">
+                    <button type="submit" class="btn-sm btn-info">View Client List</button>
+                </form>
             </div>
-
             <br>
-
-            <div id="viewClientList" style="display:none;">
+            <?php 
+                if(isset($_POST['client_list'])){
+                    echo "<div id='viewClientList'>";
+                } else {
+                    echo "<div id='viewClientList' style='display:none;'>";
+                }
+            ?>
                 <h4>Client List</h4>
                 <?php
                     $clientListArrayCount = count($clientListArray);
