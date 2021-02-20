@@ -141,12 +141,6 @@ session_start();
                     </div>
                 </div>
             </div>
-            
-            
-                <br>
-
-                
-           
             <br>
             <?php
                 if(isset($_POST['client_list'])){
@@ -172,7 +166,6 @@ session_start();
                     }
                 }
             ?>
-
             <?php 
             if(isset($_POST['client_list'])){
                 echo "<div id='viewClientList'>";
@@ -182,27 +175,25 @@ session_start();
             ?>
                 <h3 class="turqHeader">Client List</h3>
                 <div class="row">
-                <?php
-                    $clientListArrayCount = count($clientListArray);
+                    <?php
+                        $clientListArrayCount = count($clientListArray);
 
-                    for ($x = 0; $x <= $clientListArrayCount; $x++) {
-                        echo "<div class='col-sm-3'>";
-                            echo "<p class='clientList_P'>$clientListArray[$x] "; 
-                            $x++;
-                            echo "$clientListArray[$x]<br>"; 
-                            $x++;
-                            echo "$clientListArray[$x]<br>"; 
-                            $x++;
-                            echo "$clientListArray[$x]</p>"; 
-                        echo "</div>";
-                    }
-                ?>
+                        for ($x = 0; $x <= $clientListArrayCount; $x++) {
+                            echo "<div class='col-sm-3'>";
+                                echo "<p class='clientList_P'>$clientListArray[$x] "; 
+                                $x++;
+                                echo "$clientListArray[$x]<br>"; 
+                                $x++;
+                                echo "$clientListArray[$x]<br>"; 
+                                $x++;
+                                echo "$clientListArray[$x]</p>"; 
+                            echo "</div>";
+                        }
+                    ?>
                 </div>
             </div>
 
             <div id="clientSearchForm" style="display:none;">
-                <br>
-                <br>
                 <h2>Client Search</h2>
                 <h4 class="turqHeader"><em>Use any of the search fields below to search for client</em></h4>
                 
