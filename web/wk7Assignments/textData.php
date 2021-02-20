@@ -195,6 +195,31 @@ session_start();
                 </form>
             </div>
             <br>
+            <?php
+                if(isset($_POST['client_list'])){
+                    $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+                    $statement->execute();
+
+                    $clientListArray = array();
+
+                    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                    
+                        // The variable "row" now holds the complete record for that
+                        // row, and we can access the different values based on their
+                        // name
+                        $firstname = $row['client_firstname'];
+                        $lastname = $row['client_lastname'];
+                        $email = $row['client_email'];
+                        $phone = $row['client_phone'];
+
+                        array_push($clientListArray, $row['client_firstname']);
+                        array_push($clientListArray, $row['client_lastname']);
+                        array_push($clientListArray, $row['client_email']);
+                        array_push($clientListArray, $row['client_phone']);
+                    }
+                }
+            ?>
+
             <?php 
                 if(isset($_POST['client_list'])){
                     echo "<div id='viewClientList'>";
