@@ -86,10 +86,8 @@ session_start();
                 $stmt->bindValue(':AddClientEmail', $AddClientEmail, PDO::PARAM_STR);
                 $stmt->bindValue(':AddClientPhone', $AddClientPhone, PDO::PARAM_STR);
                 $stmt->execute();
-
-                $AddMessage = "New Client Added";
             }
-
+            $_SESSION['AddMessage'] = "New Client Added. To view client info, use <q>Search Client</q>";
 
             if(isset($_POST['Delclient_email']) || isset($_POST['Delclient_lastname'])){ 
 
@@ -141,6 +139,11 @@ session_start();
                     </div>
                 </div>
             </div>
+            <?php 
+            if(isset($_POST['Addclient_firstname']) || isset($_POST['Addclient_lastname'])){ 
+                echo $_SESSION['AddMessage']; 
+            }
+            ?>
             <?php
                 if(isset($_POST['client_list'])){
                     $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
@@ -248,7 +251,7 @@ session_start();
             
             <div id="clientAddForm" style="display:none;">
                 
-                
+                <br>
                 <h2>Add Client</h2>
                 
                 <form id="form_clientAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Add" name="clientAdd">
