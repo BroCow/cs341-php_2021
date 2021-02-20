@@ -221,7 +221,7 @@ session_start();
                         <?php if(isset($_SESSION['client_email'])): ?>
                         <input type="email" class="form-control" id="client_email" name="client_email" value="<?php echo $_SESSION['client_email']?>">
                         <?php else: ?>
-                        <input type="email" class="form-control" id="client_email" name="client_email">
+                        <input type="email" class="form-control" id="client_email" name="client_email" placeholder="your@email.com">
                         <?php endif; ?>
                     </div>
 
