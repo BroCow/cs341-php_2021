@@ -196,6 +196,12 @@ session_start();
             <div id="clientSearchForm" style="display:none;">
                 <h2>Client Search</h2>
                 <h4 class="turqHeader"><em>Use any of the search fields below to search for client</em></h4>
+
+                <h4>Not sure about the client's information?</h4>
+                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
+                    <input type="hidden" id="client_list" name="client_list" value="client_list">
+                    <button type="submit" class="btn-sm btn-info">View Client List</button>
+                </form>
                 
                 <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
                     <div class="form-group">
@@ -237,11 +243,7 @@ session_start();
                     <button type="submit" class="btn-lg btn-primary">Search</button>
                 </form>
                 <br>
-                <h4>Not sure about the client's information?</h4>
-                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
-                    <input type="hidden" id="client_list" name="client_list" value="client_list">
-                    <button type="submit" class="btn-sm btn-info">View Client List</button>
-                </form>
+                
             </div>
             
             <div id="clientAddForm" style="display:none;">
