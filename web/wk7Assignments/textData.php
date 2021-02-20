@@ -586,7 +586,7 @@ session_start();
                             */
                             
                             echo "<tr>";
-                            echo "<td>" . "     " . "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' . $x value=$orderDeleteArray[$x]><strong>Select this order:</strong></td>";
+                            echo "<td>" . "     " . "<input type='checkbox' class='form-check-input' name='deleteOrderSelect' value=$orderDeleteArray[$x]><strong>Select this order:</strong></td>";
                             $x++;
                             echo "<td>$deleteOrderArray[$x]</td>"; 
                             $x++;
@@ -602,6 +602,12 @@ session_start();
                         echo "</table>";
 
                         echo "<button type='submit' class='btn-lg btn-primary'>Delete Order</button>";
+
+                        if(isset($_POST['deleteOrderSelect'])) {
+                            echo "It is set";
+                        } else {
+                            echo "It is not set";
+                        }
                         
                     }
                 ?>
@@ -609,8 +615,13 @@ session_start();
 
             <!-------- DELETE Order - Details code ----------------->
             <?php
-            
-                if(isset($_POST['deleteOrderSelect'])) {
+            /*
+            for ($x = 0; $x <= $deleteOrderArrayCount; $x++) {
+                
+                
+                if(isset($_POST['deleteOrderSelect'.$x])) {
+                    echo "It is set";
+                    
                     $confirmedDeleteClientId = $_SESSION['Addorder_clientId'];
                     $confirmedFirstname = $_SESSION['Addorder_firstname'];
                     $confirmedLastname = $_SESSION['Addorder_lastname'];
@@ -630,6 +641,10 @@ session_start();
                 } else {
                     echo "<div id='orderAddForm' style='display:none;'>";
                 }
+                } else {
+                    echo "It is not set";
+                }
+            }*/
             ?>
 
         </main>
