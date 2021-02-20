@@ -142,51 +142,7 @@ session_start();
                 </div>
             </div>
             
-            <div id="clientSearchForm" style="display:none;">
-                <br>
-                <br>
-                <h2>Client Search</h2>
-                <h4 class="turqHeader"><em>Use any of the search fields below to search for client</em></h4>
-                
-                <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
-                    <div class="form-group">
-                        <label for="client_firstname">First Name:</label>
-                        <?php if(isset($_SESSION['client_firstname'])): ?>
-                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="client_lastname">Last Name:</label>
-                        <?php if(isset($_SESSION['client_lastname'])): ?>
-                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
-                        <?php else: ?>
-                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="client_email">Email:</label>
-                        <?php if(isset($_SESSION['client_email'])): ?>
-                        <input type="email" class="form-control" id="client_email" name="client_email" value="<?php echo $_SESSION['client_email']?>">
-                        <?php else: ?>
-                        <input type="email" class="form-control" id="client_email" name="client_email">
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="client_phone">Phone:</label>
-                        <?php if(isset($_SESSION['client_phone'])): ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
-                        <?php else: ?>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone">
-                        <?php endif; ?>
-                    </div>
-
-                    <button type="submit" class="btn-lg btn-primary">Search</button>
-                </form>
+            
                 <br>
 
                 <h4>Not sure about the client's information?</h4>
@@ -247,6 +203,52 @@ session_start();
                 ?>
                 </div>
             </div>
+
+            <div id="clientSearchForm" style="display:none;">
+                <br>
+                <br>
+                <h2>Client Search</h2>
+                <h4 class="turqHeader"><em>Use any of the search fields below to search for client</em></h4>
+                
+                <form id="form_clientSearch" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Search" name="clientSearch">
+                    <div class="form-group">
+                        <label for="client_firstname">First Name:</label>
+                        <?php if(isset($_SESSION['client_firstname'])): ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname" value="<?php echo $_SESSION['client_firstname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_firstname" name="client_firstname">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_lastname">Last Name:</label>
+                        <?php if(isset($_SESSION['client_lastname'])): ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname" value="<?php echo $_SESSION['client_lastname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="client_lastname" name="client_lastname">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_email">Email:</label>
+                        <?php if(isset($_SESSION['client_email'])): ?>
+                        <input type="email" class="form-control" id="client_email" name="client_email" value="<?php echo $_SESSION['client_email']?>">
+                        <?php else: ?>
+                        <input type="email" class="form-control" id="client_email" name="client_email">
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_phone">Phone:</label>
+                        <?php if(isset($_SESSION['client_phone'])): ?>
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone" value="<?php echo $_SESSION['client_phone']?>">
+                        <?php else: ?>
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" id="client_phone" name="client_phone">
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn-lg btn-primary">Search</button>
+                </form>
 
             <div id="clientAddForm" style="display:none;">
                 <br>
