@@ -242,12 +242,12 @@ session_start();
 
                     <button type="submit" class="btn-lg btn-primary">Search</button>
                 </form>
-                <br>
+                
                 
             </div>
             
             <div id="clientAddForm" style="display:none;">
-                <br>
+                
                 <br>
                 <h2>Add Client</h2>
                 
