@@ -96,11 +96,11 @@ session_start();
                 $orderNameArray = array();
                 
                 if(isset($_POST['Addorder_firstname'])){
-                    $_SESSION['order_firstname'] = htmlspecialchars($_POST['Addorder_firstname']);
+                    $_SESSION['Addorder_firstname'] = htmlspecialchars($_POST['Addorder_firstname']);
                 }
                 
                 if(isset($_POST['Addorder_lastname'])){
-                    $_SESSION['order_lastname'] = htmlspecialchars($_POST['Addorder_lastname']);
+                    $_SESSION['Addorder_lastname'] = htmlspecialchars($_POST['Addorder_lastname']);
                 }
                 
                 // Go through each result
@@ -240,8 +240,8 @@ session_start();
                     
                     <div class="form-group">
                         <label for="order_firstname">Search by first name:</label>
-                        <?php if(isset($_SESSION['order_firstname'])): ?>
-                        <input type="text" class="form-control" id="order_firstname" name="order_firstname" value="<?php echo $_SESSION['order_firstname']?>">
+                        <?php if(isset($_SESSION['Addorder_firstname'])): ?>
+                        <input type="text" class="form-control" id="order_firstname" name="order_firstname" value="<?php echo $_SESSION['Addorder_firstname']?>">
                         <?php else: ?>
                         <input type="text" class="form-control" id="order_firstname" name="order_firstname">
                         <?php endif; ?>
@@ -249,8 +249,8 @@ session_start();
                     
                     <div class="form-group">
                         <label for="order_lastname">Search by last name:</label>
-                        <?php if(isset($_SESSION['order_lastname'])): ?>
-                        <input type="text" class="form-control" id="order_lastname" name="order_lastname" value="<?php echo $_SESSION['order_lastname']?>">
+                        <?php if(isset($_SESSION['Addorder_lastname'])): ?>
+                        <input type="text" class="form-control" id="order_lastname" name="order_lastname" value="<?php echo $_SESSION['Addorder_lastname']?>">
                         <?php else: ?>
                         <input type="text" class="form-control" id="order_lastname" name="order_lastname">
                         <?php endif; ?>
@@ -402,6 +402,7 @@ session_start();
             <!---------- ADD Order - Confirm Client code -------------->
             <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
                 <?php 
+                echo $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'];
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
                         if ($_SESSION['order_firstname'] != $_SESSION['orderFirstname'] || $_SESSION['order_lastname'] != $_SESSION['orderLastname']) {
                             echo "<h3>" . $_SESSION['addOrderClientNotFound'] . "</h3>";
