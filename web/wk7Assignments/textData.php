@@ -382,6 +382,8 @@ session_start();
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
                         if (empty($_SESSION['addOrderClientNotFound'])) {
                             echo "It is empty";
+                        } else {
+                            echo $_SESSION['addOrderClientNotFound'];
                         }
                         echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
                         
