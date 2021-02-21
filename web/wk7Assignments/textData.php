@@ -124,8 +124,9 @@ session_start();
                         array_push($orderNameArray, $row['client_lastname']);
                         array_push($orderNameArray, $row['client_email']);
                         array_push($orderNameArray, $row['client_phone']);
-                    } 
-            
+                    } else if ($order_firstname != $row['client_firstname'] || $order_lastname != $row['client_lastname']) {
+                        echo "Client not found";
+                    }
 
                 }
             }
