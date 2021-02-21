@@ -313,7 +313,7 @@ session_start();
                     <input type="hidden" id="client_list" name="client_list" value="client_list">
                     <button type="submit" class="btn-sm btn-info">View Client List</button>
                 </form>
-                
+                <br>
                 <form id="form_clientDelete" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client Delete" name="clientDelete">
                     <div class="form-group">
                         <label for="Delclient_email">Enter Client Email:</label>
