@@ -124,8 +124,11 @@ session_start();
                         array_push($orderNameArray, $row['client_lastname']);
                         array_push($orderNameArray, $row['client_email']);
                         array_push($orderNameArray, $row['client_phone']);
-                    } 
-            
+                    }
+                    
+                    if ($order_firstname != $row['client_firstname'] || $order_lastname != $row['client_lastname']) {
+                        $_SESSION['addOrderClientNotFound'] = "Client not found";
+                    }
 
                 }
             }
@@ -171,6 +174,58 @@ session_start();
                 </div>
             </div>
             <br>
+            <?php
+                if(isset($_POST['client_list'])){
+                    $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+                    $statement->execute();
+
+                    $clientListArray = array();
+
+                    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                    
+                        // The variable "row" now holds the complete record for that
+                        // row, and we can access the different values based on their
+                        // name
+                        $firstname = $row['client_firstname'];
+                        $lastname = $row['client_lastname'];
+                        $email = $row['client_email'];
+                        $phone = $row['client_phone'];
+
+                        array_push($clientListArray, $row['client_firstname']);
+                        array_push($clientListArray, $row['client_lastname']);
+                        array_push($clientListArray, $row['client_email']);
+                        array_push($clientListArray, $row['client_phone']);
+                    }
+                }
+            ?>
+            <?php 
+            if(isset($_POST['client_list'])){
+                echo '<div id="viewClientList">';
+            } else {
+                echo '<div id="viewClientList" style="display:none;">';
+            }
+            ?>
+                <br>
+                <h3 class="turqHeader">Client List</h3>
+                <div class="row">
+                    <?php
+                        $clientListArrayCount = count($clientListArray);
+
+                        for ($x = 0; $x <= $clientListArrayCount; $x++) {
+                            echo "<div class='col-sm-3'>";
+                                echo "<p class='clientList_P'>$clientListArray[$x] "; 
+                                $x++;
+                                echo "$clientListArray[$x]<br>"; 
+                                $x++;
+                                echo "$clientListArray[$x]<br>"; 
+                                $x++;
+                                echo "$clientListArray[$x]</p>"; 
+                            echo "</div>";
+                        }
+                    ?>
+                </div>
+                
+            </div>
             <br>
 
             
@@ -289,6 +344,13 @@ session_start();
             <!------------ ADD Order Code -------------------------------->
             <div id="orderAddName" style="display:none;">
                 <h3>Enter name of client for new order</h3>
+                <p>If order is for a new client, <a href="phpDataAccess_client.php"> add client</a> before placing order</p>
+                <br>
+                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
+                    <input type="hidden" id="client_list" name="client_list" value="client_list">
+                    <button type="submit" class="btn-sm btn-info">View Client List</button>
+                </form>
+                <br>
                 <form id="form_orderAddName" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add Name" name="orderAddName">
             
                     <div class="form-group">
@@ -318,29 +380,35 @@ session_start();
             <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
                 <?php 
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
-                        echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
+                        if ($order_firstname != $row['client_firstname'] || $order_lastname != $row['client_lastname']) {
+                            echo "<h3>" . $_SESSION['addOrderClientNotFound'] . "</h3>";
+                            echo "<p>Try viewing the client list in the <a href='phpDataAccess_order.php'><q>Add Order</q></a> screen, or if this is a new client <a href='phpDataAccess_client.php'>Add New Client</a>.";
+                        } else {
+                            echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
                         
-                        $orderNameArrayCount = count($orderNameArray);
-
-                        for ($x = 0; $x <= $orderNameArrayCount; $x++) {
-                            echo "<div class='form-check'>";
-                            echo    "<label class='form-check-label'>";
-                            echo        "<input type='checkbox' class='form-check-input' name='clientSelect' value=$orderNameArray[$x]><strong>Select this client:</strong>"; //first value of $orderNameArray = client_id
-                            echo    "</label>";
-                            $x++;
-                            echo    "<p>$orderNameArray[$x] "; //2nd value is first name
-                            $x++;
-                            echo    $orderNameArray[$x] . "<br>"; //3rd value is last name
-                            $x++;
-                            echo    $orderNameArray[$x] . "<br>"; // 4th value is email
-                            $x++;
-                            echo    $orderNameArray[$x]; // 5th value is phone
-                            $x++;
-                            echo "</div>"; 
-            
+                            $orderNameArrayCount = count($orderNameArray);
+    
+                            for ($x = 0; $x <= $orderNameArrayCount; $x++) {
+                                echo "<div class='form-check'>";
+                                echo    "<label class='form-check-label'>";
+                                echo        "<input type='checkbox' class='form-check-input' name='clientSelect' value=$orderNameArray[$x]><strong>Select this client:</strong>"; //first value of $orderNameArray = client_id
+                                echo    "</label>";
+                                $x++;
+                                echo    "<p>$orderNameArray[$x] "; //2nd value is first name
+                                $x++;
+                                echo    $orderNameArray[$x] . "<br>"; //3rd value is last name
+                                $x++;
+                                echo    $orderNameArray[$x] . "<br>"; // 4th value is email
+                                $x++;
+                                echo    $orderNameArray[$x]; // 5th value is phone
+                                $x++;
+                                echo "</div>"; 
+                
+                            }
+                            echo "<button type='submit' class='btn-lg btn-primary'>Confirm Client</button>";
                         }
-                        echo "<button type='submit' class='btn-lg btn-primary'>Confirm Client</button>";
                     }
+                        
                 ?>
             </form>
 
