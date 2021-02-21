@@ -381,7 +381,8 @@ session_start();
                 <?php 
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
                         if ($order_firstname != $row['client_firstname'] || $order_lastname != $row['client_lastname']) {
-                            echo $_SESSION['addOrderClientNotFound'];
+                            echo "<h3>" . $_SESSION['addOrderClientNotFound'] . "</h3>";
+                            echo "<p>Try viewing the client list in the <a href='phpDataAccess_order.php'><q>Add Order</q></a> screen, or if this is a new client <a href='phpDataAccess_client.php'>Add New Client</a>.";
                         } else {
                             echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
                         
