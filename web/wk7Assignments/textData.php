@@ -177,7 +177,7 @@ session_start();
             </div>
             <br>
             <?php 
-            if(isset($POST['Addorder_type'])){ 
+            if(isset($_POST['Addorder_type'])){ 
                 echo "<br>";
                 echo "<h3>" . $_SESSION['AddOrderMessage'] . "</h3>"; 
             }
