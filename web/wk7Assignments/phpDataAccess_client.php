@@ -306,9 +306,8 @@ session_start();
 
             <div id="clientDeleteForm" style="display:none;">
                 <br>
-                <br>
                 <h2>Delete Client</h2>
-
+                <br>
                 <h4>Not sure about the client's information?</h4>
                 <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
                     <input type="hidden" id="client_list" name="client_list" value="client_list">
