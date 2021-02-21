@@ -402,7 +402,6 @@ session_start();
             <!---------- ADD Order - Confirm Client code -------------->
             <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
                 <?php 
-                echo $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'];
                 
                 if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
 
@@ -429,6 +428,9 @@ session_start();
                         }
 
                         echo "<button type='submit' class='btn-lg btn-primary'>Confirm Client</button>";
+                    } else {
+                        echo "<h3>Client not found.</h3>";
+                        echo "<p>Try viewing the client list in the <a href='phpDataAccess_order.php'><q>Add Order</q></a> screen, or if this is a new client <a href='phpDataAccess_client.php'>Add New Client</a>.";
                     }
                 }
               
