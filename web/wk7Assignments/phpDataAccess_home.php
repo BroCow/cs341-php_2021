@@ -48,6 +48,8 @@ session_start();
       
 
         <main>
+
+            <h2>What would you like to manage?</h2>
             
             <div id="test" class="container">
                 <div class="row">
