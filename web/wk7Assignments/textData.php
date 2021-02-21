@@ -403,10 +403,10 @@ session_start();
             <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
                 <?php 
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
-                        /*if ($_SESSION['order_firstname'] != $_SESSION['orderFirstname'] || $_SESSION['order_lastname'] != $_SESSION['orderLastname']) {
+                        if ($_SESSION['order_firstname'] != $_SESSION['orderFirstname'] || $_SESSION['order_lastname'] != $_SESSION['orderLastname']) {
                             echo "<h3>" . $_SESSION['addOrderClientNotFound'] . "</h3>";
                             echo "<p>Try viewing the client list in the <a href='phpDataAccess_order.php'><q>Add Order</q></a> screen, or if this is a new client <a href='phpDataAccess_client.php'>Add New Client</a>.";
-                        } else {*/
+                        } else {
                             echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
                         
                             $orderNameArrayCount = count($orderNameArray);
