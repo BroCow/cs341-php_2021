@@ -177,7 +177,7 @@ session_start();
             </div>
             <br>
             <?php 
-            if(isset($_SESSION['Addorder_dbFirstname']) || isset($_SESSION['Addorder_dbLastname'])){ 
+            if(isset($POST['Addorder_type'])){ 
                 echo "<br>";
                 echo "<h3>" . $_SESSION['AddOrderMessage'] . "</h3>"; 
             }
