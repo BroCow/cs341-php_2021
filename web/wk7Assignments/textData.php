@@ -160,6 +160,13 @@ session_start();
         <main>
             <h1>Order Management</h1>
 
+            <?php 
+            if(isset($_SESSION['Addorder_dbFirstname']) || isset($_SESSION['Addorder_dbLastname'])){ 
+                echo "<br>";
+                echo $_SESSION['AddOrderMessage']; 
+            }
+            ?>
+
             <div id="test" class="container">
                 <div class="row">
                     <div class="col">
@@ -483,9 +490,9 @@ session_start();
                     $last_order_id = $db->lastInsertId();
                     $_SESSION['last_order_id'] = $last_order_id;
                     //echo "last orderId " . $_SESSION['last_order_id'];
-
-                    echo "<h3>Order added for " . $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'];
                 }
+
+                $_SESSION['AddOrderMessage'] = "New Order Added. To view order info, use <q>Search Order</q>";
             ?>
                 <h2>Add Order for <?php echo $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'] ?></h2>
                 <form id="form_orderAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add" name="orderAdd">
