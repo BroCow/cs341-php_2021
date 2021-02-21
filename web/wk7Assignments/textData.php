@@ -289,6 +289,12 @@ session_start();
             <!------------ ADD Order Code -------------------------------->
             <div id="orderAddName" style="display:none;">
                 <h3>Enter name of client for new order</h3>
+                <p>If order is for a new client, <a href="phpDataAccess_client.php"> add client</a> before placing order</p>
+                <br>
+                <form id="clientList" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Client List" name="clientList">
+                    <input type="hidden" id="client_list" name="client_list" value="client_list">
+                    <button type="submit" class="btn-sm btn-info">View Client List</button>
+                </form>
                 <form id="form_orderAddName" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add Name" name="orderAddName">
             
                     <div class="form-group">
