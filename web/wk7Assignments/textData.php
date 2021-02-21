@@ -125,7 +125,7 @@ session_start();
                         array_push($orderNameArray, $row['client_email']);
                         array_push($orderNameArray, $row['client_phone']);
                     } else if ($order_firstname != $row['client_firstname'] || $order_lastname != $row['client_lastname']) {
-                        echo "Client not found";
+                        $_SESSION['addOrderClientNotFound'] = "Client not found";
                     }
 
                 }
@@ -378,6 +378,9 @@ session_start();
             <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
                 <?php 
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
+                        if (empty($_SESSION['addOrderClientNotFound'])) {
+                            echo "It is empty";
+                        }
                         echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
                         
                         $orderNameArrayCount = count($orderNameArray);
