@@ -176,6 +176,12 @@ session_start();
                 </div>
             </div>
             <br>
+            <?php 
+            if(isset($_POST['Addorder_type'])){ 
+                echo "<br>";
+                echo "<h3>" . $_SESSION['AddOrderMessage'] . "</h3>"; 
+            }
+            ?>
             <?php
                 if(isset($_POST['client_list'])){
                     $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
@@ -483,9 +489,9 @@ session_start();
                     $last_order_id = $db->lastInsertId();
                     $_SESSION['last_order_id'] = $last_order_id;
                     //echo "last orderId " . $_SESSION['last_order_id'];
-
-                    echo "<h3>Order added for " . $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'];
                 }
+
+                $_SESSION['AddOrderMessage'] = "New Order Added. To view order info, use <q>Search Order</q>.";
             ?>
                 <h2>Add Order for <?php echo $_SESSION['Addorder_firstname'] . " " . $_SESSION['Addorder_lastname'] ?></h2>
                 <form id="form_orderAdd" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add" name="orderAdd">
