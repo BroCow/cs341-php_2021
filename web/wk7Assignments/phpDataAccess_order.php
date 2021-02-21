@@ -44,11 +44,18 @@ session_start();
  
                 $orderArray = array();
 
+                if(isset($_POST['order_firstname'])){
+                    $search_orderFirstName = $_POST['order_firstname'];
+                }
+
+                if(isset($_POST['order_lastname'])){
+                    $search_orderLastName = $_POST['order_lastname'];
+                }
+
                 if(isset($_POST['order_type'])){
                     $search_orderType = $_POST['order_type'];
                 }
 
-                
                 if(null !==($_POST['year'] && $_POST['month'] && $_POST['day'])){
                     $search_orderDate = $_POST['year'] . "-" . $_POST['month'] . "-" . $_POST['day'];
                 }
@@ -68,18 +75,13 @@ session_start();
                 //echo "<p><strong>$firstname $lastname $email $phone</strong><p>";
 
                 // Need to create an array and push results to it instead of variable
-                if($search_orderType == $row['order_type']) {
+                if($search_orderType == $row['order_type'] || $search_orderDate == $row['order_date'] || $search_orderFirstName == $row['client_firstname'] || $search_orderLastName == $row['client_lastname']) {
                     array_push($orderArray, $row['order_type']);
                     array_push($orderArray, $row['client_firstname']);
                     array_push($orderArray, $row['client_lastname']);
                     array_push($orderArray, $row['order_date']);
                     }
-                if($search_orderDate == $row['order_date']) {
-                    array_push($orderArray, $row['order_type']);
-                    array_push($orderArray, $row['client_firstname']);
-                    array_push($orderArray, $row['client_lastname']);
-                    array_push($orderArray, $row['order_date']);
-                    } 
+                
                 } 
             //}
 
@@ -235,7 +237,28 @@ session_start();
                 <h2>Order Search</h2>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Search" name="orderSearch">
 
-                    <label for="order_type">Search by payment type:</label>
+                    
+                    <div class="form-group">
+                        <label for="order_firstname">Search by first name:</label>
+                        <?php if(isset($_SESSION['order_firstname'])): ?>
+                        <input type="text" class="form-control" id="order_firstname" name="order_firstname" value="<?php echo $_SESSION['order_firstname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="order_firstname" name="order_firstname">
+                        <?php endif; ?>
+                    </div>   
+                    
+                    <div class="form-group">
+                        <label for="order_lastname">Search by last name:</label>
+                        <?php if(isset($_SESSION['order_lastname'])): ?>
+                        <input type="text" class="form-control" id="order_lastname" name="order_lastname" value="<?php echo $_SESSION['order_lastname']?>">
+                        <?php else: ?>
+                        <input type="text" class="form-control" id="order_lastname" name="order_lastname">
+                        <?php endif; ?>
+                    </div>
+                
+                
+                
+                <label for="order_type">Search by payment type:</label>
                     <br>
                     <select id="order_type" name="order_type">
                         <option value="">Select</option>
