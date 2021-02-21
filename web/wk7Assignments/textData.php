@@ -382,30 +382,32 @@ session_start();
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
                         if ($order_firstname != $row['client_firstname'] || $order_lastname != $row['client_lastname']) {
                             echo $_SESSION['addOrderClientNotFound'];
-                        } 
-                        echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
+                        } else {
+                            echo "<h3>After verifying client information, check the box and then select <q>Confirm Client</q></h3>";
                         
-                        $orderNameArrayCount = count($orderNameArray);
-
-                        for ($x = 0; $x <= $orderNameArrayCount; $x++) {
-                            echo "<div class='form-check'>";
-                            echo    "<label class='form-check-label'>";
-                            echo        "<input type='checkbox' class='form-check-input' name='clientSelect' value=$orderNameArray[$x]><strong>Select this client:</strong>"; //first value of $orderNameArray = client_id
-                            echo    "</label>";
-                            $x++;
-                            echo    "<p>$orderNameArray[$x] "; //2nd value is first name
-                            $x++;
-                            echo    $orderNameArray[$x] . "<br>"; //3rd value is last name
-                            $x++;
-                            echo    $orderNameArray[$x] . "<br>"; // 4th value is email
-                            $x++;
-                            echo    $orderNameArray[$x]; // 5th value is phone
-                            $x++;
-                            echo "</div>"; 
-            
+                            $orderNameArrayCount = count($orderNameArray);
+    
+                            for ($x = 0; $x <= $orderNameArrayCount; $x++) {
+                                echo "<div class='form-check'>";
+                                echo    "<label class='form-check-label'>";
+                                echo        "<input type='checkbox' class='form-check-input' name='clientSelect' value=$orderNameArray[$x]><strong>Select this client:</strong>"; //first value of $orderNameArray = client_id
+                                echo    "</label>";
+                                $x++;
+                                echo    "<p>$orderNameArray[$x] "; //2nd value is first name
+                                $x++;
+                                echo    $orderNameArray[$x] . "<br>"; //3rd value is last name
+                                $x++;
+                                echo    $orderNameArray[$x] . "<br>"; // 4th value is email
+                                $x++;
+                                echo    $orderNameArray[$x]; // 5th value is phone
+                                $x++;
+                                echo "</div>"; 
+                
+                            }
+                            echo "<button type='submit' class='btn-lg btn-primary'>Confirm Client</button>";
                         }
-                        echo "<button type='submit' class='btn-lg btn-primary'>Confirm Client</button>";
                     }
+                        
                 ?>
             </form>
 
