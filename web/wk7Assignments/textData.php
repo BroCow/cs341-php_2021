@@ -171,6 +171,58 @@ session_start();
                 </div>
             </div>
             <br>
+            <?php
+                if(isset($_POST['client_list'])){
+                    $statement = $db->prepare("SELECT client_firstname, client_lastname, client_email, client_phone FROM client");
+                    $statement->execute();
+
+                    $clientListArray = array();
+
+                    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                    
+                        // The variable "row" now holds the complete record for that
+                        // row, and we can access the different values based on their
+                        // name
+                        $firstname = $row['client_firstname'];
+                        $lastname = $row['client_lastname'];
+                        $email = $row['client_email'];
+                        $phone = $row['client_phone'];
+
+                        array_push($clientListArray, $row['client_firstname']);
+                        array_push($clientListArray, $row['client_lastname']);
+                        array_push($clientListArray, $row['client_email']);
+                        array_push($clientListArray, $row['client_phone']);
+                    }
+                }
+            ?>
+            <?php 
+            if(isset($_POST['client_list'])){
+                echo '<div id="viewClientList">';
+            } else {
+                echo '<div id="viewClientList" style="display:none;">';
+            }
+            ?>
+                <br>
+                <h3 class="turqHeader">Client List</h3>
+                <div class="row">
+                    <?php
+                        $clientListArrayCount = count($clientListArray);
+
+                        for ($x = 0; $x <= $clientListArrayCount; $x++) {
+                            echo "<div class='col-sm-3'>";
+                                echo "<p class='clientList_P'>$clientListArray[$x] "; 
+                                $x++;
+                                echo "$clientListArray[$x]<br>"; 
+                                $x++;
+                                echo "$clientListArray[$x]<br>"; 
+                                $x++;
+                                echo "$clientListArray[$x]</p>"; 
+                            echo "</div>";
+                        }
+                    ?>
+                </div>
+                
+            </div>
             <br>
 
             
@@ -295,6 +347,7 @@ session_start();
                     <input type="hidden" id="client_list" name="client_list" value="client_list">
                     <button type="submit" class="btn-sm btn-info">View Client List</button>
                 </form>
+                <br>
                 <form id="form_orderAddName" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Order Add Name" name="orderAddName">
             
                     <div class="form-group">
