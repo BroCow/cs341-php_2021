@@ -96,11 +96,11 @@ session_start();
                 $orderNameArray = array();
                 
                 if(isset($_POST['Addorder_firstname'])){
-                    $order_firstname = htmlspecialchars($_POST['Addorder_firstname']);
+                    $_SESSION['order_firstname'] = htmlspecialchars($_POST['Addorder_firstname']);
                 }
                 
                 if(isset($_POST['Addorder_lastname'])){
-                    $order_lastname = htmlspecialchars($_POST['Addorder_lastname']);
+                    $_SESSION['order_lastname'] = htmlspecialchars($_POST['Addorder_lastname']);
                 }
                 
                 // Go through each result
@@ -110,8 +110,8 @@ session_start();
                 // row, and we can access the different values based on their
                 // name
                 $orderClientId = $row['client_id'];
-                $orderFirstname = $row['client_firstname'];
-                $orderLastname = $row['client_lastname'];
+                $_SESSION['orderFirstname'] = $row['client_firstname'];
+                $_SESSION['orderLastname'] = $row['client_lastname'];
                 $orderEmail = $row['client_email'];
                 $orderPhone = $row['client_phone'];
                 //echo "<p><strong>$orderFirstname $orderLastname $orderEmail $orderPhone</strong><p>";
@@ -403,7 +403,7 @@ session_start();
             <form id="form_orderAddConfirmClient" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" title="Confirm Client" name="orderAddConfirmClient">
                 <?php 
                     if(isset($_POST['Addorder_firstname']) || isset($_POST['Addorder_lastname'])){
-                        if ($order_firstname != $row['client_firstname'] || $order_lastname != $row['client_lastname']) {
+                        if ($_SESSION['order_firstname'] != $_SESSION['orderFirstname'] || $_SESSION['order_lastname'] != $_SESSION['orderLastname']) {
                             echo "<h3>" . $_SESSION['addOrderClientNotFound'] . "</h3>";
                             echo "<p>Try viewing the client list in the <a href='phpDataAccess_order.php'><q>Add Order</q></a> screen, or if this is a new client <a href='phpDataAccess_client.php'>Add New Client</a>.";
                         } else {
